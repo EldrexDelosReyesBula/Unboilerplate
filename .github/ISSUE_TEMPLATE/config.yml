@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 Community Discussions
+    url: https://github.com/EldrexDelosReyesBula/Unboilerplate/discussions
+    about: Ask questions, share your creations, and discuss new ideas with the community.
+  - name: 👥 Facebook Community Group
+    url: https://www.facebook.com/groups/1108279171718492
+    about: Join the official Facebook creator group for Unboilerplate.
+  - name: 📖 Official Documentation & Playground
+    url: https://unboilerplate.vercel.app/docs
+    about: Read the complete class reference, guides, and interactive studio.

@@ -1,0 +1,66 @@
+name: 🐛 Bug Report
+description: Report unexpected CSS rendering, layout breakage, or browser compatibility issues.
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping make **Unboilerplate** better! Please fill in the details below so we can diagnose and patch the issue quickly.
+  - type: input
+    id: class-or-component
+    attributes:
+      label: Affected Class or Component
+      description: Which Unboilerplate class (e.g. `.book-3d`, `.brutal-neo`, `.btn-3d`, `--ub-surface`) is causing the issue?
+      placeholder: "e.g. .book-3d or .card-conic-glow"
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description of the Bug
+      description: A clear and concise description of what went wrong.
+      placeholder: "When applying .book-3d on Firefox..."
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to Reproduce
+      description: Minimal HTML snippet or steps to reproduce the behavior.
+      placeholder: |
+        1. Add `<div class="book-3d">...</div>`
+        2. Hover over the element on Safari...
+        3. See visual glitch...
+    validations:
+      required: true
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected Behavior
+      description: What did you expect to happen instead?
+    validations:
+      required: true
+  - type: dropdown
+    id: browser
+    attributes:
+      label: Browser & Environment
+      description: Which browser did you encounter this on?
+      multiple: true
+      options:
+        - Chrome / Chromium
+        - Firefox
+        - Safari / WebKit (iOS & macOS)
+        - Edge
+        - Mobile Browser (iOS Safari / Chrome Android)
+    validations:
+      required: true
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: Validation Checklist
+      options:
+        - label: I verified that this bug is related to pure Unboilerplate CSS.
+          required: true
+        - label: I checked existing issues to avoid creating a duplicate report.
+          required: true

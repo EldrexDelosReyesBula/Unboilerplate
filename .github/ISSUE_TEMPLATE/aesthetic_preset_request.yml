@@ -1,0 +1,32 @@
+name: 🎨 Aesthetic Movement or Theme Proposal
+description: Propose a new aesthetic movement, mood theme, or nostalgic design style preset.
+title: "[Aesthetic]: "
+labels: ["aesthetics", "theme"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Unboilerplate celebrates distinct design movements (Neo-Brutalism, 90s Memphis, Vaporwave, Cyberpunk, Skeuomorphism, Clean Girl). Suggest a new one!
+  - type: input
+    id: movement-name
+    attributes:
+      label: Movement / Theme Name
+      description: What is the aesthetic movement called?
+      placeholder: "e.g. Frutiger Aero, Solarpunk, Acid Graphics, Bauhaus"
+    validations:
+      required: true
+  - type: textarea
+    id: aesthetic-description
+    attributes:
+      label: Visual DNA & Mood Description
+      description: Describe the colors, textures, shadows, borders, and typography of this style.
+      placeholder: "Frutiger Aero uses glossy textures, skeuomorphic water bubbles, bright greens and sky blues..."
+    validations:
+      required: true
+  - type: textarea
+    id: visual-references
+    attributes:
+      label: References & Inspiration Links
+      description: Link to images, Pinterest boards, moodboards, or code sandboxes.
+    validations:
+      required: false

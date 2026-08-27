@@ -1,0 +1,42 @@
+name: 💡 Feature or Component Request
+description: Propose a new pure CSS component, utility class, or animation preset.
+title: "[Feature]: "
+labels: ["enhancement", "proposal"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Have an awesome idea for a new pure CSS component, micro-interaction, or layout utility? Tell us about it!
+  - type: input
+    id: component-name
+    attributes:
+      label: Proposed Component / Class Name
+      description: What class name (e.g. `.card-polaroid`, `.text-glitch`, `.btn-aurora`) would best describe this?
+      placeholder: "e.g. .btn-aurora"
+    validations:
+      required: true
+  - type: textarea
+    id: problem-statement
+    attributes:
+      label: What problem or creative need does this solve?
+      description: Why would developers or creators love this addition to Unboilerplate?
+      placeholder: "Currently creating aurora glow gradients requires 30 lines of radial gradients..."
+    validations:
+      required: true
+  - type: textarea
+    id: proposed-solution
+    attributes:
+      label: Proposed CSS Solution or Design Mockup
+      description: Share example CSS, conceptual code, or screenshots/Dribbble inspiration.
+      placeholder: "HTML markup and expected visual style..."
+    validations:
+      required: true
+  - type: checkboxes
+    id: pure-css-rule
+    attributes:
+      label: Philosophy Check
+      options:
+        - label: This component can be built with 100% Pure CSS (Zero JavaScript runtime required).
+          required: true
+        - label: The proposed class name is human-friendly and intuitive.
+          required: true
