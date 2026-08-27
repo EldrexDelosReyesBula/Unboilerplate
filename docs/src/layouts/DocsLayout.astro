@@ -1,0 +1,345 @@
+---
+/**
+ * DocsLayout.astro
+ * The unified 3-column docs shell used by every page.
+ *
+ * Props:
+ *   title       — <title> tag text
+ *   description — meta description
+ *   activePage  — slug used to highlight the correct nav link
+ *                 ('learn' | 'components' | 'templates' | 'tools' | 'showcase' | 'playground' | 'home' | 'docs')
+ *   tocItems    — Array<{ id: string; label: string }> for the right-hand TOC
+ *   sidebarGroups — override sidebar if needed (optional; defaults to global nav)
+ */
+
+import '../styles/global.css';
+
+export interface Props {
+  title: string;
+  description: string;
+  activePage: string;
+  tocItems?: Array<{ id: string; label: string }>;
+  badge?: string;
+  badgeClass?: string;
+}
+
+const {
+  title,
+  description,
+  activePage,
+  tocItems = [],
+} = Astro.props as Props;
+
+const navLinks = [
+  { slug: 'home',        href: '/',           label: 'Get Started'  },
+  { slug: 'playground',  href: '/playground', label: 'Playground'   },
+  { slug: 'templates',   href: '/templates',  label: 'Templates'    },
+  { slug: 'components',  href: '/components', label: 'Components'   },
+  { slug: 'docs',        href: '/docs',       label: 'API Docs'     },
+  { slug: 'showcase',    href: '/showcase',   label: 'Showcase'     },
+  { slug: 'cheatsheet',  href: '/cheatsheet', label: 'Cheatsheet'   },
+];
+
+const siteUrl = 'https://unboilerplate.vercel.app';
+const ogImage = `${siteUrl}/assets/unboilerplate-og.png`;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={`${siteUrl}${activePage === 'home' ? '/' : '/' + activePage}`} />
+  <link rel="icon" type="image/png" href="/assets/unboilerplate-logo.png" />
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:url" content={`${siteUrl}${activePage === 'home' ? '/' : '/' + activePage}`} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImage} />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body>
+
+<div class="docs-shell">
+
+  <!-- ═══════════════════════════ HEADER ═══════════════════════════ -->
+  <header class="docs-header">
+    <div style="display:flex;align-items:center;gap:0.75rem;">
+      <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle navigation">☰</button>
+      <a href="/" class="docs-brand">
+        <img src="/assets/unboilerplate-logo.png" alt="Unboilerplate Logo" />
+        <strong>Unboilerplate</strong>
+      </a>
+    </div>
+
+    <button class="search-btn-trigger" id="search-open-btn" aria-label="Open search">
+      <span>Search documentation...</span>
+      <kbd class="search-kbd-shortcut">Ctrl K</kbd>
+    </button>
+
+    <nav class="docs-nav-links" aria-label="Primary navigation">
+      {navLinks.map(link => (
+        <a
+          href={link.href}
+          class={activePage === link.slug ? 'active' : ''}
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+
+    <div style="display:flex;align-items:center;gap:0.75rem;flex-shrink:0;">
+      <a href="https://www.facebook.com/groups/1108279171718492" target="_blank" rel="noopener" style="font-size:0.82rem;font-weight:600;color:#94a3b8;text-decoration:none;white-space:nowrap;" aria-label="Facebook Community" class="hide-mobile">
+        FB Community ↗
+      </a>
+      <a href="https://github.com/EldrexDelosReyesBula/Unboilerplate" target="_blank" rel="noopener" style="font-size:0.82rem;font-weight:600;color:#94a3b8;text-decoration:none;white-space:nowrap;" aria-label="GitHub Repository" class="hide-mobile">
+        GitHub ↗
+      </a>
+      <a href="/playground" class="vibe-btn --sm hover-bounce" style="white-space:nowrap;">
+        Playground
+      </a>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════ MOBILE DRAWER ═══════════════════════ -->
+  <div class="mobile-drawer-backdrop" id="mobile-drawer-backdrop"></div>
+  <div class="mobile-nav-drawer" id="mobile-nav-drawer" aria-label="Mobile Navigation">
+    <div class="mobile-drawer-header">
+      <div style="display:flex;align-items:center;gap:0.6rem;">
+        <img src="/assets/unboilerplate-logo.png" alt="Logo" style="width:24px;height:24px;border-radius:4px;" />
+        <strong style="color:#fff;font-size:1rem;">Unboilerplate</strong>
+      </div>
+      <button class="mobile-drawer-close" id="mobile-drawer-close" aria-label="Close menu">✕</button>
+    </div>
+
+    <div>
+      <p class="sidebar-group-title">Navigation</p>
+      <div class="sidebar-links">
+        {navLinks.map(link => (
+          <a
+            href={link.href}
+            class={`sidebar-link ${activePage === link.slug ? 'active' : ''}`}
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <div>
+      <p class="sidebar-group-title">Playground</p>
+      <div class="sidebar-links">
+        <a href="/playground" class="sidebar-link" style="color: #00f2fe; font-weight: 700;">Playground ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════ LAYOUT CONTAINER ═══════════════════════ -->
+  <div class={`docs-layout-container ${tocItems && tocItems.length > 0 ? '' : 'no-toc'}`}>
+
+    <!-- LEFT SIDEBAR — injected by each page via <slot name="sidebar"> -->
+    <aside class="docs-sidebar" aria-label="Sidebar navigation">
+      <slot name="sidebar" />
+    </aside>
+
+    <!-- MAIN CONTENT — default slot -->
+    <main class="docs-content" id="main-content" aria-label="Main content">
+      <slot />
+    </main>
+
+    <!-- RIGHT TOC (Rendered ONLY when tocItems are provided) -->
+    {tocItems && tocItems.length > 0 && (
+      <aside class="docs-toc-sidebar" aria-label="Table of contents">
+        <p class="toc-title">On this page</p>
+        <nav class="toc-list" id="toc-nav">
+          {tocItems.map((item, i) => (
+            <a
+              href={`#${item.id}`}
+              class={`toc-link${i === 0 ? ' active' : ''}`}
+              data-toc-id={item.id}
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
+        <slot name="toc-card" />
+      </aside>
+    )}
+
+  </div>
+
+  <!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
+  <footer class="docs-footer">
+    <div class="docs-footer-grid">
+      <div>
+        <h4>Get Started</h4>
+        <a href="/philosophy">The Philosophy &amp; Story</a>
+        <a href="/cheatsheet">Class Cheatsheet</a>
+        <a href="/playground">CSS Playground</a>
+        <a href="/templates">Starter Templates</a>
+      </div>
+      <div>
+        <h4>Documentation</h4>
+        <a href="/docs">API Reference</a>
+        <a href="/components">Component Library</a>
+        <a href="/docs#tokens">Design Tokens</a>
+        <a href="/docs#utilities">Utility Classes</a>
+      </div>
+      <div>
+        <h4>Interactive</h4>
+        <a href="/playground">Playground</a>
+        <a href="/cheatsheet">Cheat Sheet</a>
+        <a href="/templates">Starter Templates</a>
+        <a href="/showcase">Showcase Gallery</a>
+      </div>
+      <div>
+        <h4>Community</h4>
+        <a href="https://www.facebook.com/groups/1108279171718492" target="_blank" rel="noopener">Facebook Community ↗</a>
+        <a href="https://github.com/EldrexDelosReyesBula/Unboilerplate" target="_blank" rel="noopener">GitHub Repository ↗</a>
+        <a href="https://github.com/EldrexDelosReyesBula/Unboilerplate/discussions" target="_blank" rel="noopener">GitHub Discussions</a>
+        <a href="https://github.com/EldrexDelosReyesBula/Unboilerplate/issues" target="_blank" rel="noopener">Feature Requests</a>
+      </div>
+      <div>
+        <h4>Project</h4>
+        <a href="/philosophy">The Complete Story</a>
+        <a href="/#credits">Credits &amp; Artwork</a>
+        <a href="https://ph.pinterest.com/bzdmrsam/" target="_blank" rel="noopener">Hero Art: @bzdmrsam ↗</a>
+        <a href="/changelog">Changelog &amp; Releases</a>
+        <a href="https://github.com/EldrexDelosReyesBula/Unboilerplate/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a>
+      </div>
+    </div>
+    <div class="docs-footer-bottom">
+      <span>&copy; 2026 <strong>Unboilerplate</strong>. Created with 💙 by <strong>Eldrex Delos Reyes Bula</strong> &middot; Hero Art by <a href="https://ph.pinterest.com/bzdmrsam/" target="_blank" rel="noopener" style="color:#00f2fe;text-decoration:none;">@bzdmrsam</a></span>
+      <span>CSS that basically styles itself</span>
+    </div>
+  </footer>
+
+</div><!-- /.docs-shell -->
+
+<!-- ═══════════════════════ SEARCH MODAL ═══════════════════════ -->
+<div class="search-modal-backdrop" id="search-modal" role="dialog" aria-modal="true" aria-label="Search">
+  <div class="search-modal-box">
+    <div class="search-input-header">
+      <span style="font-size:1.1rem; color:#64748b;">/</span>
+      <input type="text" id="search-input" placeholder="Search classes, components, guides..." autocomplete="off" />
+      <kbd class="search-kbd-shortcut" style="cursor:pointer;" id="search-close-btn">Esc</kbd>
+    </div>
+    <div class="search-results-list" id="search-results">
+      <a href="/playground" class="search-result-item"><strong>Playground</strong> &mdash; Monaco Web IDE &amp; Live Device Preview</a>
+      <a href="/docs" class="search-result-item"><strong>API Reference</strong> &mdash; Complete Class Index &amp; Tokens</a>
+      <a href="/components" class="search-result-item"><strong>Components</strong> &mdash; Buttons, Cards, 3D Elements, Badges</a>
+      <a href="/templates" class="search-result-item"><strong>Templates</strong> &mdash; Full Turnkey Page Layouts</a>
+      <a href="/cheatsheet" class="search-result-item"><strong>Class Cheatsheet</strong> &mdash; Instant 75+ Class Search &amp; Copy</a>
+      <a href="/learn" class="search-result-item"><strong>Learning Guide</strong> &mdash; Step-by-Step Beginner Tutorial</a>
+      <a href="/philosophy" class="search-result-item"><strong>The Complete Story</strong> &mdash; Origin, Manifesto &amp; Philosophy</a>
+      <a href="/changelog" class="search-result-item"><strong>Changelog</strong> &mdash; Release History &amp; SemVer Milestones</a>
+      <a href="/showcase" class="search-result-item"><strong>Showcase Gallery</strong> &mdash; Community Aesthetic Showcase</a>
+      <a href="/tools" class="search-result-item"><strong>Theme Generator</strong> &mdash; Interactive CSS Token Builder</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ GLOBAL TOAST ═══════════════════════ -->
+<div id="ub-toast" role="status" aria-live="polite" style="position:fixed;bottom:2rem;right:2rem;background:#00f2fe;color:#050608;font-weight:700;padding:0.75rem 1.5rem;border-radius:100px;box-shadow:0 10px 25px rgba(0,242,254,0.4);transform:translateY(100px);opacity:0;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);z-index:3000;font-family:inherit;pointer-events:none;">
+  Copied to clipboard
+</div>
+
+<script>
+  // ── Global Toast Helper ────────────────────────────────────────────
+  (window as any).ubToast = function(msg: string = 'Copied to clipboard') {
+    const toast = document.getElementById('ub-toast')!;
+    toast.textContent = msg;
+    toast.style.transform = 'translateY(0)';
+    toast.style.opacity = '1';
+    setTimeout(() => { toast.style.transform = 'translateY(100px)'; toast.style.opacity = '0'; }, 2400);
+  };
+
+  // ── Search Modal with Real-time Filtering ──────────────────────────
+  const modal   = document.getElementById('search-modal')!;
+  const input   = document.getElementById('search-input') as HTMLInputElement;
+  const openBtn = document.getElementById('search-open-btn')!;
+  const closeBtn = document.getElementById('search-close-btn')!;
+  const searchItems = document.querySelectorAll<HTMLAnchorElement>('.search-result-item');
+
+  const openSearch  = () => { 
+    modal.classList.add('is-open'); 
+    input.value = '';
+    searchItems.forEach(i => i.style.display = 'block');
+    input.focus(); 
+  };
+  const closeSearch = () => { modal.classList.remove('is-open'); input.value = ''; };
+
+  input.addEventListener('input', () => {
+    const q = input.value.trim().toLowerCase();
+    searchItems.forEach(item => {
+      const text = item.textContent?.toLowerCase() || '';
+      item.style.display = text.includes(q) ? 'block' : 'none';
+    });
+  });
+
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      const firstVisible = Array.from(searchItems).find(i => i.style.display !== 'none');
+      if (firstVisible) {
+        window.location.href = firstVisible.getAttribute('href') || '/';
+      }
+    }
+  });
+
+  openBtn.addEventListener('click', openSearch);
+  closeBtn.addEventListener('click', closeSearch);
+  modal.addEventListener('click', e => { if (e.target === modal) closeSearch(); });
+  document.addEventListener('keydown', e => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') { e.preventDefault(); openSearch(); }
+    if (e.key === 'Escape') closeSearch();
+  });
+
+  // ── Mobile Drawer ─────────────────────────────────────────────────
+  const drawerToggle = document.getElementById('mobile-menu-toggle');
+  const drawerClose  = document.getElementById('mobile-drawer-close');
+  const drawer       = document.getElementById('mobile-nav-drawer');
+  const backdrop     = document.getElementById('mobile-drawer-backdrop');
+
+  const openDrawer  = () => { drawer?.classList.add('is-open'); backdrop?.classList.add('is-open'); };
+  const closeDrawer = () => { drawer?.classList.remove('is-open'); backdrop?.classList.remove('is-open'); };
+
+  drawerToggle?.addEventListener('click', openDrawer);
+  drawerClose?.addEventListener('click', closeDrawer);
+  backdrop?.addEventListener('click', closeDrawer);
+
+  // ── TOC Scroll-Spy ────────────────────────────────────────────────
+  const tocLinks  = document.querySelectorAll<HTMLAnchorElement>('.toc-link[data-toc-id]');
+  const sideLinks = document.querySelectorAll<HTMLAnchorElement>('.sidebar-link');
+
+  if (tocLinks.length > 0) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          tocLinks.forEach(l => l.classList.toggle('active', l.dataset.tocId === id));
+          sideLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+
+    document.querySelectorAll('main [id]').forEach(s => observer.observe(s));
+  }
+</script>
+
+</body>
+</html>

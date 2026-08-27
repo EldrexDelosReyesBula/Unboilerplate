@@ -1,0 +1,62 @@
+{
+  "name": "@eldrex/unboilerplate",
+  "version": "1.0.0",
+  "type": "commonjs",
+  "description": "Style without thinking. Think without boilerplate. A pure CSS styling system with design tokens, magic classes, and Gen Z aesthetics.",
+  "main": "dist/unboilerplate.css",
+  "style": "dist/unboilerplate.css",
+  "unpkg": "dist/unboilerplate.min.css",
+  "jsdelivr": "dist/unboilerplate.min.css",
+  "files": [
+    "dist",
+    "src",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "exports": {
+    ".": "./dist/unboilerplate.css",
+    "./min": "./dist/unboilerplate.min.css",
+    "./core": "./dist/unboilerplate.core.css",
+    "./core.min": "./dist/unboilerplate.core.min.css",
+    "./aesthetics": "./dist/unboilerplate.aesthetics.css",
+    "./aesthetics.min": "./dist/unboilerplate.aesthetics.min.css",
+    "./themes/*": "./dist/themes/*",
+    "./presets/*": "./src/presets/*",
+    "./src/*": "./src/*",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "dev": "npm run --prefix docs dev",
+    "build": "node scripts/build.js",
+    "build:all": "node scripts/build.js && npm run docs:build",
+    "test": "node scripts/build.js",
+    "check": "npm run --prefix docs check",
+    "docs:dev": "npm run --prefix docs dev",
+    "docs:build": "npm run --prefix docs build",
+    "docs:preview": "npm run --prefix docs preview"
+  },
+  "keywords": [
+    "css",
+    "css-framework",
+    "design-system",
+    "glassmorphism",
+    "gen-z",
+    "cyberpunk",
+    "cottagecore",
+    "y2k",
+    "zero-boilerplate",
+    "responsive",
+    "tokens"
+  ],
+  "author": "Eldrex Delos Reyes Bula",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EldrexDelosReyesBula/Unboilerplate.git"
+  },
+  "bugs": {
+    "url": "https://github.com/EldrexDelosReyesBula/Unboilerplate/issues"
+  },
+  "homepage": "https://unboilerplate.vercel.app"
+}

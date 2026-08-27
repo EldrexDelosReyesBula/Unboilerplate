@@ -1,0 +1,54 @@
+/**
+ * UNBOILERPLATE - Aesthetic: Dark Academia
+ * Vintage leather, rich mahogany, muted gold, parchment textures, poetic mood.
+ */
+
+.aesthetic-dark-academia,
+.theme-dark-academia,
+[data-aesthetic="dark-academia"],
+[data-theme="dark-academia"],
+[data-theme="theme-dark-academia"] {
+  --ub-bg: #131110;
+  --ub-bg-subtle: #1c1917;
+  --ub-bg-surface: #292524;
+  --ub-text: #e7e5e4;
+  --ub-text-muted: #a8a29e;
+  --ub-border: #44403c;
+  --ub-accent: #d97706;
+  --ub-primary: linear-gradient(135deg, #b45309 0%, #78350f 100%);
+  --ub-radius-lg: 12px;
+  --ub-radius-md: 8px;
+  --ub-font-family-display: 'Cinzel', 'Palatino', 'Baskerville', serif;
+}
+
+.aesthetic-dark-academia .vibe-card,
+.theme-dark-academia .vibe-card,
+[data-aesthetic="dark-academia"] .vibe-card,
+[data-theme="dark-academia"] .vibe-card,
+[data-theme="theme-dark-academia"] .vibe-card {
+  background: #1c1917;
+  border: 1px solid #78350f;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+.aesthetic-dark-academia .vibe-btn,
+.theme-dark-academia .vibe-btn,
+[data-aesthetic="dark-academia"] .vibe-btn,
+[data-theme="dark-academia"] .vibe-btn,
+[data-theme="theme-dark-academia"] .vibe-btn {
+  background: #292524;
+  color: #fef3c7;
+  border: 1px solid #d97706;
+  border-radius: var(--ub-radius-sm);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  letter-spacing: 0.05em;
+}
+
+.aesthetic-dark-academia .vibe-btn:hover,
+.theme-dark-academia .vibe-btn:hover,
+[data-aesthetic="dark-academia"] .vibe-btn:hover,
+[data-theme="dark-academia"] .vibe-btn:hover,
+[data-theme="theme-dark-academia"] .vibe-btn:hover {
+  background: #d97706;
+  color: #131110;
+}

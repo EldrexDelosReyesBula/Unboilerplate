@@ -1,0 +1,388 @@
+/**
+ * UNBOILERPLATE - Presets: The Time Machine Framework
+ * Old school cool meets modern magic: Modern Marquees, Windows 95, CRT Monitors,
+ * 8-Bit Pixels, Visitor Counters, Winamp Players, GeoCities & MySpace layouts.
+ */
+
+/* ==========================================================================
+   1. MODERN MARQUEE ENGINE (GPU Accelerated)
+   ========================================================================== */
+.marquee {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  box-sizing: border-box;
+  display: flex;
+  position: relative;
+}
+
+.marquee__inner,
+.marquee > * {
+  display: inline-block;
+  padding-left: 100%;
+  animation: ub-marquee-scroll 12s linear infinite;
+}
+
+.marquee--slow > *, .marquee.--slow > * { animation-duration: 24s; }
+.marquee--fast > *, .marquee.--fast > * { animation-duration: 5s; }
+
+.marquee--bounce > *, .marquee.--bounce > * {
+  animation: ub-marquee-bounce 8s ease-in-out infinite alternate;
+}
+
+.marquee--pause-hover:hover > *, .marquee.--pause-hover:hover > * {
+  animation-play-state: paused;
+}
+
+.marquee--gradient {
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.marquee--neon {
+  text-shadow: 0 0 8px #00f2fe, 0 0 16px #ff007f;
+}
+
+.marquee-3d {
+  perspective: 600px;
+  transform: rotateX(20deg) rotateY(-10deg);
+}
+
+.marquee-rainbow {
+  background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #8b00ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes ub-marquee-scroll {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-100%); }
+}
+
+@keyframes ub-marquee-bounce {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ==========================================================================
+   2. AESTHETIC BLINKING TEXT
+   ========================================================================== */
+.blink {
+  animation: ub-blink-step 1s step-start infinite;
+}
+
+.blink--soft {
+  animation: ub-blink-soft 1.8s ease-in-out infinite;
+}
+
+.blink--neon {
+  animation: ub-blink-neon 0.8s ease-in-out infinite alternate;
+}
+
+.blink--heartbeat {
+  animation: ub-blink-heart 1.4s ease-in-out infinite;
+}
+
+@keyframes ub-blink-step {
+  50% { opacity: 0; }
+}
+
+@keyframes ub-blink-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+
+@keyframes ub-blink-neon {
+  from { opacity: 0.3; text-shadow: none; }
+  to { opacity: 1; text-shadow: 0 0 10px #00f2fe, 0 0 20px #00f2fe; }
+}
+
+@keyframes ub-blink-heart {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  14% { transform: scale(1.15); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.1); }
+  70% { transform: scale(1); opacity: 0.8; }
+}
+
+/* ==========================================================================
+   3. WINDOWS 95 DESKTOP WINDOWS
+   ========================================================================== */
+.window-95 {
+  background: #c0c0c0;
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #000000;
+  border-bottom: 2px solid #000000;
+  box-shadow: 2px 2px 0px #808080 inset, -2px -2px 0px #dfdfdf inset, 4px 4px 15px rgba(0,0,0,0.5);
+  color: #000000;
+  font-family: 'MS Sans Serif', Tahoma, sans-serif;
+  padding: 3px;
+  max-width: 100%;
+}
+
+.window-titlebar {
+  background: linear-gradient(90deg, #000080, #1084d0);
+  color: #ffffff;
+  padding: 3px 6px;
+  font-weight: 700;
+  font-size: 0.82rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+}
+
+.window-buttons {
+  display: flex;
+  gap: 2px;
+}
+
+.win-btn, .win-min, .win-max, .win-close {
+  background: #c0c0c0;
+  border-top: 1px solid #ffffff;
+  border-left: 1px solid #ffffff;
+  border-right: 1px solid #000000;
+  border-bottom: 1px solid #000000;
+  color: #000000;
+  font-size: 0.75rem;
+  font-weight: 700;
+  width: 16px;
+  height: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+.win-btn:active, .win-close:active {
+  border-top: 1px solid #000000;
+  border-left: 1px solid #000000;
+  border-right: 1px solid #ffffff;
+  border-bottom: 1px solid #ffffff;
+}
+
+.window-content {
+  padding: 12px;
+  background: #c0c0c0;
+  font-size: 0.88rem;
+}
+
+.window-95--teal .window-titlebar { background: linear-gradient(90deg, #008080, #20b2aa); }
+.window-95--purple .window-titlebar { background: linear-gradient(90deg, #4b0082, #9400d3); }
+.window-95--dark {
+  background: #1e1e24;
+  color: #f3f4f8;
+  border-color: #3f3f46;
+}
+.window-95--dark .window-content {
+  background: #18181b;
+  color: #f3f4f8;
+}
+
+/* ==========================================================================
+   4. CRT SCREEN & PHOSPHOR EFFECTS
+   ========================================================================== */
+.crt-screen {
+  position: relative;
+  overflow: hidden;
+  background: #0d1117;
+  border-radius: 12px;
+  box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.8), 0 10px 30px rgba(0, 0, 0, 0.7);
+  border: 4px solid #1f242d;
+}
+
+.crt-scanlines::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.45) 50%);
+  background-size: 100% 4px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.crt-flicker {
+  animation: ub-crt-flicker 0.15s infinite;
+}
+
+.crt-glow {
+  text-shadow: 0 0 8px currentColor;
+}
+
+.crt--green {
+  color: #33ff33;
+  background: #020d02;
+  font-family: 'JetBrains Mono', Consolas, monospace;
+}
+
+.crt--amber {
+  color: #ffb000;
+  background: #0d0800;
+  font-family: 'JetBrains Mono', Consolas, monospace;
+}
+
+@keyframes ub-crt-flicker {
+  0% { opacity: 0.98; }
+  50% { opacity: 1; }
+  100% { opacity: 0.96; }
+}
+
+/* ==========================================================================
+   5. 8-BIT PIXEL SYSTEM
+   ========================================================================== */
+.bit-8, .pixel-art {
+  image-rendering: pixelated;
+  font-family: 'Courier New', monospace;
+  font-weight: 700;
+}
+
+.pixel-border {
+  box-shadow: 
+    0 -4px 0 0 #000,
+    0 4px 0 0 #000,
+    -4px 0 0 0 #000,
+    4px 0 0 0 #000;
+  margin: 4px;
+}
+
+.btn-8bit {
+  background: #ffcc00;
+  color: #000000;
+  font-family: 'Courier New', monospace;
+  font-weight: 900;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 
+    -4px 0 0 0 #000,
+    4px 0 0 0 #000,
+    0 -4px 0 0 #000,
+    0 4px 0 0 #000,
+    0 8px 0 0 rgba(0,0,0,0.3);
+  text-transform: uppercase;
+  transition: transform 0.1s steps(2);
+}
+.btn-8bit:active {
+  transform: translateY(4px);
+  box-shadow: 
+    -4px 0 0 0 #000,
+    4px 0 0 0 #000,
+    0 -4px 0 0 #000,
+    0 4px 0 0 #000;
+}
+
+/* ==========================================================================
+   6. RETRO WEB WIDGETS (VISITOR COUNTERS & GUESTBOOKS)
+   ========================================================================== */
+.visitor-counter {
+  display: inline-flex;
+  align-items: center;
+  background: #000000;
+  border: 2px solid #555555;
+  border-radius: 4px;
+  padding: 4px 8px;
+  gap: 8px;
+  font-family: 'Courier New', monospace;
+}
+
+.counter-digits {
+  background: #111111;
+  color: #00ff66;
+  font-weight: 900;
+  padding: 2px 6px;
+  letter-spacing: 3px;
+  border: 1px inset #333333;
+}
+
+.counter--lcd .counter-digits {
+  background: #798645;
+  color: #1a2208;
+  font-family: monospace;
+  font-weight: 900;
+}
+
+.counter--neon .counter-digits {
+  color: #ff007f;
+  text-shadow: 0 0 8px #ff007f;
+}
+
+.under-construction {
+  background: repeating-linear-gradient(
+    -45deg,
+    #ffcc00,
+    #ffcc00 15px,
+    #111111 15px,
+    #111111 30px
+  );
+  color: #ffffff;
+  padding: 12px;
+  text-align: center;
+  font-weight: 900;
+  text-shadow: 1px 1px 0 #000, -1px -1px 0 #000;
+  border-radius: 8px;
+}
+
+.construction--cute {
+  background: repeating-linear-gradient(
+    -45deg,
+    #ffb6c1,
+    #ffb6c1 15px,
+    #ffffff 15px,
+    #ffffff 30px
+  );
+  color: #d81b60;
+}
+
+/* ==========================================================================
+   7. WINAMP MUSIC PLAYER
+   ========================================================================== */
+.winamp-player {
+  background: #292a2e;
+  border: 2px solid #525357;
+  border-radius: 6px;
+  padding: 8px;
+  width: 100%;
+  max-width: 320px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+  font-family: 'Courier New', monospace;
+}
+
+.winamp-display {
+  background: #000000;
+  color: #00ff00;
+  padding: 6px;
+  border: 1px solid #111;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.winamp-eq {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 28px;
+  padding: 3px;
+  background: #0a0a0c;
+  margin-bottom: 8px;
+}
+
+.eq-bar {
+  flex: 1;
+  background: linear-gradient(to top, #00ff00, #ffff00 70%, #ff0000 90%);
+  animation: ub-eq-bounce 0.6s ease-in-out infinite alternate;
+}
+.eq-bar:nth-child(1) { height: 60%; animation-delay: 0.1s; }
+.eq-bar:nth-child(2) { height: 90%; animation-delay: 0.3s; }
+.eq-bar:nth-child(3) { height: 40%; animation-delay: 0.2s; }
+.eq-bar:nth-child(4) { height: 80%; animation-delay: 0.4s; }
+.eq-bar:nth-child(5) { height: 50%; animation-delay: 0.15s; }
+
+@keyframes ub-eq-bounce {
+  0% { height: 20%; }
+  100% { height: 95%; }
+}

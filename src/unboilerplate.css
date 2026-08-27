@@ -1,0 +1,15 @@
+/**
+ * UNBOILERPLATE - Complete Master Bundle
+ * All core layers, components, animations, themes, and Gen Z aesthetic packages.
+ * 
+ * Created by Eldrex Delos Reyes Bula
+ */
+
+@import './index.css';
+
+/* Aesthetic Presets */
+@import './presets/aesthetics/cyberpunk.css';
+@import './presets/aesthetics/cottagecore.css';
+@import './presets/aesthetics/y2k.css';
+@import './presets/aesthetics/dark-academia.css';
+@import './presets/aesthetics/clean-girl.css';

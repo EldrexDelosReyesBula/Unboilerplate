@@ -1,0 +1,141 @@
+/**
+ * UNBOILERPLATE - Layer 2: Modifier Classes
+ * Modifiers that adapt elements by theme, size, mood, state, and screen.
+ */
+
+/* ==========================================================================
+   1. THEME MODIFIERS
+   ========================================================================== */
+.--dark,
+[class~="--dark"] {
+  --ub-bg: #090a0f !important;
+  --ub-bg-surface: #13141f !important;
+  --ub-text: #f9fafb !important;
+  --ub-text-muted: #9ca3af !important;
+  --ub-border: rgba(255, 255, 255, 0.1) !important;
+  background-color: var(--ub-bg-surface);
+  color: var(--ub-text);
+}
+
+.--light,
+[class~="--light"] {
+  --ub-bg: #f8fafc !important;
+  --ub-bg-surface: #ffffff !important;
+  --ub-text: #0f172a !important;
+  --ub-text-muted: #64748b !important;
+  --ub-border: rgba(0, 0, 0, 0.08) !important;
+  background-color: var(--ub-bg-surface);
+  color: var(--ub-text);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.06);
+}
+
+.--neon,
+[class~="--neon"] {
+  border-color: #00f2fe !important;
+  box-shadow: 0 0 20px rgba(0, 242, 254, 0.35), inset 0 0 10px rgba(255, 0, 127, 0.2) !important;
+}
+
+.--pastel,
+[class~="--pastel"] {
+  background: linear-gradient(135deg, rgba(255, 154, 162, 0.15), rgba(254, 207, 239, 0.2)) !important;
+  border-color: rgba(255, 183, 197, 0.4) !important;
+}
+
+/* ==========================================================================
+   2. SIZE & SCALE MODIFIERS
+   ========================================================================== */
+.--xs {
+  font-size: var(--ub-font-xs) !important;
+  padding: var(--ub-space-1) var(--ub-space-2) !important;
+}
+
+.--sm {
+  font-size: var(--ub-font-sm) !important;
+  padding: var(--ub-space-2) var(--ub-space-3) !important;
+}
+
+.--md {
+  font-size: var(--ub-font-base) !important;
+  padding: var(--ub-space-3) var(--ub-space-5) !important;
+}
+
+.--lg {
+  font-size: var(--ub-font-lg) !important;
+  padding: var(--ub-space-4) var(--ub-space-6) !important;
+}
+
+.--xl {
+  font-size: var(--ub-font-xl) !important;
+  padding: var(--ub-space-5) var(--ub-space-8) !important;
+}
+
+.--full {
+  width: 100% !important;
+}
+
+.--compact {
+  padding: var(--ub-space-2) var(--ub-space-3) !important;
+  gap: var(--ub-space-2) !important;
+}
+
+.--loose {
+  padding: var(--ub-space-6) var(--ub-space-8) !important;
+  gap: var(--ub-space-5) !important;
+}
+
+/* ==========================================================================
+   3. MOOD & VIBE MODIFIERS
+   ========================================================================== */
+.--calm {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border-color: rgba(255, 255, 255, 0.06) !important;
+  backdrop-filter: blur(8px) !important;
+  box-shadow: none !important;
+}
+
+.--chaos {
+  animation: ub-chaos-pulse 0.4s infinite alternate;
+  border-color: #ff007f !important;
+}
+
+@keyframes ub-chaos-pulse {
+  0% { transform: scale(1) rotate(0deg); }
+  100% { transform: scale(1.02) rotate(-0.5deg); }
+}
+
+.--soft {
+  border-radius: var(--ub-radius-2xl) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: var(--ub-shadow-soft) !important;
+}
+
+.--bold {
+  border-width: 2px !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.01em !important;
+}
+
+.--glow {
+  box-shadow: 0 0 25px rgba(255, 0, 127, 0.4) !important;
+}
+
+.--round {
+  border-radius: var(--ub-radius-pill) !important;
+}
+
+/* ==========================================================================
+   4. RESPONSIVE MODIFIERS
+   ========================================================================== */
+@media (max-width: 767px) {
+  .hidden--mobile { display: none !important; }
+  .visible--mobile { display: block !important; }
+  .stack--mobile { flex-direction: column !important; }
+  .full--mobile { width: 100% !important; }
+  .text-center--mobile { text-align: center !important; }
+}
+
+@media (min-width: 768px) {
+  .hidden--desktop { display: none !important; }
+  .visible--desktop { display: block !important; }
+  .row--desktop { flex-direction: row !important; }
+}

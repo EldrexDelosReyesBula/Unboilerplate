@@ -1,0 +1,62 @@
+/**
+ * UNBOILERPLATE - Aesthetic: Y2K Retro
+ * Metallic sheen, bubblegum gloss, 2000s cyber chrome, high-contrast candy gradients.
+ */
+
+.aesthetic-y2k,
+.theme-y2k,
+[data-aesthetic="y2k"],
+[data-theme="y2k"],
+[data-theme="theme-y2k"] {
+  --ub-bg: #0e051c;
+  --ub-bg-subtle: #190a33;
+  --ub-bg-surface: #26114a;
+  --ub-text: #ffffff;
+  --ub-text-muted: #d8b4fe;
+  --ub-border: #f472b6;
+  --ub-accent: #38bdf8;
+  --ub-primary: linear-gradient(135deg, #ff007f 0%, #00ffff 50%, #ff00ea 100%);
+  --ub-radius-lg: 32px;
+  --ub-radius-md: 20px;
+}
+
+.aesthetic-y2k .vibe-card,
+.theme-y2k .vibe-card,
+[data-aesthetic="y2k"] .vibe-card,
+[data-theme="y2k"] .vibe-card,
+[data-theme="theme-y2k"] .vibe-card {
+  background: linear-gradient(135deg, rgba(255, 0, 128, 0.15), rgba(0, 255, 255, 0.15)), rgba(20, 5, 40, 0.7);
+  border: 2px solid #f472b6;
+  box-shadow: 0 0 25px rgba(244, 114, 182, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.6);
+}
+
+.aesthetic-y2k .vibe-btn,
+.theme-y2k .vibe-btn,
+[data-aesthetic="y2k"] .vibe-btn,
+[data-theme="y2k"] .vibe-btn,
+[data-theme="theme-y2k"] .vibe-btn {
+  background: linear-gradient(180deg, #ff71ce 0%, #ff007f 60%, #b50058 100%);
+  border: 2px solid #ffffff;
+  border-radius: var(--ub-radius-pill);
+  box-shadow: 0 6px 0 #7b003c, 0 10px 20px rgba(255, 0, 127, 0.5);
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.aesthetic-y2k .vibe-btn:hover,
+.theme-y2k .vibe-btn:hover,
+[data-aesthetic="y2k"] .vibe-btn:hover,
+[data-theme="y2k"] .vibe-btn:hover,
+[data-theme="theme-y2k"] .vibe-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 0 #7b003c, 0 14px 28px rgba(255, 0, 127, 0.7);
+}
+
+.aesthetic-y2k .vibe-btn:active,
+.theme-y2k .vibe-btn:active,
+[data-aesthetic="y2k"] .vibe-btn:active,
+[data-theme="y2k"] .vibe-btn:active,
+[data-theme="theme-y2k"] .vibe-btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 #7b003c;
+}

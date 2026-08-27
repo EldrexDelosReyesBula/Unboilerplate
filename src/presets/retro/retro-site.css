@@ -1,0 +1,265 @@
+/**
+ * UNBOILERPLATE - Presets: 1999 Retro Personal Homepage Builder
+ * Authentic late-90s Web 1.0 styling, marquees, 3D beveled buttons, visitor counters, webrings, and 88x31 badges.
+ */
+
+/* ==========================================================================
+   1. RETRO SITE CONTAINER & TYPOGRAPHY
+   ========================================================================== */
+.site-retro {
+  background-color: #000080;
+  background-image: 
+    radial-gradient(#ffffff 1px, transparent 1px),
+    radial-gradient(#ffffff 1px, #000080 1px);
+  background-size: 40px 40px;
+  background-position: 0 0, 20px 20px;
+  color: #00ff00;
+  font-family: 'Courier New', Courier, monospace;
+  padding: 1.5rem;
+  border: 4px ridge #c0c0c0;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.retro-header {
+  text-align: center;
+  padding: 1.5rem 1rem;
+  border-bottom: 4px double #ffff00;
+  margin-bottom: 1.5rem;
+}
+
+.text-rainbow {
+  background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #00ffff, #0000ff, #8b00ff, #ff0000);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: ub-rainbow-shift 3s linear infinite;
+  font-family: 'Comic Sans MS', 'Impact', cursive, sans-serif;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+@keyframes ub-rainbow-shift {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* ==========================================================================
+   2. PURE CSS MARQUEE
+   ========================================================================== */
+.marquee {
+  overflow: hidden;
+  white-space: nowrap;
+  box-sizing: border-box;
+  background: #000000;
+  color: #ffff00;
+  padding: 8px 12px;
+  font-weight: bold;
+  border: 2px dashed #ffff00;
+  margin: 1rem 0;
+  font-family: 'Courier New', monospace;
+  position: relative;
+  display: block;
+}
+
+.marquee::before,
+.marquee > * {
+  display: inline-block;
+  padding-left: 100%;
+  animation: ub-marquee-scroll 12s linear infinite;
+}
+
+@keyframes ub-marquee-scroll {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(-100%, 0); }
+}
+
+/* ==========================================================================
+   3. RETRO NAVIGATION & 3D BUTTONS
+   ========================================================================== */
+.retro-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  margin: 1.5rem 0;
+}
+
+.site-retro .btn-3d,
+.retro-nav .btn-3d,
+.btn-retro {
+  background: #c0c0c0;
+  color: #000000 !important;
+  border-top: 3px solid #ffffff;
+  border-left: 3px solid #ffffff;
+  border-right: 3px solid #404040;
+  border-bottom: 3px solid #404040;
+  padding: 8px 18px;
+  font-family: 'MS Sans Serif', 'Tahoma', sans-serif;
+  font-size: 0.95rem;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.4);
+  user-select: none;
+}
+
+.site-retro .btn-3d:active,
+.retro-nav .btn-3d:active,
+.btn-retro:active {
+  border-top: 3px solid #404040;
+  border-left: 3px solid #404040;
+  border-right: 3px solid #ffffff;
+  border-bottom: 3px solid #ffffff;
+  transform: translate(2px, 2px);
+  box-shadow: none;
+}
+
+/* ==========================================================================
+   4. RETRO MAIN CONTENT, PROFILE & GUESTBOOK
+   ========================================================================== */
+.retro-main {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.profile-card,
+.guestbook {
+  background: #c0c0c0;
+  color: #000000;
+  border: 3px outset #ffffff;
+  padding: 1.25rem;
+  box-shadow: 5px 5px 0px #000000;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.profile-card h2,
+.guestbook h2,
+.photo-gallery h2 {
+  color: #000080;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  border-bottom: 2px solid #000080;
+  padding-bottom: 4px;
+  margin-bottom: 0.75rem;
+}
+
+.profile-pic,
+.--pixelated {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  border: 3px inset #ffffff;
+  max-width: 140px;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.mood-status,
+.now-playing {
+  background: #ffffcc;
+  color: #000000;
+  padding: 6px 10px;
+  border: 1px solid #999999;
+  margin: 0.6rem 0;
+  font-size: 0.85rem;
+  font-family: 'MS Sans Serif', Tahoma, sans-serif;
+}
+
+.guestbook-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: 0.75rem;
+}
+
+.input-retro {
+  background: #ffffff;
+  color: #000000;
+  border: 2px inset #808080;
+  padding: 6px 8px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+}
+
+.guestbook-entries {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.guestbook-entries .entry {
+  background: #e0e0e0;
+  border: 1px dotted #666;
+  padding: 6px 10px;
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+/* ==========================================================================
+   5. RETRO FOOTER, WEBRING, COUNTERS & BADGES
+   ========================================================================== */
+.retro-footer {
+  text-align: center;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 4px double #ffff00;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.webring {
+  border: 2px dotted #00ffff;
+  background: #000040;
+  color: #00ffff;
+  padding: 8px 16px;
+  display: inline-block;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.counter {
+  background: #000000;
+  color: #00ff00;
+  font-family: 'Courier New', monospace;
+  border: 3px inset #808080;
+  padding: 6px 14px;
+  display: inline-block;
+  font-weight: 900;
+  letter-spacing: 3px;
+  font-size: 1.1rem;
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.4);
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  color: #fff;
+  font-size: 0.7rem;
+  font-family: 'MS Sans Serif', Tahoma, sans-serif;
+  font-weight: bold;
+  padding: 4px 10px;
+  border: 2px outset #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.6);
+}

@@ -1,0 +1,105 @@
+/**
+ * UNBOILERPLATE - Presets: Creative Background Magic
+ * Animated gradients, mesh, conic, dots, grids, stripes, triangles, stars, clouds, and oceans in pure CSS.
+ */
+
+/* ==========================================================================
+   1. GRADIENT BACKGROUNDS
+   ========================================================================== */
+.bg-gradient {
+  background: linear-gradient(135deg, #1f1c2c, #928dab);
+}
+
+.bg-gradient.--animated,
+.gradient-aurora {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: ub-aurora 15s ease infinite;
+}
+
+.bg-gradient.--mesh {
+  background-color: #0d0f17;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(255, 0, 122, 0.35) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(0, 242, 254, 0.35) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(121, 40, 202, 0.35) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, rgba(247, 186, 44, 0.25) 0px, transparent 50%);
+}
+
+.bg-gradient.--conic {
+  background: conic-gradient(from 180deg at 50% 50%, #2a8af6 0deg, #a853ba 180deg, #e92a67 360deg);
+}
+
+.bg-gradient.--radial {
+  background: radial-gradient(circle at 50% 50%, rgba(0, 242, 254, 0.2) 0%, rgba(6, 7, 10, 0.95) 70%);
+}
+
+/* ==========================================================================
+   2. PATTERN BACKGROUNDS
+   ========================================================================== */
+.bg-pattern.--dots {
+  background-color: #06070a;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+}
+
+.bg-pattern.--grid {
+  background-color: #06070a;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.bg-pattern.--stripes {
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.03),
+    rgba(255, 255, 255, 0.03) 10px,
+    transparent 10px,
+    transparent 20px
+  );
+}
+
+.bg-pattern.--triangles {
+  background-color: #06070a;
+  background-image: 
+    linear-gradient(45deg, rgba(255, 255, 255, 0.04) 25%, transparent 25%), 
+    linear-gradient(-45deg, rgba(255, 255, 255, 0.04) 25%, transparent 25%), 
+    linear-gradient(45deg, transparent 75%, rgba(255, 255, 255, 0.04) 75%), 
+    linear-gradient(-45deg, transparent 75%, rgba(255, 255, 255, 0.04) 75%);
+  background-size: 20px 20px;
+}
+
+/* ==========================================================================
+   3. ATMOSPHERIC BACKGROUNDS
+   ========================================================================== */
+.bg-noise {
+  background-color: #0b0c10;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 0);
+  background-size: 4px 4px;
+}
+
+.bg-stars {
+  background-color: #050608;
+  background-image: 
+    radial-gradient(1px 1px at 20px 30px, #ffffff, rgba(0,0,0,0)),
+    radial-gradient(1.5px 1.5px at 40px 70px, #00f2fe, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 90px 40px, #ff007a, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 160px 120px, #ffffff, rgba(0,0,0,0));
+  background-size: 200px 200px;
+}
+
+.bg-clouds {
+  background: linear-gradient(180deg, #87ceeb 0%, #e0f6ff 100%);
+}
+
+.bg-ocean {
+  background: linear-gradient(180deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+}
+
+@keyframes ub-aurora {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}

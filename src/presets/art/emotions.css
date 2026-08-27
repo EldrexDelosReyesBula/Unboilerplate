@@ -1,0 +1,131 @@
+/**
+ * UNBOILERPLATE - Presets: Emotions & Sensory Design
+ * Mood classes, emotional gradients, sensory feel, and magic .vibe-artistic component.
+ */
+
+/* ==========================================================================
+   1. MOOD CLASSES
+   ========================================================================== */
+.mood-calm {
+  --ub-bg: #0e131f;
+  --ub-text: #e2e8f0;
+  --ub-border: rgba(148, 163, 184, 0.15);
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.8));
+  color: var(--ub-text);
+}
+
+.mood-energetic {
+  background: linear-gradient(135deg, #ff0844 0%, #ffb199 100%);
+  color: #ffffff;
+}
+
+.mood-mysterious {
+  background: linear-gradient(135deg, #090a0f 0%, #170d2b 50%, #090a0f 100%);
+  border: 1px solid #7928ca;
+  box-shadow: 0 0 30px rgba(121, 40, 202, 0.35);
+  color: #f3f4f6;
+}
+
+.mood-playful {
+  background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+  color: #1e1b4b;
+  border-radius: var(--ub-radius-2xl);
+}
+
+.mood-romantic {
+  background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+  color: #4a0e2e;
+}
+
+.mood-powerful {
+  background: #000000;
+  color: #ffffff;
+  border: 3px solid #ff0055;
+  box-shadow: 8px 8px 0px #00f2fe;
+}
+
+/* ==========================================================================
+   2. EMOTIONAL GRADIENTS
+   ========================================================================== */
+.emotion-joy {
+  background: linear-gradient(135deg, #ffe259 0%, #ffa751 100%);
+  color: #261605;
+}
+
+.emotion-peace {
+  background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+  color: #0f172a;
+}
+
+.emotion-passion {
+  background: linear-gradient(135deg, #f857a6 0%, #ff5858 100%);
+  color: #ffffff;
+}
+
+.emotion-growth {
+  background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+  color: #ffffff;
+}
+
+.emotion-creativity {
+  background: linear-gradient(135deg, #7f00ff 0%, #e100ff 100%);
+  color: #ffffff;
+}
+
+.emotion-warmth {
+  background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+  color: #3b1100;
+}
+
+/* ==========================================================================
+   3. SENSORY TOUCH & FEEL
+   ========================================================================== */
+.feel-soft {
+  border-radius: var(--ub-radius-2xl);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+
+.feel-smooth {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: all var(--ub-transition-base);
+}
+
+.feel-rough {
+  border: 3px solid #000000;
+  box-shadow: 6px 6px 0px #000000;
+}
+
+.feel-grainy {
+  position: relative;
+}
+.feel-grainy::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(0, 0, 0, 0.18) 1px, transparent 0);
+  background-size: 3px 3px;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   4. MAGIC ARTISTIC COMPONENT (.vibe-artistic)
+   ========================================================================== */
+.vibe-artistic {
+  position: relative;
+  padding: var(--ub-space-7);
+  border-radius: var(--ub-radius-2xl);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03)), var(--ub-bg-surface);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--ub-glass-border);
+  box-shadow: var(--ub-shadow-float), 0 0 30px rgba(121, 40, 202, 0.25);
+  color: var(--ub-text);
+  overflow: hidden;
+  transition: transform var(--ub-transition-spring), box-shadow var(--ub-transition-base);
+}
+
+.vibe-artistic:hover {
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: var(--ub-shadow-deep), 0 0 40px rgba(0, 242, 254, 0.35);
+}

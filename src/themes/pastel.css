@@ -1,0 +1,20 @@
+/**
+ * UNBOILERPLATE - Theme: Pastel
+ */
+
+:root[data-theme="pastel"],
+.theme-pastel {
+  --ub-bg: #fff5f5;
+  --ub-bg-subtle: #fee8eb;
+  --ub-bg-surface: #ffffff;
+  --ub-text: #4a3e4e;
+  --ub-text-muted: #8b7d90;
+  --ub-text-subtle: #bcaec0;
+  --ub-border: #f8cdda;
+  --ub-border-hover: #f3a6be;
+  --ub-accent: #f472b6;
+  --ub-primary: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #a1c4fd 100%);
+  --ub-shadow-soft: 0 4px 15px rgba(254, 207, 239, 0.4);
+  --ub-shadow-float: 0 12px 28px rgba(254, 207, 239, 0.6);
+  --ub-radius-lg: 24px;
+}

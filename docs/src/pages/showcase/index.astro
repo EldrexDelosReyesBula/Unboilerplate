@@ -1,0 +1,168 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+
+const tocItems: Array<{ id: string; label: string }> = [];
+---
+
+<DocsLayout
+  title="Showcase — Community Creations | Unboilerplate"
+  description="Curated gallery of aesthetic websites, experimental canvases, and digital art created by the Unboilerplate community."
+  activePage="showcase"
+  tocItems={tocItems}
+>
+
+  <!-- SIDEBAR -->
+  <div slot="sidebar">
+    <p class="sidebar-group-title">Community</p>
+    <div class="sidebar-links">
+      <a href="#overview" class="sidebar-link active">Showcase</a>
+      <a href="#submit"   class="sidebar-link">Submit Your Work</a>
+    </div>
+
+    <p class="sidebar-group-title" style="margin-top:1.5rem;">Explore</p>
+    <div class="sidebar-links">
+      <a href="/"           class="sidebar-link">Get Started</a>
+      <a href="/playground" class="sidebar-link" style="color:#00f2fe;font-weight:700;">Playground</a>
+      <a href="/components" class="sidebar-link">Components</a>
+      <a href="/templates"  class="sidebar-link">Templates</a>
+      <a href="/docs"       class="sidebar-link">API Docs</a>
+      <a href="/cheatsheet" class="sidebar-link">Class Cheatsheet</a>
+    </div>
+
+    <p class="sidebar-group-title" style="margin-top:1.5rem;">Links</p>
+    <div class="sidebar-links">
+      <a href="https://github.com/EldrexDelosReyesBula/unboilerplate" class="sidebar-link" target="_blank" rel="noopener">GitHub Repository ↗</a>
+      <a href="https://github.com/EldrexDelosReyesBula/unboilerplate/discussions" class="sidebar-link" target="_blank" rel="noopener">Discussions ↗</a>
+    </div>
+  </div>
+
+  <!-- TOC CARD -->
+  <div slot="toc-card" style="margin-top:2rem;padding:1rem;background:rgba(255,0,122,0.06);border:1px solid rgba(255,0,122,0.2);border-radius:12px;">
+    <p style="font-size:0.78rem;font-weight:700;color:#fff;margin-bottom:0.5rem;">Community Submissions</p>
+    <p style="font-size:0.75rem;color:#64748b;line-height:1.5;">Built something unique? Submit your work to be featured in the official directory.</p>
+    <a href="https://github.com/EldrexDelosReyesBula/unboilerplate/discussions" target="_blank" rel="noopener" style="display:block;margin-top:0.75rem;font-size:0.78rem;color:#ff007a;text-decoration:none;font-weight:700;">Submit Project →</a>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div id="overview">
+    <div class="docs-breadcrumb">
+      <a href="/" style="color:#64748b;text-decoration:none;">Unboilerplate</a>
+      <span>›</span>
+      <span>Showcase</span>
+    </div>
+    
+    <h1 class="docs-page-title text-gradient --rainbow">Community Showcase</h1>
+    <p class="docs-lead">Explore aesthetic websites, visual playgrounds, and digital canvases crafted with pure CSS and zero boilerplate.</p>
+
+    <!-- EMPTY / WELCOMING STATE -->
+    <div class="vibe-card effect-premium text-center" style="margin: 2rem 0; padding: clamp(2.5rem, 6vw, 4rem) 1.5rem; border-radius: 20px; border-color: rgba(0, 242, 254, 0.25);">
+      <div style="font-size: 3rem; margin-bottom: 1rem;">✨ 🎨 ✨</div>
+      <h2 class="text-gradient" style="font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 900;">Be the First to Get Featured!</h2>
+      <p style="max-width: 540px; margin: 1rem auto 1.75rem; color: #94a3b8; line-height: 1.75; font-size: 0.95rem;">
+        The Unboilerplate Community Showcase is fresh and open for submissions. Have you built an aesthetic landing page, a retro experiment, a portfolio, or a 3D component with Unboilerplate? We'd love to feature your work here.
+      </p>
+      <div style="display:flex; justify-content:center; gap:0.75rem; flex-wrap:wrap;">
+        <a href="https://github.com/EldrexDelosReyesBula/unboilerplate/discussions" target="_blank" rel="noopener" class="vibe-btn hover-bounce" style="font-size:0.95rem; padding: 0.75rem 1.5rem;">
+          🚀 Submit Your Project
+        </a>
+        <a href="/playground" class="pill-tab" style="font-size:0.95rem; padding: 0.75rem 1.5rem;">
+          Build in Playground →
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW TO SUBMIT -->
+  <hr class="section-divider" id="submit" />
+  <section>
+    <span class="vibe-badge vibe-badge--neon" style="margin-bottom:0.75rem;display:inline-block;">HOW TO SUBMIT</span>
+    <h2 style="font-size:1.6rem;">Submit Your Creation</h2>
+    <p style="color:#94a3b8;font-size:0.92rem;margin-top:0.4rem;line-height:1.7;">Built something unique with Unboilerplate? Every aesthetic is welcome — cyberpunk, cottagecore, Y2K, minimalist, retro, or something entirely new. Here's how to get featured:</p>
+
+    <div style="display:flex;flex-direction:column;gap:0.75rem;margin-top:1.25rem;">
+      {[
+        { n: '1', title: 'Build your project', body: 'Use Unboilerplate classes to create your page. You can start in the <strong>/playground</strong> and pick a preset to get started quickly.' },
+        { n: '2', title: 'Host it publicly', body: 'Deploy your project to any free host: <strong>Vercel</strong>, <strong>Netlify</strong>, <strong>GitHub Pages</strong>, or <strong>CodePen</strong>. You just need a public URL.' },
+        { n: '3', title: 'Open a GitHub Discussion', body: 'Go to <a href="https://github.com/EldrexDelosReyesBula/unboilerplate/discussions" target="_blank" rel="noopener" style="color:#00f2fe;">GitHub Discussions</a> and create a new post in the <strong>Show &amp; Tell</strong> category.' },
+        { n: '4', title: 'Include these details', body: 'In your post, include: <code>Project title</code>, <code>Live URL</code>, <code>Screenshot or GIF</code>, <code>Which Unboilerplate classes you used</code>, and your aesthetic inspiration.' },
+        { n: '5', title: 'Get featured', body: 'Community submissions are reviewed regularly. Approved projects are added directly to this Showcase page with your author credit.' },
+      ].map(step => (
+        <div class="lesson-item" style="border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:0.9rem 1.1rem;">
+          <div style="flex:1;">
+            <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:0.3rem;">
+              <span style="background:rgba(255,0,122,0.15);color:#ff007a;font-size:0.7rem;font-weight:800;padding:2px 8px;border-radius:100px;border:1px solid rgba(255,0,122,0.3);">STEP {step.n}</span>
+              <span style="font-weight:700;font-size:0.92rem;">{step.title}</span>
+            </div>
+            <p style="font-size:0.84rem;color:#94a3b8;line-height:1.6;margin-left:0;" set:html={step.body} />
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="callout-box" style="margin-top:1.5rem;">
+      <strong>No gatekeeping.</strong> There's no minimum follower count, no experience bar, and no "good enough" filter. If you built something with Unboilerplate and you're proud of it, it belongs here.
+    </div>
+
+    <div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:1.25rem;">
+      <a href="https://www.facebook.com/groups/1108279171718492" target="_blank" rel="noopener" class="vibe-btn hover-bounce" style="background:linear-gradient(135deg,#1877f2,#00f2fe);">Join Facebook Community ↗</a>
+      <a href="https://github.com/EldrexDelosReyesBula/Unboilerplate/discussions" target="_blank" rel="noopener" class="pill-tab hover-lift">Submit on GitHub Discussions ↗</a>
+      <a href="/playground" class="pill-tab">Create in Playground →</a>
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+  <div style="display:flex;gap:0.75rem;flex-wrap:wrap;align-items:center;">
+    <a href="/playground" class="vibe-btn hover-bounce">Open Playground</a>
+    <a href="/templates" class="pill-tab">Starter Templates →</a>
+    <a href="/components" class="pill-tab">Component Library →</a>
+  </div>
+
+</DocsLayout>
+
+<style>
+  .callout-box {
+    background: rgba(255,0,122,0.06);
+    border: 1px solid rgba(255,0,122,0.2);
+    border-radius: 14px;
+    padding: 1.25rem 1.5rem;
+    font-size: 0.92rem;
+    color: #cbd5e1;
+    line-height: 1.7;
+    margin: 1.5rem 0;
+  }
+  .callout-box strong { color: #ff007a; }
+  .section-divider { border: none; border-top: 1px solid rgba(255,255,255,0.07); margin: 2.5rem 0; }
+  .showcase-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px,1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  .showcase-card {
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 280px;
+    transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s ease;
+    cursor: pointer;
+  }
+  .showcase-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
+  .showcase-meta { display: flex; justify-content: space-between; align-items: center; margin-top: 0.75rem; flex-wrap: wrap; gap: 0.5rem; }
+  .submit-card {
+    background: rgba(255,255,255,0.03);
+    border: 2px dashed rgba(255,255,255,0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 0.75rem;
+    padding: 2rem;
+    min-height: 280px;
+    border-radius: 20px;
+    transition: border-color 0.3s ease, background 0.3s ease;
+  }
+  .submit-card:hover { border-color: rgba(0,242,254,0.4); background: rgba(0,242,254,0.03); }
+</style>

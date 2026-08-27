@@ -1,0 +1,447 @@
+/**
+ * UNBOILERPLATE - Core: Fluid Typography, Butter System & Automatic Responsiveness
+ * "It just... fits. Everywhere. Always."
+ * Zero Breakpoints. Zero Media Queries. Pure Fluid Mathematical Scaling.
+ */
+
+/* ==========================================================================
+   1. FLUID EVERYTHING TYPOGRAPHY (AUTO-SCALING TEXT)
+   ========================================================================== */
+.title,
+.title-fit {
+  font-size: clamp(2rem, 8vw, 6rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.text,
+.text-fit {
+  font-size: clamp(1rem, 4vw, 1.5rem);
+  line-height: 1.6;
+}
+
+.small {
+  font-size: clamp(0.8rem, 3vw, 1rem);
+  line-height: 1.4;
+}
+
+.huge {
+  font-size: clamp(3rem, 15vw, 12rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.fluid-text,
+.text-fluid {
+  font-size: clamp(1.25rem, 5vw, 3.5rem);
+  line-height: 1.2;
+}
+
+.text-fluid.--min-24.--max-72 {
+  --fluid-min: 1.5rem;
+  --fluid-val: calc(5vw + 1rem);
+  --fluid-max: 4.5rem;
+  font-size: clamp(var(--fluid-min), var(--fluid-val), var(--fluid-max));
+}
+
+.text-fluid.--min-18.--max-48 {
+  --fluid-min: 1.125rem;
+  --fluid-val: calc(3.5vw + 0.75rem);
+  --fluid-max: 3rem;
+  font-size: clamp(var(--fluid-min), var(--fluid-val), var(--fluid-max));
+}
+
+.text-fluid.--min-14.--max-20 {
+  --fluid-min: 0.875rem;
+  --fluid-val: calc(1.2vw + 0.7rem);
+  --fluid-max: 1.25rem;
+  font-size: clamp(var(--fluid-min), var(--fluid-val), var(--fluid-max));
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   2. FLUID SPACING & SECTIONS (AUTO-ADJUSTING GAPS & PADDING)
+   ========================================================================== */
+.card,
+.vibe-card {
+  padding: clamp(1rem, 5vw, 3rem);
+}
+
+.section {
+  margin: clamp(2rem, 8vw, 6rem) auto;
+  width: 100%;
+}
+
+.fluid-space,
+.space-fluid {
+  padding: clamp(1rem, 5vw, 4rem);
+  margin-inline: auto;
+}
+
+.container-fluid {
+  width: min(94%, 1280px);
+  margin-inline: auto;
+}
+
+/* ==========================================================================
+   3. FLUID GRIDS (AUTO-REARRANGING)
+   ========================================================================== */
+.grid,
+.grid.auto,
+.vibe-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  gap: clamp(1rem, 4vw, 3rem);
+  width: 100%;
+}
+
+.grid-sm {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+  gap: clamp(0.75rem, 3vw, 1.5rem);
+}
+
+.grid-lg {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr));
+  gap: clamp(1.5rem, 5vw, 4rem);
+}
+
+.grid.flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(1rem, 3vw, 2rem);
+}
+.grid.flex > * {
+  flex: 1 1 min(280px, 100%);
+}
+
+.fluid-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+  gap: clamp(1rem, 3vw, 2.5rem);
+}
+
+/* ==========================================================================
+   4. UNIVERSAL "FITS ANYWHERE" CLASSES
+   ========================================================================== */
+.fit {
+  width: 100%;
+  height: 100%;
+}
+
+.fit-screen {
+  width: 100vw;
+  min-height: 100dvh;
+}
+
+.fit-content {
+  width: fit-content;
+  max-width: 100%;
+}
+
+.fit-auto {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+}
+
+.img-fit {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.img-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.img-contain {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.img-blur {
+  filter: blur(8px);
+}
+
+.img-grayscale {
+  filter: grayscale(100%);
+}
+
+.img-sepia {
+  filter: sepia(100%);
+}
+
+.img-duotone {
+  filter: grayscale(100%) contrast(120%) drop-shadow(0 0 0 #00f2fe);
+  mix-blend-mode: screen;
+}
+
+.img-hover-zoom {
+  overflow: hidden;
+}
+.img-hover-zoom img {
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.img-hover-zoom:hover img {
+  transform: scale(1.1);
+}
+
+.img-hover-rotate img {
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.img-hover-rotate:hover img {
+  transform: rotate(4deg) scale(1.05);
+}
+
+/* ==========================================================================
+   5. ORIENTATION & DEVICE INTELLIGENCE
+   ========================================================================== */
+@media (orientation: portrait) {
+  .landscape-only {
+    display: none !important;
+  }
+}
+
+@media (orientation: landscape) {
+  .portrait-only {
+    display: none !important;
+  }
+}
+
+.orientation-auto {
+  display: flex;
+  flex-direction: column;
+}
+@media (orientation: landscape) {
+  .orientation-auto {
+    flex-direction: row;
+  }
+}
+
+/* Touch vs Mouse Optimization */
+@media (pointer: coarse) {
+  button,
+  a,
+  input,
+  .touch-friendly {
+    min-height: 48px;
+    min-width: 48px;
+  }
+  .mobile-optimized {
+    padding: var(--ub-space-4, 1rem);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .desktop-optimized,
+  .mouse-friendly {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+  }
+}
+
+/* Breakpoint visibility overrides */
+@media (max-width: 640px) {
+  .desktop-only,
+  .tablet-only {
+    display: none !important;
+  }
+  /* Full-width on mobile utility */
+  .full-width-mobile {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .mobile-only,
+  .desktop-only {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1025px) {
+  .mobile-only,
+  .tablet-only {
+    display: none !important;
+  }
+}
+
+/* Container Queries Support */
+.container-query {
+  container-type: inline-size;
+}
+
+@container (max-width: 400px) {
+  .card {
+    padding: 1rem;
+    font-size: 0.95rem;
+  }
+}
+
+@container (min-width: 800px) {
+  .card {
+    padding: 3rem;
+  }
+}
+
+/* ==========================================================================
+   6. THE "BUTTER" MOTION SYSTEM & SMOOTH UTILITIES
+   ========================================================================== */
+.smooth-normal {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.smooth-fast {
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.smooth-slow {
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.smooth-dramatic {
+  transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.smooth-butter {
+  transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.smooth-spring {
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.smooth-bounce {
+  transition: all 0.6s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+}
+
+/* Accessibility: Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Smart defaults: dark mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+  }
+}
+
+/* Smart defaults: high contrast */
+@media (prefers-contrast: high) {
+  .card,
+  .btn,
+  .input,
+  .navbar {
+    border-width: 2px !important;
+    border-color: currentColor !important;
+  }
+  .text {
+    color: inherit !important;
+  }
+}
+
+/* ==========================================================================
+   7. FLUID ANIMATIONS & ADAPTIVE PARALLAX
+   ========================================================================== */
+
+/* Fluid float: translateY scales with viewport */
+@keyframes ub-float-fluid {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(clamp(-8px, -2vw, -20px)); }
+}
+
+/* Apply to .animate-float if user prefers motion */
+@media (prefers-reduced-motion: no-preference) {
+  .animate-float {
+    animation-name: ub-float-fluid;
+  }
+}
+
+/* Adaptive parallax: subtle on mobile, dramatic on desktop */
+.parallax {
+  transform: translateY(0);
+  will-change: transform;
+  transition: transform 0.1s linear;
+}
+@media (min-width: 768px) {
+  .parallax {
+    --parallax-depth: clamp(10px, 5vw, 50px);
+  }
+}
+
+/* ==========================================================================
+   7. DETAIL LIBRARY: CURSORS, SCROLLBARS, SELECTION
+   ========================================================================== */
+.cursor-pointer { cursor: pointer; }
+.cursor-glow { cursor: crosshair; }
+.cursor-dot { cursor: cell; }
+.cursor-none { cursor: none; }
+.cursor-magnetic { transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1); }
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: var(--ub-glass-border, rgba(255, 255, 255, 0.2));
+  border-radius: 9999px;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hidden {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-gradient::-webkit-scrollbar {
+  width: 8px;
+}
+.scrollbar-gradient::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #00f2fe, #ff007f);
+  border-radius: 9999px;
+}
+
+.scrollbar-neon::-webkit-scrollbar {
+  width: 8px;
+}
+.scrollbar-neon::-webkit-scrollbar-thumb {
+  background: #00f2fe;
+  box-shadow: 0 0 10px #00f2fe;
+  border-radius: 9999px;
+}
+
+.select-color::selection,
+::selection {
+  background: var(--ub-accent-cyan, #00f2fe);
+  color: #080911;
+}
+
+.select-gradient::selection {
+  background: #ff007f;
+  color: #ffffff;
+}
+
+.select-none {
+  user-select: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+

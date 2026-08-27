@@ -1,0 +1,436 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+
+const tocItems: Array<{ id: string; label: string }> = [];
+---
+
+<DocsLayout
+  title="The Complete Story — Unboilerplate"
+  description="CSS that finally speaks human. The friendly origin story and philosophy of Unboilerplate."
+  activePage="philosophy"
+  tocItems={tocItems}
+>
+
+  <!-- SIDEBAR -->
+  <div slot="sidebar">
+    <p class="sidebar-group-title">The Complete Story</p>
+    <div class="sidebar-links">
+      <a href="#what-is-it"     class="sidebar-link active">What Is Unboilerplate?</a>
+      <a href="#the-problem"    class="sidebar-link">The Problem We Solve</a>
+      <a href="#philosophy"     class="sidebar-link">The Philosophy</a>
+      <a href="#the-dna"        class="sidebar-link">The 3-Layer System</a>
+      <a href="#differences"    class="sidebar-link">What Makes It Different?</a>
+      <a href="#ecosystem"      class="sidebar-link">Tools &amp; Playground</a>
+      <a href="#who-is-it-for"  class="sidebar-link">Who Is It For?</a>
+      <a href="#the-promise"    class="sidebar-link">The Promise</a>
+      <a href="#aesthetics"     class="sidebar-link">Fun Aesthetic Styles</a>
+      <a href="#creator"        class="sidebar-link">The Creator</a>
+    </div>
+
+    <p class="sidebar-group-title" style="margin-top:1.5rem;">Quick Navigation</p>
+    <div class="sidebar-links">
+      <a href="/"           class="sidebar-link">Home &amp; Guide</a>
+      <a href="/playground" class="sidebar-link" style="color:#00f2fe;font-weight:700;">Playground ↗</a>
+      <a href="/templates"  class="sidebar-link">Starter Templates</a>
+      <a href="/components" class="sidebar-link">Components</a>
+      <a href="/cheatsheet" class="sidebar-link">Class Cheatsheet</a>
+      <a href="/docs"       class="sidebar-link">API Reference</a>
+    </div>
+  </div>
+
+  <!-- ARTICLE HEADER -->
+  <header style="margin-bottom: 3.5rem; text-align: left;">
+    <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:1rem; flex-wrap:wrap;">
+      <span class="vibe-badge vibe-badge--neon">THE FRIENDLY MANIFESTO</span>
+      <span class="vibe-badge vibe-badge--sunset">CSS FOR HUMANS</span>
+    </div>
+    <h1 class="text-gradient" style="font-size: clamp(2.4rem, 6vw, 3.8rem); font-weight: 900; line-height: 1.1; letter-spacing: -0.03em; margin:0.5rem 0;">
+      Unboilerplate: The Complete Story
+    </h1>
+    <p style="font-size: clamp(1.15rem, 2.2vw, 1.4rem); font-style: italic; color: #cbd5e1; margin-top: 0.8rem; font-family: serif;">
+      "CSS that finally speaks human."
+    </p>
+  </header>
+
+  <!-- ── 1. WHAT IS UNBOILERPLATE? ──────────────────────────────── -->
+  <section id="what-is-it" class="stack gap-4" style="margin-bottom: 4rem;">
+    <div class="section-header">
+      <span class="section-eyebrow">What Is Unboilerplate?</span>
+      <h2 class="section-title">Making Web Design Feel Like Play</h2>
+    </div>
+    <p style="font-size: 1.1rem; line-height: 1.8; color: #cbd5e1;">
+      Unboilerplate is a <strong>pure CSS framework</strong> that makes web styling feel like playing, not programming. It's built for humans who want to create beautiful things without drowning in endless lines of code.
+    </p>
+
+    <!-- Friendly Code Example -->
+    <div class="vibe-card p-6" style="background:#090a12; border-color:rgba(0,242,254,0.25); border-radius:18px;">
+      <div style="font-size:0.8rem; color:#64748b; margin-bottom:0.75rem; font-family:monospace;">
+        &lt;!-- This is literally all you need in your HTML --&gt;
+      </div>
+      <pre style="margin:0; background:rgba(0,0,0,0.65); padding:1.25rem; border-radius:12px; overflow-x:auto; font-family:'JetBrains Mono', monospace; font-size:0.9rem; color:#00f2fe; line-height:1.7;"><code>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@eldrex/unboilerplate@latest/dist/unboilerplate.min.css"&gt;
+
+&lt;div class="vibe-card hover-lift p-6"&gt;
+  ✨ Hello World!
+&lt;/div&gt;</code></pre>
+      <div class="mt-4 flex items-center gap-2 flex-wrap"><br><br>
+        <span class="vibe-badge vibe-badge--neon">THAT'S IT</span>
+        <strong style="color:#fff; font-size:0.95rem;">You're done. It's beautiful. It's responsive. It's animated.</strong>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 2. THE PROBLEM WE'RE SOLVING ──────────────────────────── -->
+  <hr class="section-divider" id="the-problem" />
+  <section class="stack gap-4" style="margin-bottom: 4rem;">
+    <div class="section-header">
+      <span class="section-eyebrow" style="color:#ff007f; background:rgba(255,0,127,0.1); border-color:rgba(255,0,127,0.3);">🎯 The Problem We're Solving</span>
+      <h2 class="section-title">The Current Reality vs. The Unboilerplate Way</h2>
+      <p class="section-sub">Why write 50 lines of complex rules when one friendly class does the job?</p>
+    </div>
+
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap:1.5rem; margin-top:0.5rem;">
+      <!-- The Current Reality -->
+      <div class="vibe-card p-6" style="background:#0c0e17; border-color:rgba(239,68,68,0.3); border-radius:18px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+          <span style="color:#ef4444; font-weight:800; font-size:0.85rem;">THE OVERWHELMING WAY</span>
+          <span class="vibe-badge" style="background:rgba(239,68,68,0.1); color:#ef4444;">50+ LINES</span>
+        </div>
+        <pre style="margin:0; background:#05060a; padding:1rem; border-radius:10px; font-family:'JetBrains Mono', monospace; font-size:0.76rem; color:#94a3b8; line-height:1.6; overflow-x:auto;"><code>/* What you normally have to write */
+.my-card &#123;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.2);
+&#125;
+
+.my-card:hover &#123;
+  transform: translateY(-10px);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.25);
+&#125;
+
+@media (max-width: 768px) &#123;
+  .my-card &#123;
+    padding: 20px;
+    border-radius: 15px;
+  &#125;
+&#125;
+/* ...plus 50 more lines for dark mode */</code></pre>
+      </div>
+
+      <!-- The Unboilerplate Way -->
+      <div class="vibe-card p-6" style="background:#09121c; border-color:rgba(0,242,254,0.4); border-radius:18px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+          <span style="color:#00f2fe; font-weight:800; font-size:0.85rem;">THE UNBOILERPLATE WAY</span>
+          <span class="vibe-badge vibe-badge--neon">1 CLASS</span>
+        </div>
+        <pre style="margin:0; background:#05060a; padding:1.25rem; border-radius:10px; font-family:'JetBrains Mono', monospace; font-size:0.88rem; color:#00f2fe; line-height:1.7; overflow-x:auto;"><code>&lt;!-- What you write with Unboilerplate --&gt;
+&lt;div class="vibe-card hover-lift p-6"&gt;
+  ✨ Beautiful, animated, responsive!
+&lt;/div&gt;</code></pre>
+        <div style="margin-top:1.25rem; padding:1rem; background:rgba(0,242,254,0.08); border-radius:10px; border:1px solid rgba(0,242,254,0.25);">
+          <strong style="color:#fff; font-size:0.95rem; display:block;">One class. Beautiful. Responsive. Animated. Done.</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 3. THE PHILOSOPHY ──────────────────────────────────────── -->
+  <hr class="section-divider" id="philosophy" />
+  <section class="stack gap-4" style="margin-bottom: 4rem;">
+    <div class="section-header">
+      <span class="section-eyebrow">💡 Core Beliefs</span>
+      <h2 class="section-title">The Philosophy</h2>
+    </div>
+
+    <div class="vibe-grid">
+      <div class="vibe-card p-6">
+        <span class="vibe-badge vibe-badge--sunset">1. PLAY &amp; DISCOVERY</span>
+        <h3 style="font-size:1.25rem; font-weight:800; margin:0.6rem 0;">1. Design Should Be Fun</h3>
+        <p style="color:#94a3b8; font-size:0.92rem; line-height:1.7;">
+          Remember playing with LEGO as a kid? You didn't read a giant manual first. You just picked up blocks and built things. That's exactly how web styling should feel.
+        </p>
+      </div>
+
+      <div class="vibe-card p-6">
+        <span class="vibe-badge vibe-badge--neon">2. INTUITIVE DEPTH</span>
+        <h3 style="font-size:1.25rem; font-weight:800; margin:0.6rem 0;">2. Simple &ne; Limited</h3>
+        <p style="color:#94a3b8; font-size:0.92rem; line-height:1.7;">
+          Simple means the <em>easy things stay easy</em>, not that the <em>hard things become impossible</em>. Unboilerplate scales from "one class" to "full custom styling" whenever you're ready.
+        </p>
+      </div>
+
+      <div class="vibe-card p-6">
+        <span class="vibe-badge">3. OPEN ARCHITECTURE</span>
+        <h3 style="font-size:1.25rem; font-weight:800; margin:0.6rem 0;">3. Teach, Don't Trap</h3>
+        <p style="color:#94a3b8; font-size:0.92rem; line-height:1.7;">
+          We want you to feel confident with CSS, not dependent on us forever. Every class name is readable. Every style is clean vanilla CSS you can copy and use anywhere.
+        </p>
+      </div>
+
+      <div class="vibe-card p-6">
+        <span class="vibe-badge vibe-badge--sunset">4. HUMANITY FIRST</span>
+        <h3 style="font-size:1.25rem; font-weight:800; margin:0.6rem 0;">4. Humans First</h3>
+        <p style="color:#94a3b8; font-size:0.92rem; line-height:1.7;">
+          Built for artists, designers, beginners, students, hobbyists, and busy developers. Not for machines or confusing build steps. For people who simply want to create.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 4. THE DNA & THREE-LAYER SYSTEM ────────────────────────── -->
+  <hr class="section-divider" id="the-dna" />
+  <section class="stack gap-4" style="margin-bottom: 4rem;">
+    <div class="section-header">
+      <span class="section-eyebrow">🧬 Framework Architecture</span>
+      <h2 class="section-title">The Three-Layer System</h2>
+      <p class="section-sub">Start as simple as you like, and customize as much as you want.</p>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(300px,100%), 1fr)); gap:1.5rem;">
+      <!-- Zero Setup Specs -->
+      <div class="vibe-card p-6" style="background:#090a12;">
+        <span class="vibe-badge vibe-badge--neon">ZERO SETUP REQUIRED</span>
+        <div style="margin-top:1.25rem; display:flex; flex-direction:column; gap:0.75rem; font-family:'JetBrains Mono', monospace; font-size:0.9rem; color:#cbd5e1;">
+          <div><span style="color:#64748b;">Runtime:</span> <strong style="color:#00f2fe;">None (Pure CSS)</strong></div>
+          <div><span style="color:#64748b;">Build Step:</span> <strong style="color:#00f2fe;">Not needed</strong></div>
+          <div><span style="color:#64748b;">Dependencies:</span> <strong style="color:#00f2fe;">Zero</strong></div>
+          <div><span style="color:#64748b;">JavaScript:</span> <strong style="color:#00f2fe;">None required</strong></div>
+          <div><span style="color:#64748b;">Complexity:</span> <strong style="color:#00f2fe;">Minimal</strong></div>
+          <div><span style="color:#64748b;">Learning Curve:</span> <strong style="color:#00f2fe;">Gentle &amp; Fun</strong></div>
+        </div>
+      </div>
+
+      <!-- 3 Layers Card -->
+      <div class="vibe-card p-6" style="background:#07080e; border:1px solid rgba(255,255,255,0.08);">
+        <div style="display:flex; flex-direction:column; gap:1rem;">
+          <div style="padding:0.85rem; background:rgba(0,242,254,0.06); border:1px solid rgba(0,242,254,0.25); border-radius:10px;">
+            <strong style="color:#00f2fe; font-size:0.92rem; display:block;">👶 LAYER 1: VIBE MODE ("Just make it pretty")</strong>
+            <p style="color:#94a3b8; font-size:0.82rem; margin:0.3rem 0 0.5rem;">One single class gives you a complete, polished component.</p>
+            <code style="color:#00f2fe; font-size:0.8rem; background:rgba(0,0,0,0.4); padding:3px 8px; border-radius:4px;">&lt;div class="vibe-card"&gt;✨&lt;/div&gt;</code>
+          </div>
+
+          <div style="padding:0.85rem; background:rgba(244,114,182,0.06); border:1px solid rgba(244,114,182,0.25); border-radius:10px;">
+            <strong style="color:#f472b6; font-size:0.92rem; display:block;">🎨 LAYER 2: DESIGNER MODE ("Let me tweak it")</strong>
+            <p style="color:#94a3b8; font-size:0.82rem; margin:0.3rem 0 0.5rem;">Mix vibes and add modifiers with friendly helper classes.</p>
+            <code style="color:#f472b6; font-size:0.8rem; background:rgba(0,0,0,0.4); padding:3px 8px; border-radius:4px;">&lt;div class="vibe-card effect-glass text-neon"&gt;</code>
+          </div>
+
+          <div style="padding:0.85rem; background:rgba(247,186,44,0.06); border:1px solid rgba(247,186,44,0.25); border-radius:10px;">
+            <strong style="color:#f7ba2c; font-size:0.92rem; display:block;">🤓 LAYER 3: ARTIST MODE ("Full control")</strong>
+            <p style="color:#94a3b8; font-size:0.82rem; margin:0.3rem 0 0.5rem;">Override CSS variables easily with standard vanilla CSS.</p>
+            <code style="color:#f7ba2c; font-size:0.8rem; background:rgba(0,0,0,0.4); padding:3px 8px; border-radius:4px;">.vibe-card &#123; --ub-radius: 30px; &#125;</code>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 5. WHAT MAKES IT DIFFERENT ─────────────────────────────── -->
+  <hr class="section-divider" id="differences" />
+  <section class="stack gap-4" style="margin-bottom: 4rem;">
+    <div class="section-header">
+      <span class="section-eyebrow">🎪 Friendly Comparison</span>
+      <h2 class="section-title">What Makes It Different?</h2>
+    </div>
+
+    <div class="vibe-grid">
+      <!-- vs Tailwind -->
+      <div class="vibe-card p-6">
+        <h3 style="font-size:1.2rem; font-weight:800; color:#38bdf8;">vs. Tailwind CSS</h3>
+        <p style="font-size:0.88rem; color:#94a3b8; margin:0.5rem 0 1rem; line-height:1.6;">Tailwind requires memorizing dozens of cryptic abbreviations per element. Unboilerplate uses natural, human-readable names that keep your HTML clean.</p>
+        <div style="padding:0.75rem; background:rgba(0,0,0,0.5); border-radius:8px; font-size:0.82rem; color:#38bdf8; line-height:1.6;">
+          ✓ 1 friendly class for a complete look<br>
+          ✓ Clean HTML with zero visual clutter<br>
+          ✓ Fast results with zero memorization
+        </div>
+      </div>
+
+      <!-- vs Bootstrap -->
+      <div class="vibe-card p-6">
+        <h3 style="font-size:1.2rem; font-weight:800; color:#a78bfa;">vs. Bootstrap</h3>
+        <p style="font-size:0.88rem; color:#94a3b8; margin:0.5rem 0 1rem; line-height:1.6;">Bootstrap enforces rigid corporate enterprise styling. Unboilerplate gives you rich artistic vibes like Cyberpunk, Dark Academia, and Retro 1999.</p>
+        <div style="padding:0.75rem; background:rgba(0,0,0,0.5); border-radius:8px; font-size:0.82rem; color:#a78bfa; line-height:1.6;">
+          ✓ Unique, expressive aesthetics<br>
+          ✓ No bloated JavaScript scripts<br>
+          ✓ Built for human creators
+        </div>
+      </div>
+
+      <!-- vs Vanilla CSS -->
+      <div class="vibe-card p-6">
+        <h3 style="font-size:1.2rem; font-weight:800; color:#34d399;">vs. Vanilla CSS</h3>
+        <p style="font-size:0.88rem; color:#94a3b8; margin:0.5rem 0 1rem; line-height:1.6;">Writing plain CSS from scratch requires hundreds of repetitive lines. Unboilerplate provides beautiful defaults and teaches you real CSS as you build.</p>
+        <div style="padding:0.75rem; background:rgba(0,0,0,0.5); border-radius:8px; font-size:0.82rem; color:#34d399; line-height:1.6;">
+          ✓ Freedom without repetitive code<br>
+          ✓ Automatic mobile responsiveness<br>
+          ✓ Teaches transferable CSS skills
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 6. THE ECOSYSTEM ───────────────────────────────────────── -->
+  <hr class="section-divider" id="ecosystem" />
+  <section class="stack gap-4" style="margin-bottom: 4rem;">
+    <div class="section-header">
+      <span class="section-eyebrow">🌈 Tools &amp; Ecosystem</span>
+      <h2 class="section-title">Built-In Tools</h2>
+    </div>
+
+    <div class="vibe-grid">
+      <div class="vibe-card p-6">
+        <span class="vibe-badge vibe-badge--neon">1. PLAYGROUND</span>
+        <h3 style="margin-top:0.5rem; font-size:1.15rem;">Live Playground</h3>
+        <p style="color:#94a3b8; font-size:0.88rem; line-height:1.6; margin-top:0.4rem;">
+          Instant live preview stage with ready-made presets, theme switcher, and single-click copy with CDN.
+        </p>
+      </div>
+
+      <div class="vibe-card p-6">
+        <span class="vibe-badge vibe-badge--sunset">2. 3D SPATIAL ENGINE</span>
+        <h3 style="margin-top:0.5rem; font-size:1.15rem;">Physical 3D Elements</h3>
+        <p style="color:#94a3b8; font-size:0.88rem; line-height:1.6; margin-top:0.4rem;">
+          Real interactive 3D books, 180° flip cards, photo cubes, and fan stack decks powered purely by CSS.
+        </p>
+      </div>
+
+      <div class="vibe-card p-6">
+        <span class="vibe-badge">3. TIME MACHINE</span>
+        <h3 style="margin-top:0.5rem; font-size:1.15rem;">Retro &amp; Nostalgia</h3>
+        <p style="color:#94a3b8; font-size:0.88rem; line-height:1.6; margin-top:0.4rem;">
+          Smooth marquees, Windows 95 dialog windows, phosphor CRT monitors, and Winamp media players.
+        </p>
+      </div>
+
+      <div class="vibe-card p-6">
+        <span class="vibe-badge vibe-badge--neon">4. STARTER TEMPLATES</span>
+        <h3 style="margin-top:0.5rem; font-size:1.15rem;">Complete Websites</h3>
+        <p style="color:#94a3b8; font-size:0.88rem; line-height:1.6; margin-top:0.4rem;">
+          Ready-to-use artist portfolios, literary journals, cyber dashboards, and scrapbooks with free photography.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 7. WHO IS IT FOR? ──────────────────────────────────────── -->
+  <hr class="section-divider" id="who-is-it-for" />
+  <section class="stack gap-4" style="margin-bottom: 4rem;">
+    <div class="section-header">
+      <span class="section-eyebrow">🎯 Who Is It For?</span>
+      <h2 class="section-title">Built For Creators of All Kinds</h2>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(300px,100%), 1fr)); gap:1.5rem;">
+      <div class="vibe-card p-6" style="border-color:rgba(0,242,254,0.3);">
+        <h3 style="color:#00f2fe; font-size:1.2rem; font-weight:800; margin-bottom:1rem;">✨ Perfect For</h3>
+        <ul style="color:#cbd5e1; font-size:0.92rem; line-height:1.9; padding-left:1.25rem;">
+          <li><strong>🎨 Artists &amp; Designers:</strong> Build beautiful portfolios in minutes with zero coding headaches.</li>
+          <li><strong>📚 Students &amp; Beginners:</strong> Learn how CSS works while building real, tangible projects.</li>
+          <li><strong>💼 Freelancers:</strong> Deliver stunning, tactile client websites faster than ever.</li>
+          <li><strong>🚀 Startups:</strong> Launch eye-catching landing pages in days with zero heavy build tools.</li>
+          <li><strong>🎪 Hobbyists:</strong> Experiment freely with 3D depth, retro aesthetics, and fun gradients.</li>
+          <li><strong>😴 Pragmatic Developers:</strong> Stop writing repetitive boilerplate and focus on building.</li>
+        </ul>
+      </div>
+
+      <div class="vibe-card p-6" style="border-color:rgba(255,255,255,0.08);">
+        <h3 style="color:#94a3b8; font-size:1.2rem; font-weight:800; margin-bottom:1rem;">🚫 Maybe Not For</h3>
+        <ul style="color:#94a3b8; font-size:0.92rem; line-height:1.9; padding-left:1.25rem;">
+          <li><strong>🏢 Legacy Enterprise Banks:</strong> Requiring strict 10-year-old internal UI packages.</li>
+          <li><strong>🔧 Strict Framework Purists:</strong> Who prefer manually writing 5,000 lines of CSS.</li>
+          <li><strong>📦 Legacy Megaprojects:</strong> Locked into heavy, proprietary toolchains.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 8. THE PROMISE ─────────────────────────────────────────── -->
+  <hr class="section-divider" id="the-promise" />
+  <section class="stack gap-4" style="margin-bottom: 4rem;">
+    <div class="section-header">
+      <span class="section-eyebrow" style="color:#ff007f; background:rgba(255,0,127,0.1); border-color:rgba(255,0,127,0.3);">💖 The Guarantee</span>
+      <h2 class="section-title">The Promise</h2>
+    </div>
+
+    <div class="vibe-grid">
+      <div class="vibe-card p-4"><span style="color:#00f2fe; font-weight:800;">✓ No Lock-In:</span> Export to standard vanilla CSS anytime. Standard CSS forever.</div>
+      <div class="vibe-card p-4"><span style="color:#00f2fe; font-weight:800;">✓ No Complexity:</span> Start with one class. Add more only when you want to.</div>
+      <div class="vibe-card p-4"><span style="color:#00f2fe; font-weight:800;">✓ No Judgment:</span> Use 1 class or 1,000. All skill levels are warmly welcome.</div>
+      <div class="vibe-card p-4"><span style="color:#00f2fe; font-weight:800;">✓ No Boredom:</span> Beautiful by default. Joy in every line of code.</div>
+      <div class="vibe-card p-4"><span style="color:#00f2fe; font-weight:800;">✓ No Gatekeeping:</span> Free and open source under the MIT License.</div>
+    </div>
+  </section>
+
+  <!-- ── 9. THE AESTHETICS ──────────────────────────────────────── -->
+  <hr class="section-divider" id="aesthetics" />
+  <section class="stack gap-4" style="margin-bottom: 4rem;">
+    <div class="section-header">
+      <span class="section-eyebrow">🎨 Design Movements</span>
+      <h2 class="section-title">Built-In Aesthetics</h2>
+      <p class="section-sub">Switch visual styles instantly with a single class name.</p>
+    </div>
+
+    <div style="display:flex; flex-wrap:wrap; gap:0.65rem;">
+      <span class="vibe-badge vibe-badge--neon">Cyberpunk 2099</span>
+      <span class="vibe-badge vibe-badge--sunset">Vaporwave 1984</span>
+      <span class="vibe-badge">Dark Academia</span>
+      <span class="vibe-badge vibe-badge--neon">Clean Girl Minimal</span>
+      <span class="vibe-badge">Cottagecore Botanical</span>
+      <span class="vibe-badge vibe-badge--sunset">Y2K Gloss Hologram</span>
+      <span class="vibe-badge">Neo-Brutalism</span>
+      <span class="vibe-badge vibe-badge--neon">Glassmorphism</span>
+      <span class="vibe-badge">Skeuomorphism</span>
+      <span class="vibe-badge vibe-badge--sunset">Win95 Retro</span>
+    </div>
+  </section>
+
+  <!-- ── 10. THE CREATOR ────────────────────────────────────────── -->
+  <hr class="section-divider" id="creator" />
+  <section class="stack gap-4" style="margin-bottom: 4rem;">
+    <div class="section-header">
+      <span class="section-eyebrow">📝 The Creator</span>
+      <h2 class="section-title">Eldrex Delos Reyes Bula</h2>
+    </div>
+
+    <div class="vibe-card p-8" style="background:radial-gradient(circle at top right, rgba(0,242,254,0.08), transparent 70%), #0c0e17; border-radius:24px;">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap:2rem; align-items:center;">
+        <div>
+          <span class="vibe-badge vibe-badge--neon">CREATOR &amp; ARCHITECT</span>
+          <h3 style="font-size:1.8rem; font-weight:900; margin:0.5rem 0;">Eldrex Delos Reyes Bula</h3>
+          <p style="color:#cbd5e1; font-size:0.95rem; line-height:1.75; margin-bottom:1.5rem;">
+            "Why is making websites so hard when it should be fun? Unboilerplate was born from the belief that everyone can create breathtaking digital experiences without unnecessary complexity."
+          </p>
+          <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+            <a href="https://github.com/EldrexDelosReyesBula" target="_blank" rel="noopener noreferrer" class="pill-tab" style="text-decoration:none;">GitHub Profile ↗</a>
+            <a href="https://github.com/EldrexDelosReyesBula/unboilerplate" target="_blank" rel="noopener noreferrer" class="vibe-btn --sm hover-bounce" style="text-decoration:none;">Star on GitHub ★</a>
+          </div>
+        </div>
+        <div class="card-conic-glow" style="max-width:320px; margin:0 auto; width:100%;">
+          <div class="card-conic-content p-6 text-center">
+            <span style="font-size:2rem;">✨</span>
+            <h4 style="font-size:1.1rem; color:#fff; font-weight:800; margin-top:0.5rem;">Unboilerplate</h4>
+            <p style="font-size:0.8rem; color:#94a3b8; margin-top:0.25rem;">Style it. Ship it. Vibe with it.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FINAL CALL TO ACTION ───────────────────────────────────── -->
+  <hr class="section-divider" />
+  <div style="text-align:center; padding:3rem 1.5rem; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06); border-radius:20px;">
+    <h2 style="font-size:clamp(1.6rem,4vw,2.4rem); font-weight:900;">Ready to experience CSS that speaks human?</h2>
+    <p style="color:#94a3b8; max-width:500px; margin:0.75rem auto 1.75rem; line-height:1.6;">
+      Launch the Playground to play with interactive 3D elements or explore our turnkey starter templates.
+    </p>
+    <div style="display:flex; gap:0.85rem; justify-content:center; flex-wrap:wrap;">
+      <a href="/playground" class="vibe-btn hover-bounce">Launch Playground →</a>
+      <a href="/templates" class="pill-tab">Browse Templates</a>
+      <a href="/cheatsheet" class="pill-tab">Class Cheatsheet</a>
+    </div>
+  </div>
+
+</DocsLayout>

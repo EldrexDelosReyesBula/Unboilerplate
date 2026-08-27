@@ -1,0 +1,207 @@
+/**
+ * UNBOILERPLATE - Presets: Creative Text Effects Library
+ * Gradients, neon glows, glitches, 3D text extrusions, fire, ice, and dynamic waves.
+ */
+
+/* ==========================================================================
+   1. GRADIENT TEXTS
+   ========================================================================== */
+.text-gradient {
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  display: inline-block;
+}
+
+.text-gradient.--sunset,
+.gradient-sunset {
+  background: linear-gradient(135deg, #ff0844 0%, #ffb199 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient.--ocean,
+.gradient-ocean {
+  background: linear-gradient(135deg, #2af598 0%, #009efd 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient.--rainbow,
+.gradient-rainbow {
+  background: linear-gradient(90deg, #ff007a, #7928ca, #00f2fe, #f7ba2c, #ff007a);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: ub-rainbow-shift 4s linear infinite;
+}
+
+.text-gradient.--metal,
+.gradient-metal {
+  background: linear-gradient(135deg, #d3d3d3 0%, #708090 50%, #ffffff 75%, #4682b4 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ==========================================================================
+   2. ANIMATED & GLOW TEXTS
+   ========================================================================== */
+.text-neon {
+  color: #fff;
+  text-shadow: 
+    0 0 5px #fff,
+    0 0 10px #fff,
+    0 0 20px #00f2fe,
+    0 0 35px #00f2fe,
+    0 0 55px #00f2fe;
+}
+
+.text-fire {
+  color: #ffcc00;
+  text-shadow: 
+    0 0 4px #ff3300,
+    0 -5px 8px #ff6600,
+    2px -10px 14px #ff9900,
+    -2px -15px 20px #ffcc00;
+  animation: ub-fire-flicker 1.8s ease-in-out infinite alternate;
+}
+
+.text-ice {
+  color: #e0f7fa;
+  text-shadow: 
+    0 0 6px #00e5ff,
+    0 0 15px #00b0ff,
+    0 0 25px rgba(0, 176, 255, 0.6);
+}
+
+.text-3d {
+  color: #ffffff;
+  text-shadow: 
+    0 1px 0 #cccccc,
+    0 2px 0 #c9c9c9,
+    0 3px 0 #bbbbbb,
+    0 4px 0 #b9b9b9,
+    0 5px 0 #aaaaaa,
+    0 6px 1px rgba(0,0,0,.1),
+    0 0 5px rgba(0,0,0,.1),
+    0 1px 3px rgba(0,0,0,.3),
+    0 3px 5px rgba(0,0,0,.2),
+    0 5px 10px rgba(0,0,0,.25);
+}
+
+.text-glitch {
+  position: relative;
+  display: inline-block;
+  color: #fff;
+}
+
+.text-glitch::before,
+.text-glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  clip: rect(0, 0, 0, 0);
+}
+
+.text-glitch::before {
+  left: 2px;
+  text-shadow: -2px 0 #ff007a;
+  animation: ub-glitch-anim 2s infinite linear alternate-reverse;
+}
+
+.text-glitch::after {
+  left: -2px;
+  text-shadow: 2px 0 #00f2fe;
+  animation: ub-glitch-anim-2 2.5s infinite linear alternate-reverse;
+}
+
+.text-wave {
+  animation: ub-wave-text 2s ease-in-out infinite;
+  display: inline-block;
+}
+
+.text-bounce {
+  animation: ub-bounce-text 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+  display: inline-block;
+}
+
+.text-spin {
+  animation: ub-spin 4s linear infinite;
+  display: inline-block;
+}
+
+/* ==========================================================================
+   3. SPECIAL TEXT EFFECTS
+   ========================================================================== */
+.text-outline {
+  -webkit-text-stroke: 1.5px currentColor;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.text-shadow {
+  text-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+}
+
+.text-reflection {
+  -webkit-box-reflect: below 2px linear-gradient(transparent 40%, rgba(255, 255, 255, 0.25));
+}
+
+.text-blur {
+  filter: blur(4px);
+  transition: filter 0.3s ease;
+}
+
+.text-blur:hover {
+  filter: blur(0);
+}
+
+.text-mix {
+  mix-blend-mode: difference;
+  color: #fff;
+}
+
+/* ==========================================================================
+   4. KEYFRAMES
+   ========================================================================== */
+@keyframes ub-fire-flicker {
+  0% { transform: scale(1); filter: brightness(1); }
+  50% { transform: scale(1.02) skewX(1deg); filter: brightness(1.15); }
+  100% { transform: scale(0.99) skewX(-1deg); filter: brightness(0.95); }
+}
+
+@keyframes ub-wave-text {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-6px) rotate(-2deg); }
+  75% { transform: translateY(6px) rotate(2deg); }
+}
+
+@keyframes ub-bounce-text {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes ub-glitch-anim {
+  0% { clip: rect(12px, 9999px, 44px, 0); }
+  20% { clip: rect(65px, 9999px, 80px, 0); }
+  40% { clip: rect(20px, 9999px, 50px, 0); }
+  60% { clip: rect(80px, 9999px, 95px, 0); }
+  80% { clip: rect(35px, 9999px, 60px, 0); }
+  100% { clip: rect(10px, 9999px, 30px, 0); }
+}
+
+@keyframes ub-glitch-anim-2 {
+  0% { clip: rect(40px, 9999px, 60px, 0); }
+  25% { clip: rect(10px, 9999px, 35px, 0); }
+  50% { clip: rect(75px, 9999px, 90px, 0); }
+  75% { clip: rect(20px, 9999px, 45px, 0); }
+  100% { clip: rect(60px, 9999px, 85px, 0); }
+}

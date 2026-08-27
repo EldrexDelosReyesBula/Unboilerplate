@@ -1,0 +1,58 @@
+/**
+ * UNBOILERPLATE - Aesthetic: Cyberpunk
+ * High-voltage neon, glitch lines, terminal scanlines, hyper-vibrant saturation.
+ */
+
+.aesthetic-cyberpunk,
+.theme-cyberpunk,
+[data-aesthetic="cyberpunk"],
+[data-theme="cyberpunk"],
+[data-theme="theme-cyberpunk"] {
+  --ub-bg: #050508;
+  --ub-bg-subtle: #0c0d14;
+  --ub-bg-surface: #121320;
+  --ub-text: #f0f6fc;
+  --ub-text-muted: #8b949e;
+  --ub-border: #ff0055;
+  --ub-accent: #00f2fe;
+  --ub-primary: linear-gradient(135deg, #ff0055 0%, #7928ca 50%, #00f2fe 100%);
+  --ub-radius-lg: 4px;
+  --ub-radius-md: 2px;
+  --ub-radius-sm: 0px;
+  --ub-font-family-display: 'JetBrains Mono', monospace;
+}
+
+.aesthetic-cyberpunk .vibe-card,
+.theme-cyberpunk .vibe-card,
+[data-aesthetic="cyberpunk"] .vibe-card,
+[data-theme="cyberpunk"] .vibe-card,
+[data-theme="theme-cyberpunk"] .vibe-card {
+  border: 1px solid #00f2fe;
+  box-shadow: 0 0 15px rgba(0, 242, 254, 0.3), inset 0 0 15px rgba(255, 0, 85, 0.15);
+  background: rgba(10, 11, 20, 0.85);
+  clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 15px, 100% 100%, 15px 100%, 0 calc(100% - 15px));
+}
+
+.aesthetic-cyberpunk .vibe-btn,
+.theme-cyberpunk .vibe-btn,
+[data-aesthetic="cyberpunk"] .vibe-btn,
+[data-theme="cyberpunk"] .vibe-btn,
+[data-theme="theme-cyberpunk"] .vibe-btn {
+  background: #ff0055;
+  color: #ffffff;
+  border-radius: 0;
+  clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+  box-shadow: 0 0 20px rgba(255, 0, 85, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.aesthetic-cyberpunk .vibe-btn:hover,
+.theme-cyberpunk .vibe-btn:hover,
+[data-aesthetic="cyberpunk"] .vibe-btn:hover,
+[data-theme="cyberpunk"] .vibe-btn:hover,
+[data-theme="theme-cyberpunk"] .vibe-btn:hover {
+  background: #00f2fe;
+  color: #050508;
+  box-shadow: 0 0 25px rgba(0, 242, 254, 0.8);
+}

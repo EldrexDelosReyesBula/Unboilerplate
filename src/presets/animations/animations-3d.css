@@ -1,0 +1,66 @@
+/**
+ * UNBOILERPLATE - Presets: 3D Animations & Loops
+ * Continuous 3D keyframe motion presets.
+ */
+
+.animate-3d-spin {
+  animation: ub-spin-3d 6s linear infinite;
+  transform-style: preserve-3d;
+}
+
+.animate-3d-bounce {
+  animation: ub-bounce-3d 3s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+
+.animate-3d-wave {
+  animation: ub-wave-3d 4s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+
+.animate-3d-flip {
+  animation: ub-flip-3d 2s ease-in-out infinite alternate;
+  transform-style: preserve-3d;
+}
+
+.animate-3d-fold {
+  animation: ub-fold-3d 3s ease-in-out infinite alternate;
+  transform-origin: top center;
+}
+
+@keyframes ub-spin-3d {
+  0% { transform: perspective(800px) rotateY(0deg) rotateX(15deg); }
+  100% { transform: perspective(800px) rotateY(360deg) rotateX(15deg); }
+}
+
+@keyframes ub-bounce-3d {
+  0%, 100% { transform: perspective(800px) translateY(0) translateZ(0) rotateX(0deg); }
+  50% { transform: perspective(800px) translateY(-20px) translateZ(40px) rotateX(10deg); }
+}
+
+@keyframes ub-wave-3d {
+  0%, 100% { transform: perspective(800px) rotateY(-15deg) rotateX(10deg); }
+  50% { transform: perspective(800px) rotateY(15deg) rotateX(-10deg); }
+}
+
+@keyframes ub-flip-3d {
+  0% { transform: perspective(1000px) rotateY(0deg); }
+  100% { transform: perspective(1000px) rotateY(180deg); }
+}
+
+@keyframes ub-fold-3d {
+  0% { transform: perspective(800px) rotateX(0deg); }
+  100% { transform: perspective(800px) rotateX(-45deg); }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .animate-3d-spin,
+  .animate-3d-bounce,
+  .animate-3d-wave,
+  .animate-3d-flip,
+  .animate-3d-fold {
+    animation: none !important;
+    transform: none !important;
+  }
+}

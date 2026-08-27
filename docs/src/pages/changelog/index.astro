@@ -1,0 +1,262 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+
+const tocItems: Array<{ id: string; label: string }> = [
+  { id: 'v1-0-0',        label: 'v1.0.0 — Initial Release' },
+  { id: 'tokens',        label: 'Design Tokens & Themes'  },
+  { id: 'spatial-3d',    label: '3D Spatial Suite'        },
+  { id: 'movements',     label: 'Aesthetic Movements'     },
+  { id: 'retro',         label: 'Retro Systems'           },
+  { id: 'motion',        label: 'Motion & FX'             },
+  { id: 'playground-ide',label: 'Studio Playground'       },
+];
+---
+
+<DocsLayout
+  title="Changelog — Unboilerplate"
+  description="Full release history and version changelog for Unboilerplate v1.0.0 Initial Release."
+  activePage="changelog"
+  tocItems={tocItems}
+>
+
+  <!-- SIDEBAR -->
+  <div slot="sidebar">
+    <p class="sidebar-group-title">Changelog</p>
+    <div class="sidebar-links">
+      <a href="#v1-0-0"         class="sidebar-link active">v1.0.0 (Initial Release)</a>
+      <a href="#tokens"         class="sidebar-link">Tokens &amp; Themes</a>
+      <a href="#spatial-3d"     class="sidebar-link">3D Spatial Suite</a>
+      <a href="#movements"      class="sidebar-link">Aesthetic Movements</a>
+      <a href="#retro"          class="sidebar-link">Retro Systems</a>
+      <a href="#motion"         class="sidebar-link">Motion Engine &amp; FX</a>
+      <a href="#playground-ide" class="sidebar-link">Studio &amp; CDN</a>
+    </div>
+
+    <p class="sidebar-group-title" style="margin-top:1.5rem;">Quick Links</p>
+    <div class="sidebar-links">
+      <a href="/playground" class="sidebar-link" style="color:#00f2fe;font-weight:700;">Playground Studio ↗</a>
+      <a href="/templates"  class="sidebar-link">Starter Templates</a>
+      <a href="/components" class="sidebar-link">Component Library</a>
+      <a href="/philosophy" class="sidebar-link">The Complete Story</a>
+      <a href="https://github.com/EldrexDelosReyesBula/Unboilerplate" class="sidebar-link" target="_blank">GitHub Repo ↗</a>
+    </div>
+  </div>
+
+  <!-- ARTICLE HEADER -->
+  <header style="margin-bottom: 3rem; text-align: left;">
+    <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:1rem; flex-wrap:wrap;">
+      <span class="vibe-badge vibe-badge--neon">SEMANTIC VERSIONING</span>
+      <span class="vibe-badge vibe-badge--sunset">OFFICIAL RELEASE</span>
+    </div>
+    <h1 class="text-gradient" style="font-size: clamp(2.4rem, 6vw, 3.8rem); font-weight: 900; line-height: 1.1; letter-spacing: -0.03em; margin:0.5rem 0;">
+      Changelog
+    </h1>
+    <p style="font-size: clamp(1rem, 2vw, 1.25rem); color: #94a3b8; margin-top: 0.8rem; line-height: 1.7;">
+      Official release history for Unboilerplate adhering strictly to Semantic Versioning.
+    </p>
+  </header>
+
+  <!-- ── 1. v1.0.0 INITIAL RELEASE ──────────────────────────────── -->
+  <section id="v1-0-0" class="release-section stack gap-4" style="margin-bottom: 4rem;">
+    <div class="release-header">
+      <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;">
+        <span class="version-tag --current">v1.0.0</span>
+        <span class="release-date">August 27, 2026</span>
+        <span class="vibe-badge vibe-badge--neon" style="font-size:0.65rem;">INITIAL RELEASE</span>
+      </div>
+      <h2 style="font-size: clamp(1.8rem, 4vw, 2.3rem);font-weight:900;color:#fff;margin:1rem 0 0.5rem;">
+        Unboilerplate v1.0.0: The Pure CSS Framework
+      </h2>
+      <p style="color:#cbd5e1;font-size:1.05rem;line-height:1.8;">
+        The initial release of <strong>Unboilerplate</strong> brings a complete, zero-dependency pure CSS framework to web developers and designers worldwide. Built for humans who want rich aesthetics, interactive 3D elements, nostalgic retro widgets, and modern layouts without build tools or framework fatigue.
+      </p>
+    </div>
+
+    <!-- 1. Design Tokens & Themes -->
+    <div id="tokens" class="change-card p-6 stack gap-3">
+      <div style="display:flex;align-items:center;gap:0.5rem;">
+        <span class="category-pill" style="background:rgba(0,242,254,0.12);color:#00f2fe;border:1px solid rgba(0,242,254,0.3);">FOUNDATIONS</span>
+        <h3 class="change-title text-gradient --ocean" style="margin:0;">Cascading Design Tokens &amp; Theme System</h3>
+      </div>
+      <ul class="change-list">
+        <li><strong>Unified CSS Custom Properties:</strong> Full semantic root tokens for backgrounds (<code>--ub-bg</code>, <code>--ub-surface</code>), text (<code>--ub-text</code>, <code>--ub-text-muted</code>), borders (<code>--ub-border</code>), and brand accents.</li>
+        <li><strong>Multi-Theme Architecture:</strong> Zero-specificity theme switching via <code>[data-theme="..."]</code> and body presets (Default Dark, Default Light, Cyberpunk HUD, Pastel Dream, Sunset Dusk, Clean Girl Minimalist).</li>
+        <li><strong>Fluid Layout Primitives:</strong> Flexbox and CSS Grid layout helpers: <code>.flex</code>, <code>.stack</code>, <code>.vibe-grid</code>, <code>.split-2</code>, <code>.split-3</code>, <code>.center</code>, <code>.between</code>, and responsive scale utilities.</li>
+      </ul>
+    </div>
+
+    <!-- 2. 3D Spatial Suite -->
+    <div id="spatial-3d" class="change-card p-6 stack gap-3">
+      <div style="display:flex;align-items:center;gap:0.5rem;">
+        <span class="category-pill" style="background:rgba(99,102,241,0.15);color:#818cf8;border:1px solid rgba(99,102,241,0.3);">3D SPATIAL</span>
+        <h3 class="change-title" style="color:#a5b4fc;margin:0;">Hardware-Accelerated 3D Suite</h3>
+      </div>
+      <ul class="change-list">
+        <li><strong>Interactive 3D Book (<code>.book-3d</code>):</strong> Real hardbound book with progressive page-turn physics, spine-anchored cover, aged parchment texture, and optional JavaScript <code>.is-open</code> toggle.</li>
+        <li><strong>3D VIP Pass Flip Card (<code>.card-3d-flip</code>):</strong> 180° perspective front-to-back flip with holographic reflection.</li>
+        <li><strong>3D Orbital Ring Carousel (<code>.carousel-3d</code>):</strong> Continuous orbiting carousel that pauses smoothly on hover.</li>
+        <li><strong>Six-Face Rotating Cube Scene (<code>.cube-3d-scene</code>):</strong> 3D geometry cube with GPU perspective compositing.</li>
+        <li><strong>Photoshop Layer Canvas (<code>.canvas</code>):</strong> Multi-tier layer blending (<code>.layer-back</code>, <code>.layer-mid</code>, <code>.layer-front</code>) with native CSS blend modes (<code>.blend-screen</code>, <code>.blend-overlay</code>).</li>
+      </ul>
+    </div>
+
+    <!-- 3. Aesthetic Movements -->
+    <div id="movements" class="change-card p-6 stack gap-3">
+      <div style="display:flex;align-items:center;gap:0.5rem;">
+        <span class="category-pill" style="background:rgba(255,0,127,0.12);color:#ff007f;border:1px solid rgba(255,0,127,0.3);">AESTHETICS</span>
+        <h3 class="change-title text-gradient --sunset" style="margin:0;">Curated Design Movements &amp; Skeuomorphism</h3>
+      </div>
+      <ul class="change-list">
+        <li><strong>Neo-Brutalism (<code>.brutal-neo</code>, <code>.btn-brutal</code>):</strong> 6px hard offset drop shadows, 3px solid black borders, and high-contrast confidence.</li>
+        <li><strong>1990s Memphis Pattern (<code>.memphis-pattern</code>):</strong> Geometric pattern backgrounds with vibrant confetti and shapes.</li>
+        <li><strong>Vaporwave Sunset (<code>.vapor-sunset</code>, <code>.vapor-chrome</code>):</strong> 80s dusk horizon grid with chrome typography.</li>
+        <li><strong>Mahogany Skeuomorphism (<code>.card-wood</code>, <code>.btn-leather</code>):</strong> Handcrafted woodgrain with stitched borders and leather buttons.</li>
+        <li><strong>360° Conic Glow (<code>.card-conic-glow</code>):</strong> Continuous rotating gradient perimeter glow.</li>
+      </ul>
+    </div>
+
+    <!-- 4. Retro Systems -->
+    <div id="retro" class="change-card p-6 stack gap-3">
+      <div style="display:flex;align-items:center;gap:0.5rem;">
+        <span class="category-pill" style="background:rgba(0,255,163,0.12);color:#00ffa3;border:1px solid rgba(0,255,163,0.3);">RETRO SYSTEMS</span>
+        <h3 class="change-title" style="color:#00ffa3;margin:0;">Nostalgic Time Machine Suite</h3>
+      </div>
+      <ul class="change-list">
+        <li><strong>Windows 95 Window Frame (<code>.window-95</code>):</strong> Classic beveled dialog frame with titlebar and control buttons.</li>
+        <li><strong>Cathode-Ray CRT Displays (<code>.crt-screen</code>):</strong> Curved scanlines (<code>.crt-scanlines</code>) and green/amber phosphor glow.</li>
+        <li><strong>Winamp 2005 Media Player (<code>.winamp-player</code>):</strong> Vintage skin with animated graphic equalizer bars (<code>.winamp-eq</code>).</li>
+        <li><strong>Hardware Scrolling Marquee (<code>.marquee</code>):</strong> GPU-composited scrolling ticker with <code>.marquee.--pause-hover</code>.</li>
+        <li><strong>Visitor Counter (<code>.visitor-counter</code>):</strong> 90s digital LED hit counter badge.</li>
+      </ul>
+    </div>
+
+    <!-- 5. Motion Engine -->
+    <div id="motion" class="change-card p-6 stack gap-3">
+      <div style="display:flex;align-items:center;gap:0.5rem;">
+        <span class="category-pill" style="background:rgba(244,114,182,0.12);color:#f472b6;border:1px solid rgba(244,114,182,0.3);">MOTION &amp; FX</span>
+        <h3 class="change-title" style="color:#f472b6;margin:0;">Motion Engine, Particles &amp; Text Shaders</h3>
+      </div>
+      <ul class="change-list">
+        <li><strong>3D Floating Particles (<code>.particles-3d</code>):</strong> Cosmic particle system with float, spin, and orbit animation modifiers.</li>
+        <li><strong>Twinkling Starfields (<code>.particles-stars</code>):</strong> Pure CSS pulsing celestial starlight.</li>
+        <li><strong>Pure CSS Typewriter Headline (<code>.text-animate.--typewriter</code>):</strong> Keyframe typing headline with blinking caret.</li>
+        <li><strong>Stacked Polaroids (<code>.polaroid-stack</code>):</strong> Analog photograph frames with rotational offsets and hover lift.</li>
+        <li><strong>Cosmic Text Shaders:</strong> <code>.text-gradient</code>, <code>.text-fire</code>, <code>.text-ice</code>, <code>.text-neon</code>, and <code>.text-3d</code>.</li>
+      </ul>
+    </div>
+
+    <!-- 6. Playground Studio & CDN -->
+    <div id="playground-ide" class="change-card p-6 stack gap-3">
+      <div style="display:flex;align-items:center;gap:0.5rem;">
+        <span class="category-pill" style="background:rgba(251,191,36,0.12);color:#fbbf24;border:1px solid rgba(251,191,36,0.3);">TOOLING &amp; CDN</span>
+        <h3 class="change-title" style="color:#fbbf24;margin:0;">Playground Studio &amp; Production CDN</h3>
+      </div>
+      <ul class="change-list">
+        <li><strong>Interactive Studio Playground (<code>/playground</code>):</strong> Live split-pane editor with Monaco Editor support, mobile tab switcher, and zero-bleed live DOM stage.</li>
+        <li><strong>10 Curated Starter Templates:</strong> Bento SaaS, Cyberpunk HUD, Neo-Brutalist Studio, Glassmorphic Landing, Artisan Roastery, 1999 Personal Site, Quantum Docs, and more.</li>
+        <li><strong>6-Category Component Library (<code>/components</code>):</strong> 25+ copy-paste interactive building blocks.</li>
+        <li><strong>Production Distribution CDN:</strong> Global delivery via jsDelivr:
+          <pre style="background:#08090f;padding:0.75rem 1rem;border-radius:8px;border:1px solid rgba(255,255,255,0.08);color:#00f2fe;font-size:0.8rem;margin-top:0.5rem;overflow-x:auto;"><code>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@eldrex/unboilerplate@1.0.0/dist/unboilerplate.min.css"&gt;</code></pre>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+  <div style="display:flex;gap:0.75rem;flex-wrap:wrap;align-items:center;">
+    <a href="/playground" class="vibe-btn hover-bounce">Launch Playground Studio</a>
+    <a href="/components" class="pill-tab">Explore Components →</a>
+    <a href="/philosophy" class="pill-tab">The Complete Story →</a>
+  </div>
+
+</DocsLayout>
+
+<style>
+  .section-divider { border: none; border-top: 1px solid rgba(255,255,255,0.07); margin: 3rem 0; }
+  
+  .release-section {
+    position: relative;
+    padding-left: 1.5rem;
+    border-left: 2px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .release-section::before {
+    content: '';
+    position: absolute;
+    left: -7px;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #00f2fe;
+    box-shadow: 0 0 10px #00f2fe;
+  }
+
+  .version-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #00f2fe;
+    background: rgba(0, 242, 254, 0.1);
+    border: 1px solid rgba(0, 242, 254, 0.3);
+    padding: 2px 10px;
+    border-radius: 6px;
+  }
+
+  .version-tag.--current {
+    color: #fff;
+    background: linear-gradient(135deg, #00f2fe, #4facfe);
+    border: none;
+    box-shadow: 0 2px 10px rgba(0, 242, 254, 0.4);
+  }
+
+  .release-date {
+    font-size: 0.85rem;
+    color: #64748b;
+    font-weight: 600;
+  }
+
+  .category-pill {
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    padding: 2px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+  }
+
+  .change-card {
+    background: #0e111a;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+  }
+
+  .change-title {
+    font-size: 1.15rem;
+    font-weight: 800;
+  }
+
+  .change-list {
+    margin: 0;
+    padding-left: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    color: #cbd5e1;
+    font-size: 0.92rem;
+    line-height: 1.65;
+  }
+
+  .change-list strong {
+    color: #fff;
+  }
+
+  .change-list code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    background: rgba(255, 255, 255, 0.08);
+    color: #00f2fe;
+    padding: 1px 5px;
+    border-radius: 4px;
+  }
+</style>

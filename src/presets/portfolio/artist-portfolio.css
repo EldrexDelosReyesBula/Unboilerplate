@@ -1,0 +1,269 @@
+/**
+ * UNBOILERPLATE - Presets: Creative Artist Portfolio Builder
+ * Turnkey artist & creator portfolio layouts, aurora heroes, work showcases, and skill visualizers.
+ */
+
+/* ==========================================================================
+   1. PORTFOLIO CONTAINER & HERO
+   ========================================================================== */
+.portfolio-artist {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.hero-creative {
+  position: relative;
+  min-height: 480px;
+  border-radius: var(--ub-radius-2xl, 28px);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.5rem;
+  box-shadow: var(--ub-shadow-float, 0 20px 40px rgba(0,0,0,0.4));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hero-creative .hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(13, 15, 23, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 2.5rem;
+  border-radius: var(--ub-radius-xl, 20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  max-width: 600px;
+}
+
+.avatar.--floating {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  animation: ub-float-slow 5s ease-in-out infinite;
+}
+
+.hero-particles {
+  display: flex;
+  gap: 1rem;
+  font-size: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+/* ==========================================================================
+   2. WORK SHOWCASE & GRID
+   ========================================================================== */
+.work-showcase {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.section-title.--underline {
+  font-size: 2.2rem;
+  font-weight: 800;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 8px;
+}
+
+.section-title.--underline::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: var(--ub-accent-gradient, linear-gradient(90deg, #ff007a, #00f2fe));
+  border-radius: 2px;
+}
+
+.work-featured {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 2rem;
+  background: var(--ub-bg-surface, #0d0f17);
+  border-radius: var(--ub-radius-xl, 20px);
+  padding: 1.5rem;
+  border: 1px solid var(--ub-border, rgba(255, 255, 255, 0.08));
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .work-featured {
+    grid-template-columns: 1fr;
+  }
+}
+
+.work-image {
+  width: 100%;
+  border-radius: var(--ub-radius-lg, 14px);
+  object-fit: cover;
+  aspect-ratio: 16 / 10;
+}
+
+.work-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.work-tags .tag {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--ub-accent-cyan, #00f2fe);
+  padding: 4px 10px;
+  border-radius: 100px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.work-card {
+  background: var(--ub-bg-surface, #0d0f17);
+  border-radius: var(--ub-radius-lg, 14px);
+  overflow: hidden;
+  border: 1px solid var(--ub-border, rgba(255, 255, 255, 0.08));
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+  cursor: pointer;
+}
+
+.work-card img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+}
+
+.work-card figcaption {
+  padding: 1rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.work-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+}
+
+/* ==========================================================================
+   3. ABOUT & SKILLS
+   ========================================================================== */
+.about-creative {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2.5rem;
+  align-items: center;
+  background: var(--ub-bg-surface, #0d0f17);
+  border-radius: var(--ub-radius-xl, 20px);
+  padding: 2.5rem;
+  border: 1px solid var(--ub-border, rgba(255, 255, 255, 0.08));
+}
+
+@media (max-width: 768px) {
+  .about-creative {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+}
+
+.about-image.--polaroid {
+  max-width: 220px;
+}
+
+.skills {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.skill {
+  display: block;
+  position: relative;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.skill::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, #ff007a, #00f2fe);
+  opacity: 0.25;
+  z-index: -1;
+  border-radius: 8px;
+}
+
+.skill.--level-90::before { width: 90%; }
+.skill.--level-80::before { width: 80%; }
+.skill.--level-70::before { width: 70%; }
+
+/* ==========================================================================
+   4. CONTACT
+   ========================================================================== */
+.contact-creative {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.06) 100%);
+  border-radius: var(--ub-radius-xl, 20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.contact-btn {
+  padding: 10px 22px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.contact-btn:hover {
+  background: #fff;
+  color: #000;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2);
+}

@@ -1,0 +1,83 @@
+/**
+ * UNBOILERPLATE - Presets: Text Animation Engine
+ * Typewriter, gradient flow, wave, and cadence text animations in pure CSS.
+ */
+
+.text-animate {
+  display: inline-block;
+  position: relative;
+}
+
+/* 1. Typewriter */
+.text-animate.--typewriter,
+.--typewriter {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid currentColor;
+  width: 0;
+  animation: 
+    ub-typing 3.5s steps(30, end) infinite alternate,
+    ub-blink-caret 0.75s step-end infinite;
+}
+
+@keyframes ub-typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes ub-blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: currentColor; }
+}
+
+/* 2. Gradient Flow */
+.text-animate.--gradient-flow,
+.--gradient-flow {
+  background: linear-gradient(270deg, #ff007a, #7928ca, #00f2fe, #4facfe, #ff007a);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: ub-text-gradient-flow 5s ease infinite;
+}
+
+@keyframes ub-text-gradient-flow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 3. Word-by-word & Letter-by-letter pulse */
+.text-animate.--word-by-word,
+.text-animate.--letter-by-letter {
+  animation: ub-text-pop 2s ease-in-out infinite;
+}
+
+.text-animate.--line-by-line {
+  animation: ub-line-fade 3s ease-in-out infinite;
+}
+
+.text-animate.--scramble {
+  animation: ub-text-glitch 1.5s infinite steps(2);
+  filter: contrast(150%);
+}
+
+@keyframes ub-text-pop {
+  0%, 100% { transform: scale(1); filter: brightness(1); }
+  50% { transform: scale(1.05); filter: brightness(1.3); }
+}
+
+@keyframes ub-line-fade {
+  0%, 100% { opacity: 0.3; transform: translateY(4px); }
+  50% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ub-text-glitch {
+  0% { transform: translate(0); text-shadow: none; }
+  20% { transform: translate(-2px, 1px); text-shadow: 2px 0 #ff007a, -2px 0 #00f2fe; }
+  40% { transform: translate(2px, -1px); text-shadow: -2px 0 #ff007a, 2px 0 #00f2fe; }
+  60% { transform: translate(0); text-shadow: none; }
+  100% { transform: translate(0); text-shadow: none; }
+}

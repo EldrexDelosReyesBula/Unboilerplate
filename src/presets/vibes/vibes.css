@@ -1,0 +1,61 @@
+/**
+ * UNBOILERPLATE - Presets: The Vibe Engine
+ * Instant full-aesthetic mood wrappers with pure CSS custom property cascading.
+ */
+
+/* 1. Dreamy Vibe */
+.vibe-dreamy {
+  --ub-vibe-primary: #ff9a9e;
+  --ub-vibe-secondary: #fecfef;
+  --ub-vibe-accent: #a1c4fd;
+  --ub-vibe-bg: #1a1528;
+  --ub-vibe-card: rgba(255, 255, 255, 0.08);
+  --ub-vibe-font: 'Playfair Display', serif;
+  background: radial-gradient(circle at 20% 20%, rgba(255, 154, 158, 0.15), transparent 40%),
+              radial-gradient(circle at 80% 80%, rgba(161, 196, 253, 0.15), transparent 40%),
+              var(--ub-vibe-bg);
+  color: #fff;
+  border-radius: var(--ub-radius-xl, 20px);
+  padding: 2rem;
+  box-shadow: 0 15px 35px rgba(254, 207, 239, 0.1);
+  border: 1px solid rgba(255, 154, 158, 0.2);
+}
+
+/* 2. Bold Vibe */
+.vibe-bold {
+  --ub-vibe-primary: #ff0055;
+  --ub-vibe-secondary: #ffe600;
+  --ub-vibe-accent: #00f2fe;
+  --ub-vibe-bg: #000000;
+  background: var(--ub-vibe-bg);
+  color: #ffffff;
+  border: 4px solid var(--ub-vibe-secondary);
+  border-radius: 0px;
+  padding: 2rem;
+  box-shadow: 8px 8px 0px var(--ub-vibe-primary);
+  font-weight: 800;
+}
+
+/* 3. Retro Vibe */
+.vibe-retro {
+  --ub-vibe-primary: #00ff00;
+  --ub-vibe-secondary: #ffff00;
+  --ub-vibe-bg: #000080;
+  background: var(--ub-vibe-bg);
+  color: var(--ub-vibe-primary);
+  border: 4px ridge #c0c0c0;
+  padding: 2rem;
+  font-family: 'Courier New', monospace;
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.8), 4px 4px 0px #000;
+}
+
+/* 4. Custom Vibe (Overrides via Inline CSS Custom Properties) */
+.vibe-custom {
+  --vibe-accent: var(--my-color, #ff007a);
+  background: radial-gradient(circle at top right, var(--vibe-accent), transparent 70%), #0d0f17;
+  color: #ffffff;
+  border: 1px solid var(--vibe-accent);
+  border-radius: var(--ub-radius-xl, 20px);
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}

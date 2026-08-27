@@ -1,0 +1,84 @@
+/**
+ * UNBOILERPLATE - Base Elements
+ * Semantic base styling with dynamic theme variables.
+ */
+
+body {
+  font-family: var(--ub-font-family-sans);
+  font-size: var(--ub-font-base);
+  color: var(--ub-text);
+  background-color: var(--ub-bg);
+  background-attachment: fixed;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--ub-font-family-display, var(--ub-font-family-sans));
+  font-weight: 700;
+  line-height: var(--ub-leading-tight);
+  color: var(--ub-text);
+  letter-spacing: -0.02em;
+}
+
+h1 { font-size: var(--ub-font-5xl); }
+h2 { font-size: var(--ub-font-4xl); }
+h3 { font-size: var(--ub-font-3xl); }
+h4 { font-size: var(--ub-font-2xl); }
+h5 { font-size: var(--ub-font-xl); }
+h6 { font-size: var(--ub-font-lg); }
+
+p {
+  color: var(--ub-text-muted);
+  line-height: var(--ub-leading-normal);
+  max-width: 70ch;
+}
+
+small {
+  font-size: var(--ub-font-sm);
+  color: var(--ub-text-subtle);
+}
+
+strong, b {
+  font-weight: 600;
+  color: var(--ub-text);
+}
+
+code, kbd, samp, pre {
+  font-family: var(--ub-font-family-mono);
+  font-size: 0.9em;
+}
+
+code {
+  padding: 0.15em 0.4em;
+  background: var(--ub-bg-surface);
+  border: 1px solid var(--ub-border);
+  border-radius: var(--ub-radius-xs);
+  color: var(--ub-accent-cyan);
+}
+
+pre {
+  padding: var(--ub-space-4);
+  background: var(--ub-bg-subtle);
+  border: 1px solid var(--ub-border);
+  border-radius: var(--ub-radius-md);
+  overflow-x: auto;
+}
+
+pre code {
+  padding: 0;
+  background: none;
+  border: none;
+  color: inherit;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--ub-border);
+  margin: var(--ub-space-6) 0;
+}
+
+blockquote {
+  border-left: 3px solid var(--ub-accent);
+  padding-left: var(--ub-space-4);
+  font-style: italic;
+  color: var(--ub-text-muted);
+}

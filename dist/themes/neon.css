@@ -1,0 +1,27 @@
+/**
+ * UNBOILERPLATE - Theme: neon
+ * Style without thinking. Think without boilerplate.
+ * Author: Eldrex Delos Reyes Bula
+ * https://unboilerplate.vercel.app
+ * License: MIT
+ */
+/**
+ * UNBOILERPLATE - Theme: Neon
+ */
+
+:root[data-theme="neon"],
+.theme-neon {
+  --ub-bg: #06070a;
+  --ub-bg-subtle: #0d0f17;
+  --ub-bg-surface: #141724;
+  --ub-text: #ffffff;
+  --ub-text-muted: #a5b4fc;
+  --ub-text-subtle: #6366f1;
+  --ub-border: rgba(0, 242, 254, 0.3);
+  --ub-border-hover: rgba(0, 242, 254, 0.7);
+  --ub-accent: #00f2fe;
+  --ub-primary: linear-gradient(135deg, #ff007f 0%, #00f2fe 100%);
+  --ub-shadow-soft: 0 0 15px rgba(0, 242, 254, 0.2);
+  --ub-shadow-float: 0 0 30px rgba(0, 242, 254, 0.4), 0 0 15px rgba(255, 0, 127, 0.3);
+  --ub-shadow-neon: 0 0 25px rgba(0, 242, 254, 0.5), 0 0 45px rgba(255, 0, 127, 0.35);
+}

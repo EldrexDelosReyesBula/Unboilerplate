@@ -1,0 +1,50 @@
+/**
+ * UNBOILERPLATE - Presets: Pure CSS Carousel
+ * Zero-JS scroll-snap carousel with smooth momentum and responsive full-bleed tracks.
+ */
+
+.carousel-css {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--ub-radius-xl, 20px);
+  background: var(--ub-bg-surface, #0d0f17);
+}
+
+.carousel-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-slide {
+  flex: 0 0 85%;
+  max-width: 85%;
+  aspect-ratio: 16 / 9;
+  scroll-snap-align: center;
+  border-radius: var(--ub-radius-lg, 14px);
+  object-fit: cover;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+@media (min-width: 768px) {
+  .carousel-slide {
+    flex: 0 0 70%;
+    max-width: 70%;
+  }
+}
+
+.carousel-slide:hover {
+  transform: scale(1.02);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+}

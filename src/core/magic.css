@@ -1,0 +1,257 @@
+/**
+ * UNBOILERPLATE - Layer 3: Magic Classes
+ * "One Class = Everything" - fully pre-composed, self-contained components with aesthetic defaults.
+ */
+
+/* ==========================================================================
+   1. VIBE-CARD: Instant glassmorphic card with rich micro-interactions
+   ========================================================================== */
+.vibe-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: var(--ub-space-6);
+  background: var(--ub-glass-bg);
+  backdrop-filter: blur(var(--ub-glass-blur));
+  -webkit-backdrop-filter: blur(var(--ub-glass-blur));
+  border: 1px solid var(--ub-glass-border);
+  border-radius: var(--ub-radius-lg);
+  box-shadow: var(--ub-shadow-inner-glass), var(--ub-shadow-soft);
+  color: var(--ub-text);
+  overflow: hidden;
+  transition: transform var(--ub-transition-base), box-shadow var(--ub-transition-base), border-color var(--ub-transition-base);
+}
+
+.vibe-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--ub-border-hover);
+  box-shadow: var(--ub-shadow-inner-glass), var(--ub-shadow-float);
+}
+
+.vibe-card > header {
+  margin-bottom: var(--ub-space-4);
+}
+
+.vibe-card > footer {
+  margin-top: auto;
+  padding-top: var(--ub-space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--ub-space-3);
+}
+
+/* ==========================================================================
+   2. VIBE-BTN: Interactive tactile button with spring physics & glows
+   ========================================================================== */
+.vibe-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ub-space-2);
+  padding: var(--ub-space-3) var(--ub-space-6);
+  font-family: var(--ub-font-family-display, var(--ub-font-family-sans));
+  font-size: var(--ub-font-base);
+  font-weight: 600;
+  line-height: 1;
+  color: #ffffff;
+  background-image: var(--ub-primary);
+  background-size: 200% auto;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--ub-radius-md);
+  box-shadow: 0 4px 14px -2px rgba(255, 0, 127, 0.35);
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform var(--ub-transition-spring), box-shadow var(--ub-transition-base), background-position var(--ub-transition-base), filter var(--ub-transition-base);
+}
+
+.vibe-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  background-position: right center;
+  box-shadow: 0 8px 24px -2px rgba(255, 0, 127, 0.55), 0 0 15px rgba(0, 242, 254, 0.3);
+  filter: brightness(1.08);
+}
+
+.vibe-btn:active {
+  transform: scale(0.96);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.vibe-btn:disabled,
+.vibe-btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* ==========================================================================
+   3. VIBE-INPUT: Floating aesthetic form control
+   ========================================================================== */
+.vibe-input {
+  width: 100%;
+  padding: var(--ub-space-3) var(--ub-space-4);
+  font-family: var(--ub-font-family-sans);
+  font-size: var(--ub-font-base);
+  color: var(--ub-text);
+  background: var(--ub-bg-surface);
+  border: 1px solid var(--ub-border);
+  border-radius: var(--ub-radius-md);
+  outline: none;
+  transition: border-color var(--ub-transition-base), box-shadow var(--ub-transition-base), background var(--ub-transition-base);
+}
+
+.vibe-input::placeholder {
+  color: var(--ub-text-subtle);
+}
+
+.vibe-input:focus {
+  border-color: var(--ub-accent-cyan);
+  background: var(--ub-bg-subtle);
+  box-shadow: 0 0 0 3px rgba(0, 242, 254, 0.25), var(--ub-shadow-inner-glass);
+}
+
+/* ==========================================================================
+   4. VIBE-NAV: Floating glassmorphic top navigation bar
+   ========================================================================== */
+.vibe-nav {
+  position: sticky;
+  top: var(--ub-space-4);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--ub-space-3) var(--ub-space-6);
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  background: rgba(13, 14, 21, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--ub-glass-border);
+  border-radius: var(--ub-radius-pill);
+  box-shadow: var(--ub-shadow-float);
+}
+
+.vibe-nav a {
+  color: var(--ub-text-muted);
+  font-weight: 500;
+  transition: color var(--ub-transition-fast);
+}
+
+.vibe-nav a:hover {
+  color: var(--ub-text);
+}
+
+/* ==========================================================================
+   5. VIBE-HERO: High-impact hero container
+   ========================================================================== */
+.vibe-hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--ub-space-10) var(--ub-space-6);
+  min-height: 65vh;
+  background: radial-gradient(circle at 50% 20%, rgba(255, 0, 127, 0.15), transparent 60%),
+              radial-gradient(circle at 80% 80%, rgba(0, 242, 254, 0.12), transparent 50%);
+  border-radius: var(--ub-radius-2xl);
+  overflow: hidden;
+}
+
+.vibe-hero h1 {
+  font-size: var(--ub-font-6xl);
+  margin-bottom: var(--ub-space-4);
+}
+
+.vibe-hero p {
+  font-size: var(--ub-font-lg);
+  max-width: 600px;
+  margin-bottom: var(--ub-space-6);
+}
+
+/* ==========================================================================
+   6. VIBE-GRID: Dynamic auto-flowing responsive grid
+   ========================================================================== */
+.vibe-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: var(--ub-space-6);
+  width: 100%;
+}
+
+/* ==========================================================================
+   7. VIBE-BADGE & VIBE-CHIP: Status indicators
+   ========================================================================== */
+.vibe-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ub-space-2);
+  padding: var(--ub-space-1) var(--ub-space-3);
+  font-size: var(--ub-font-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: var(--ub-radius-pill);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--ub-border);
+  color: var(--ub-text);
+}
+
+.vibe-badge--neon {
+  background: rgba(0, 242, 254, 0.12);
+  border-color: rgba(0, 242, 254, 0.4);
+  color: var(--ub-accent-cyan);
+  box-shadow: 0 0 10px rgba(0, 242, 254, 0.25);
+}
+
+.vibe-badge--sunset {
+  background: rgba(255, 107, 107, 0.15);
+  border-color: rgba(255, 107, 107, 0.4);
+  color: #ffa07a;
+}
+
+/* ==========================================================================
+   8. VIBE-ALERT: Notification callout
+   ========================================================================== */
+.vibe-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ub-space-4);
+  padding: var(--ub-space-4) var(--ub-space-5);
+  border-radius: var(--ub-radius-md);
+  background: rgba(255, 255, 255, 0.04);
+  border-left: 4px solid var(--ub-accent-cyan);
+  box-shadow: var(--ub-shadow-soft);
+}
+
+/* ==========================================================================
+   9. VIBE-MODAL: Dialog backdrop and popup container
+   ========================================================================== */
+.vibe-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--ub-space-4);
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.vibe-modal {
+  position: relative;
+  width: 100%;
+  max-width: 540px;
+  padding: var(--ub-space-7);
+  background: var(--ub-bg-surface);
+  border: 1px solid var(--ub-glass-border);
+  border-radius: var(--ub-radius-xl);
+  box-shadow: var(--ub-shadow-deep);
+  animation: ub-popIn 0.35s var(--ub-transition-spring);
+}

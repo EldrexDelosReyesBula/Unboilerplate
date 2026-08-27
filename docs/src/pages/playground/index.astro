@@ -1,0 +1,1968 @@
+---
+// Unboilerplate Playground — Pure CSS Creative IDE in Astro
+import '../../styles/global.css';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Playground — Unboilerplate</title>
+  <meta name="description" content="Pure CSS creative workspace. Interactive presets, component pickers, live responsive viewport, and zero build step." />
+  <link rel="icon" type="image/png" href="/assets/unboilerplate-logo.png" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet" />
+  
+  <!-- Monaco Editor Loader -->
+  <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/loader.min.js"></script>
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #06070a;
+      color: #f3f4f8;
+      font-family: var(--ub-font-family-sans, 'Plus Jakarta Sans', sans-serif);
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Studio Header */
+    .studio-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.55rem 1.25rem;
+      background: #0b0d14;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      z-index: 100;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .brand-logo-img {
+      width: 26px;
+      height: 26px;
+      object-fit: contain;
+      border-radius: 6px;
+    }
+
+    .brand-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .brand-badge {
+      background: rgba(0, 242, 254, 0.12);
+      color: #00f2fe;
+      border: 1px solid rgba(0, 242, 254, 0.3);
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Studio Controls & Dropdowns */
+    .studio-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .control-group {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 0.2rem 0.5rem;
+      border-radius: 8px;
+    }
+
+    .control-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+
+    .studio-select {
+      background: #111420;
+      color: #f3f4f8;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 6px;
+      padding: 0.3rem 0.6rem;
+      font-size: 0.76rem;
+      font-weight: 600;
+      font-family: inherit;
+      outline: none;
+      cursor: pointer;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .studio-select:hover, .studio-select:focus {
+      border-color: rgba(0, 242, 254, 0.5);
+      background: #161a29;
+    }
+
+    .studio-select optgroup {
+      background: #0d0f17;
+      color: #94a3b8;
+      font-weight: 700;
+    }
+
+    .studio-select option {
+      background: #111420;
+      color: #f3f4f8;
+      font-weight: 500;
+    }
+
+    .action-btn {
+      padding: 0.35rem 0.85rem;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      text-decoration: none;
+      font-family: inherit;
+      border: none;
+      white-space: nowrap;
+    }
+
+    .action-btn--primary {
+      background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+      color: #06070a;
+      box-shadow: 0 4px 14px rgba(0, 242, 254, 0.3);
+    }
+    .action-btn--primary:hover {
+      box-shadow: 0 6px 20px rgba(0, 242, 254, 0.5);
+      transform: translateY(-1px);
+    }
+
+    .action-btn--subtle {
+      background: rgba(255, 255, 255, 0.05);
+      color: #f3f4f8;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .action-btn--subtle:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Mobile Pane Switcher */
+    .mobile-pane-switcher {
+      display: none;
+      background: #0b0d14;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 0.35rem 1rem;
+      gap: 0.5rem;
+    }
+
+    .mobile-tab-btn {
+      flex: 1;
+      padding: 0.4rem;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.03);
+      color: #94a3b8;
+      cursor: pointer;
+    }
+
+    .mobile-tab-btn.active {
+      background: rgba(0, 242, 254, 0.12);
+      color: #00f2fe;
+      border-color: rgba(0, 242, 254, 0.35);
+    }
+
+    /* Studio Workspace Split Pane */
+    .studio-layout {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+      position: relative;
+    }
+
+    @media (max-width: 900px) {
+      .mobile-pane-switcher {
+        display: flex;
+      }
+      .studio-layout {
+        grid-template-columns: 1fr;
+      }
+      .editor-pane.mobile-hidden, .preview-pane.mobile-hidden {
+        display: none !important;
+      }
+    }
+
+    .editor-pane {
+      display: flex;
+      flex-direction: column;
+      background: #08090f;
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .pane-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.45rem 1rem;
+      background: #0e111a;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #94a3b8;
+    }
+
+    .pane-title {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+    }
+    .status-dot--cyan { background: #00f2fe; box-shadow: 0 0 8px #00f2fe; }
+    .status-dot--green { background: #10b981; box-shadow: 0 0 8px #10b981; }
+
+    #monaco-editor-box {
+      flex: 1;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .fallback-textarea {
+      width: 100%;
+      height: 100%;
+      background: #08090f;
+      color: #00f2fe;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      padding: 1rem;
+      border: none;
+      resize: none;
+      outline: none;
+      line-height: 1.6;
+    }
+
+    .preview-pane {
+      display: flex;
+      flex-direction: column;
+      background: #06070a;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .preview-stage {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 1.5rem;
+      transition: background 0.3s ease, color 0.3s ease;
+      width: 100%;
+      height: 100%;
+      background-color: var(--ub-bg, #06070a);
+      color: var(--ub-text, #f3f4f8);
+      display: block;
+    }
+
+    .toast-popup {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #00f2fe;
+      color: #06070a;
+      padding: 10px 20px;
+      border-radius: 100px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      box-shadow: 0 10px 30px rgba(0, 242, 254, 0.4);
+      z-index: 10000;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .toast-popup.is-visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP HEADER -->
+  <header class="studio-header">
+    <div class="brand-group">
+      <a href="/" style="text-decoration: none; display: flex; align-items: center; gap: 0.65rem;">
+        <img src="/assets/unboilerplate-logo.png" alt="Unboilerplate Logo" class="brand-logo-img" />
+        <span class="brand-title">Playground</span>
+      </a>
+    </div>
+
+    <!-- Clean Central Controls Strip -->
+    <div class="studio-controls">
+      <!-- 1. Templates Dropdown -->
+      <div class="control-group">
+        <label class="control-label" for="select-preset">Template:</label>
+        <select class="studio-select" id="select-preset">
+          <option value="helloWorld" selected>✨ Hello World (Fresh Start)</option>
+          <option value="artistPortfolio">🎨 Creative Artist Portfolio</option>
+          <option value="saas">🚀 Modern AI SaaS Platform</option>
+          <option value="bento">🍱 Spatial Bento Grid Portfolio</option>
+          <option value="cleanGirl">🌿 Clean Girl Minimal</option>
+          <option value="cyberDashboard">⚡ Cyberpunk HUD Dashboard</option>
+          <option value="neoBrutal">💥 Neo-Brutalism Poster & Zine</option>
+          <option value="literaryJournal">📖 Dark Academia Journal</option>
+          <option value="coffee">☕ Artisanal Coffee Roastery</option>
+          <option value="luxury">💎 Luxury Fashion Lookbook</option>
+          <option value="indieGame">👾 16-Bit Indie Game Showcase</option>
+          <option value="retro1999">🕹️ 1999 Personal Homepage</option>
+          <option value="polaroidStack">📸 Stacked Polaroid Photos</option>
+          <option value="cube3d">🎲 3D Rotating Photo Cube</option>
+          <option value="vaporwave">🌴 Vaporwave Sunset Canvas</option>
+          <option value="book3d">📖 3D Interactive Book</option>
+          <option value="canvasLayers">🖌️ Photoshop Canvas Layers</option>
+          <option value="carousel3d">🎡 3D Orbital Carousel</option>
+          <option value="particles3d">🌌 3D Celestial Particles</option>
+          <option value="win95">🪟 Windows 95 Dialog Window</option>
+          <option value="crtScreen">📺 CRT Monitor Terminal</option>
+        </select>
+      </div>
+
+      <!-- 2. Snippets Dropdown -->
+      <div class="control-group">
+        <label class="control-label" for="select-snippet">Snippet:</label>
+        <select class="studio-select" id="select-snippet">
+          <option value="" disabled selected>Insert snippet...</option>
+          <optgroup label="Physical & 3D">
+            <option value="cardFlip">3D 180° Flip Card</option>
+            <option value="book">3D Storybook Interactive</option>
+            <option value="fanStack">3D Fan Stack Deck</option>
+            <option value="cube">Rotating 3D Cube</option>
+            <option value="btn3d">Physical 3D Spring Button</option>
+            <option value="carousel">3D Orbital Ring</option>
+          </optgroup>
+          <optgroup label="Cards & Containers">
+            <option value="vibeCard">Glassmorphic Frosted Card</option>
+            <option value="conicGlow">360° Conic Rainbow Card</option>
+            <option value="priceCard">SaaS Pricing Tier Card</option>
+            <option value="brutalCard">Neo-Brutalist Bold Card</option>
+            <option value="woodCard">Mahogany Grain Card</option>
+          </optgroup>
+          <optgroup label="Typography & Glows">
+            <option value="neonText">Cyberpunk Neon Text</option>
+            <option value="textGradient">Vibrant Text Gradient</option>
+            <option value="typewriter">Pure CSS Typewriter</option>
+            <option value="crtGlow">Phosphor Terminal Glow</option>
+          </optgroup>
+          <optgroup label="Layouts & Spacing">
+            <option value="vibeGrid">Auto-Fill Responsive Grid</option>
+            <option value="flexRow">Flexbox Centered Row</option>
+            <option value="boxmodel">Box Model Visualizer</option>
+            <option value="marquee">Smooth Marquee Banner</option>
+            <option value="badges">Status Badge Chips</option>
+          </optgroup>
+          <optgroup label="Retro & Nostalgia">
+            <option value="win95">Windows 95 Window Frame</option>
+            <option value="counter">90s Web Hit Counter</option>
+            <option value="pixelBtn">8-Bit Retro Button</option>
+          </optgroup>
+        </select>
+      </div>
+
+      <!-- 3. Aesthetic Theme Dropdown -->
+      <div class="control-group">
+        <label class="control-label" for="select-theme">Theme:</label>
+        <select class="studio-select" id="select-theme">
+          <option value="default">Default Dark</option>
+          <option value="theme-cyberpunk">Cyberpunk Neon</option>
+          <option value="theme-cottagecore">Cottagecore Botanical</option>
+          <option value="theme-y2k">Y2K Gloss Hologram</option>
+          <option value="theme-dark-academia">Dark Academia Classical</option>
+          <option value="theme-clean-girl">Clean Girl Minimal</option>
+        </select>
+      </div>
+
+      <!-- 4. CDN Version Dropdown -->
+      <div class="control-group">
+        <label class="control-label" for="select-cdn-version">CDN:</label>
+        <select class="studio-select" id="select-cdn-version" title="CDN Version in copied code">
+          <option value="latest">@latest</option>
+          <option value="1.0.0">@1.0.0</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Top Action Buttons -->
+    <div class="studio-controls">
+      <button class="action-btn action-btn--subtle" id="btn-format" style="padding: 0.35rem 0.75rem; font-size: 0.78rem;">
+        Format
+      </button>
+      <button class="action-btn action-btn--primary" id="btn-copy">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+        Copy Code
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile View Switcher (Visible on mobile/tablet screens) -->
+  <div class="mobile-pane-switcher" id="mobile-switcher">
+    <button class="mobile-tab-btn active" id="tab-code">💻 Source Code</button>
+    <button class="mobile-tab-btn" id="tab-preview">👁 Live Stage</button>
+  </div>
+
+  <!-- MAIN WORKSPACE -->
+  <main class="studio-layout">
+    
+    <!-- Code Editor Column -->
+    <section class="editor-pane">
+      <div class="pane-toolbar">
+        <div class="pane-title">
+          <span class="status-dot status-dot--cyan"></span>
+          <span>Source Code</span>
+        </div>
+      </div>
+      <div id="monaco-editor-box">
+        <textarea id="fallback-editor" class="fallback-textarea" spellcheck="false"></textarea>
+      </div>
+    </section>
+
+    <!-- Live Stage Preview Column -->
+    <section class="preview-pane">
+      <div class="pane-toolbar">
+        <div class="pane-title">
+          <span class="status-dot status-dot--green"></span>
+          <span>Live Stage</span>
+        </div>
+      </div>
+
+      <div id="preview-stage" class="preview-stage"></div>
+    </section>
+
+  </main>
+
+  <div id="toast-popup" class="toast-popup">Copied to clipboard</div>
+
+  <script is:inline>
+    const ideTemplates = {
+      helloWorld: `<!-- ✨ Welcome to Unboilerplate Playground! ✨
+     Simple, friendly, pure CSS. Edit anything below to make it your own! -->
+<div class="flex center" style="min-height: 75vh; width: 100%;">
+  <div class="vibe-card p-8 text-center" style="max-width: 520px; width: 100%; border-radius: 24px;">
+    <span class="vibe-badge vibe-badge--neon mb-3">PURE CSS STARTER</span>
+    <h1 class="text-gradient font-bold" style="font-size: clamp(2rem, 5vw, 2.8rem); margin: 0.5rem 0;">
+      Hello, World! ✨
+    </h1>
+    <p style="color: #94a3b8; font-size: 1rem; line-height: 1.6; margin-bottom: 1.5rem;">
+      Welcome to your personal CSS canvas. No complex setup, no JavaScript, and no build tools. Just pure creativity.
+    </p>
+    <div class="flex justify-center gap-3 flex-wrap">
+      <button class="vibe-btn hover-bounce">Click Me 🚀</button>
+      <button class="pill-tab hover-lift">Get Started</button>
+    </div>
+  </div>
+</div>`,
+
+      artistPortfolio: `<!-- Elena Vance Studio — Creative Artist Portfolio -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elena Vance — Creative Technologist & Digital Artist</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@eldrex/unboilerplate@latest/dist/unboilerplate.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body style="background:#06070a;color:#f3f4f8;margin:0;font-family:'Plus Jakarta Sans',sans-serif;overflow-x:hidden;">
+
+  <nav style="padding:1.25rem 2rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,0.06);background:rgba(6,7,10,0.8);backdrop-filter:blur(20px);position:sticky;top:0;z-index:100;">
+    <div style="display:flex;align-items:center;gap:0.75rem;">
+      <span style="font-weight:900;font-size:1.1rem;letter-spacing:-0.03em;">ELENA VANCE</span>
+      <span class="vibe-badge vibe-badge--neon">STUDIO</span>
+    </div>
+    <div style="display:flex;gap:1.5rem;font-size:0.88rem;align-items:center;">
+      <a href="#works" style="color:#94a3b8;text-decoration:none;font-weight:600;">Works</a>
+      <a href="#about" style="color:#94a3b8;text-decoration:none;font-weight:600;">About</a>
+      <a href="#contact" class="vibe-btn --sm" style="text-decoration:none;">Let's Talk</a>
+    </div>
+  </nav>
+
+  <header class="hero-creative" style="position:relative;padding:clamp(4rem,10vw,8rem) 2rem;text-align:center;overflow:hidden;min-height:70vh;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+    <div class="hero-bg gradient-aurora"></div>
+    <div style="max-width:800px;position:relative;z-index:10;">
+      <span class="vibe-badge vibe-badge--neon mb-3">DIGITAL SPATIAL ARCHITECTURE</span>
+      <h1 class="text-gradient font-bold" style="font-size:clamp(2.5rem,7vw,5rem);line-height:1.05;margin:0.5rem 0 1rem;">Creative Technologist &amp; Visual Artist</h1>
+      <p class="text-animate --typewriter" style="font-size:clamp(1rem,2vw,1.25rem);color:#cbd5e1;max-width:620px;margin:0 auto 2rem;line-height:1.6;">
+        Sculpting generative physics, pure CSS hardware shaders, and emotional spatial dimensions.
+      </p>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+        <a href="#works" class="vibe-btn hover-bounce">View Selected Works ↓</a>
+        <a href="#contact" class="pill-tab" style="padding:0.7rem 1.5rem;">Commission Work</a>
+      </div>
+    </div>
+  </header>
+
+  <main style="max-width:1200px;margin:0 auto;padding:4rem 2rem;">
+    <section id="works" style="margin-bottom:6rem;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2.5rem;flex-wrap:wrap;gap:1rem;">
+        <div>
+          <span class="vibe-badge vibe-badge--sunset">SELECTED EXHIBITIONS</span>
+          <h2 style="font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;margin-top:0.4rem;">Featured Canvases</h2>
+        </div>
+        <p style="color:#64748b;font-size:0.9rem;max-width:340px;">Interactive 3D compositions generated with zero JavaScript overhead.</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:2rem;">
+        <article class="vibe-card hover-lift p-4" style="background:#0c0e17;border:1px solid rgba(255,255,255,0.08);border-radius:18px;">
+          <div style="border-radius:12px;overflow:hidden;aspect-ratio:16/10;margin-bottom:1.25rem;">
+            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=700&auto=format&fit=crop&q=80" alt="Generative Light Sculpture" style="width:100%;height:100%;object-fit:cover;" />
+          </div>
+          <span class="vibe-badge" style="font-size:0.65rem;">GENERATIVE SHADER</span>
+          <h3 style="font-size:1.25rem;font-weight:800;margin-top:0.4rem;">Chromatic Horizon</h3>
+          <p style="color:#94a3b8;font-size:0.88rem;margin-top:0.4rem;line-height:1.6;">Multi-spectral lighting synthesis exploring mathematical color spaces.</p>
+        </article>
+
+        <article class="vibe-card hover-lift p-4" style="background:#0c0e17;border:1px solid rgba(255,255,255,0.08);border-radius:18px;">
+          <div style="border-radius:12px;overflow:hidden;aspect-ratio:16/10;margin-bottom:1.25rem;">
+            <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?w=700&auto=format&fit=crop&q=80" alt="Spatial Geometry" style="width:100%;height:100%;object-fit:cover;" />
+          </div>
+          <span class="vibe-badge" style="font-size:0.65rem;">SPATIAL 3D</span>
+          <h3 style="font-size:1.25rem;font-weight:800;margin-top:0.4rem;">Aetherial Synthesis</h3>
+          <p style="color:#94a3b8;font-size:0.88rem;margin-top:0.4rem;line-height:1.6;">Hardware-accelerated perspective matrix projecting volumetric particles.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+</body>
+</html>`,
+
+      artist: `<!-- Elena Vance Studio — Creative Artist Portfolio -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elena Vance — Creative Technologist & Digital Artist</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@eldrex/unboilerplate@latest/dist/unboilerplate.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body style="background:#06070a;color:#f3f4f8;margin:0;font-family:'Plus Jakarta Sans',sans-serif;overflow-x:hidden;">
+  <nav style="padding:1.25rem 2rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,0.06);background:rgba(6,7,10,0.8);backdrop-filter:blur(20px);position:sticky;top:0;z-index:100;">
+    <div style="display:flex;align-items:center;gap:0.75rem;">
+      <span style="font-weight:900;font-size:1.1rem;letter-spacing:-0.03em;">ELENA VANCE</span>
+      <span class="vibe-badge vibe-badge--neon">STUDIO</span>
+    </div>
+    <div style="display:flex;gap:1.5rem;font-size:0.88rem;align-items:center;">
+      <a href="#works" style="color:#94a3b8;text-decoration:none;font-weight:600;">Works</a>
+      <a href="#about" style="color:#94a3b8;text-decoration:none;font-weight:600;">About</a>
+    </div>
+  </nav>
+  <header style="padding:4rem 2rem;text-align:center;">
+    <span class="vibe-badge vibe-badge--neon mb-3">DIGITAL ARCHITECTURE</span>
+    <h1 class="text-gradient font-bold" style="font-size:3rem;">Creative Technologist</h1>
+  </header>
+</body>
+</html>`,
+
+      saas: `<!-- NovaFlow AI — Modern SaaS Platform -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NovaFlow AI — Intelligent Cloud Infrastructure</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@eldrex/unboilerplate@latest/dist/unboilerplate.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body style="background:#08090f;color:#f3f4f8;margin:0;font-family:'Plus Jakarta Sans',sans-serif;overflow-x:hidden;">
+
+  <nav style="padding:1.25rem 2.5rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,0.06);background:rgba(8,9,15,0.85);backdrop-filter:blur(20px);position:sticky;top:0;z-index:100;">
+    <div style="display:flex;align-items:center;gap:0.75rem;">
+      <span style="width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#00f2fe,#4facfe);display:inline-flex;align-items:center;justify-content:center;font-weight:900;color:#06070a;font-size:0.9rem;">N</span>
+      <span style="font-weight:900;font-size:1.15rem;letter-spacing:-0.03em;">NovaFlow</span>
+      <span class="vibe-badge vibe-badge--neon" style="font-size:0.65rem;">v3.0</span>
+    </div>
+    <div style="display:flex;gap:2rem;font-size:0.88rem;align-items:center;">
+      <a href="#features" style="color:#94a3b8;text-decoration:none;font-weight:600;">Features</a>
+      <a href="#pricing" style="color:#94a3b8;text-decoration:none;font-weight:600;">Pricing</a>
+      <a href="#start" class="vibe-btn --sm hover-bounce" style="text-decoration:none;">Deploy Free →</a>
+    </div>
+  </nav>
+
+  <header style="padding:clamp(4rem,8vw,7rem) 2rem;text-align:center;position:relative;overflow:hidden;">
+    <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:700px;height:350px;background:radial-gradient(ellipse at center,rgba(0,242,254,0.15),transparent 70%);filter:blur(50px);pointer-events:none;"></div>
+    
+    <div style="max-width:800px;margin:0 auto;position:relative;z-index:10;">
+      <span class="vibe-badge vibe-badge--neon mb-3">AI EDGE COMPUTING</span>
+      <h1 class="text-gradient font-bold" style="font-size:clamp(2.5rem,6.5vw,4.6rem);line-height:1.08;letter-spacing:-0.03em;margin:0.5rem 0 1.25rem;">
+        Scale Intelligence Without Complexity
+      </h1>
+      <p style="color:#94a3b8;font-size:clamp(1rem,2vw,1.25rem);max-width:600px;margin:0 auto 2.25rem;line-height:1.7;">
+        Sub-millisecond inference routing, zero cold starts, and automated multi-region replication — delivered on pure edge nodes.
+      </p>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+        <button class="vibe-btn hover-bounce" style="padding:0.85rem 2rem;font-size:1rem;">Start Free Sandbox 🚀</button>
+        <button class="pill-tab" style="padding:0.85rem 1.75rem;">Explore Architecture</button>
+      </div>
+    </div>
+  </header>
+
+  <main style="max-width:1150px;margin:0 auto;padding:2rem 2rem 6rem;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:2rem;">
+      <div class="vibe-card hover-lift p-8" style="background:#0e101a;border-radius:20px;">
+        <div style="width:40px;height:40px;border-radius:10px;background:rgba(0,242,254,0.1);border:1px solid rgba(0,242,254,0.3);display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;color:#00f2fe;font-size:1.2rem;">⚡</div>
+        <h3 style="font-size:1.3rem;font-weight:800;margin-bottom:0.5rem;">0.4ms Edge Routing</h3>
+        <p style="color:#94a3b8;font-size:0.95rem;line-height:1.6;">Global Anycast network automatically dispatches workloads to the nearest compute cluster.</p>
+      </div>
+
+      <div class="vibe-card hover-lift p-8" style="background:#0e101a;border-radius:20px;">
+        <div style="width:40px;height:40px;border-radius:10px;background:rgba(255,0,128,0.1);border:1px solid rgba(255,0,128,0.3);display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;color:#ff0080;font-size:1.2rem;">🛡️</div>
+        <h3 style="font-size:1.3rem;font-weight:800;margin-bottom:0.5rem;">Zero-Trust Sandbox</h3>
+        <p style="color:#94a3b8;font-size:0.95rem;line-height:1.6;">Hardware-level TLS termination and isolated micro-VM execution with automated certs.</p>
+      </div>
+
+      <div class="vibe-card hover-lift p-8" style="background:#0e101a;border-radius:20px;">
+        <div style="width:40px;height:40px;border-radius:10px;background:rgba(247,186,44,0.1);border:1px solid rgba(247,186,44,0.3);display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;color:#f7ba2c;font-size:1.2rem;">📊</div>
+        <h3 style="font-size:1.3rem;font-weight:800;margin-bottom:0.5rem;">Real-Time Telemetry</h3>
+        <p style="color:#94a3b8;font-size:0.95rem;line-height:1.6;">Instant visibility into token throughput, GPU memory allocation, and concurrency.</p>
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>`,
+
+      bento: `<!-- Kaito Tanaka — Spatial Bento Grid Portfolio -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kaito Tanaka — Spatial Frontend Architect</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@eldrex/unboilerplate@latest/dist/unboilerplate.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body style="background:#08090d;color:#f3f4f8;margin:0;padding:4rem 2rem;font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;">
+
+  <main style="max-width:1050px;margin:0 auto;display:grid;grid-template-columns:repeat(12,1fr);gap:1.5rem;">
+
+    <div class="vibe-card p-8" style="grid-column:span 7;background:#0f111a;border-radius:24px;display:flex;flex-direction:column;justify-content:space-between;min-height:260px;">
+      <div>
+        <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:1rem;">
+          <span style="width:8px;height:8px;border-radius:50%;background:#10b981;box-shadow:0 0 10px #10b981;"></span>
+          <span style="font-size:0.75rem;font-weight:700;color:#10b981;letter-spacing:0.05em;">AVAILABLE FOR Q3 CONTRACTS</span>
+        </div>
+        <h1 style="font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:900;letter-spacing:-0.03em;line-height:1.1;margin:0 0 0.75rem;">
+          Hi, I'm Kaito Tanaka 👋
+        </h1>
+        <p style="color:#94a3b8;font-size:1rem;line-height:1.6;margin:0;">
+          Staff Frontend Architect crafting spatial user interfaces, pure CSS 3D engines, and ultra-high-speed web systems.
+        </p>
+      </div>
+      <div style="display:flex;gap:0.75rem;margin-top:1.5rem;flex-wrap:wrap;">
+        <button class="vibe-btn --sm hover-bounce">Get in Touch →</button>
+        <button class="pill-tab">Tokyo, JP (UTC+9)</button>
+      </div>
+    </div>
+
+    <div class="vibe-card p-8" style="grid-column:span 5;background:#0f111a;border-radius:24px;display:flex;flex-direction:column;justify-content:center;gap:1.25rem;">
+      <div>
+        <span class="text-gradient" style="font-size:2.4rem;font-weight:900;line-height:1;">140K+</span>
+        <p style="color:#64748b;font-size:0.85rem;margin-top:4px;">Global Developers Using My UI Toolkits</p>
+      </div>
+      <div style="border-top:1px solid rgba(255,255,255,0.06);padding-top:1rem;">
+        <span class="text-cyber" style="font-size:2.4rem;font-weight:900;line-height:1;">99.98%</span>
+        <p style="color:#64748b;font-size:0.85rem;margin-top:4px;">Production Uptime & Zero JS Overhead</p>
+      </div>
+    </div>
+
+    <div class="vibe-card p-6" style="grid-column:span 4;background:#0f111a;border-radius:24px;">
+      <span style="font-size:0.75rem;color:#64748b;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">Core Stack</span>
+      <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1rem;">
+        <span class="vibe-badge vibe-badge--neon">Pure CSS 3D</span>
+        <span class="vibe-badge">WebGL</span>
+        <span class="vibe-badge">TypeScript</span>
+        <span class="vibe-badge">Rust / WASM</span>
+      </div>
+    </div>
+
+    <div class="vibe-card hover-lift p-6" style="grid-column:span 8;background:#0f111a;border-radius:24px;display:flex;gap:1.5rem;align-items:center;flex-wrap:wrap;">
+      <div style="width:140px;height:100px;border-radius:12px;overflow:hidden;flex-shrink:0;">
+        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=500&auto=format&fit=crop&q=80" alt="Arcade Engine" style="width:100%;height:100%;object-fit:cover;" />
+      </div>
+      <div style="flex:1;min-width:200px;">
+        <span class="vibe-badge vibe-badge--neon" style="font-size:0.65rem;">OPEN SOURCE ENGINE</span>
+        <h3 style="font-size:1.15rem;font-weight:800;margin:0.3rem 0;">Vortex Spatial UI</h3>
+        <p style="color:#94a3b8;font-size:0.85rem;line-height:1.5;margin:0;">High-performance pure CSS 3D perspective compositor used by over 40k web apps.</p>
+      </div>
+    </div>
+
+  </main>
+
+</body>
+</html>`,
+
+      neoBrutal: `<!-- HYPERSPACE 2026 — Neo-Brutalist Digital Design Zine -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HYPERSPACE 2026 — Digital Design Zine</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@eldrex/unboilerplate@latest/dist/unboilerplate.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@900&family=JetBrains+Mono:wght@700;800&display=swap" rel="stylesheet">
+</head>
+<body style="background:#ffde59;color:#000;margin:0;padding:0;font-family:'Plus Jakarta Sans',sans-serif;overflow-x:hidden;">
+
+  <div class="marquee" style="background:#000;color:#ffde59;font-weight:900;padding:8px 0;font-size:0.85rem;letter-spacing:0.1em;border-bottom:3px solid #000;">
+    <span>✦ HYPERSPACE FESTIVAL 2026 ✦ NEW YORK ✦ LONDON ✦ TOKYO ✦ TICKETS SELLING FAST ✦ NO JAVASCRIPT ALLOWED ✦</span>
+  </div>
+
+  <header style="max-width:1100px;margin:3rem auto;padding:0 2rem;text-align:center;">
+    <div style="display:inline-block;padding:6px 16px;background:#ff007f;color:#fff;font-weight:900;font-size:0.85rem;border:3px solid #000;box-shadow:4px 4px 0 #000;transform:rotate(-2deg);margin-bottom:1.5rem;">
+      ISSUE NO. 042 &middot; PURE CSS REVOLUTION
+    </div>
+
+    <h1 style="font-size:clamp(2.8rem,9vw,6.5rem);font-weight:900;letter-spacing:-0.04em;line-height:0.95;margin:0;text-transform:uppercase;">
+      BREAK THE<br><span style="background:#00f2fe;padding:0 14px;border:4px solid #000;box-shadow:6px 6px 0 #000;display:inline-block;margin-top:8px;">BORING WEB</span>
+    </h1>
+
+    <p style="font-family:'JetBrains Mono',monospace;font-size:1.15rem;font-weight:700;max-width:620px;margin:2rem auto;line-height:1.6;">
+      Stop building identical gray rectangles. Reclaim vibrant raw creativity with physical geometry and tactile shadows.
+    </p>
+
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <button class="btn-brutal" style="background:#000;color:#fff;font-size:1.1rem;padding:1rem 2.25rem;">GRAB THE ZINE →</button>
+      <button class="btn-brutal" style="background:#fff;color:#000;font-size:1.1rem;padding:1rem 2.25rem;">EXPLORE LINEUP</button>
+    </div>
+  </header>
+
+  <main style="max-width:1100px;margin:0 auto 5rem;padding:0 2rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:2rem;">
+    <div class="brutal-neo p-6" style="background:#fff;color:#000;">
+      <span class="vibe-badge" style="background:#00f2fe;color:#000;border:2px solid #000;font-weight:900;">WORKSHOP 01</span>
+      <h3 style="font-size:1.5rem;font-weight:900;margin:0.8rem 0;color:#000;">Hardware Shaders</h3>
+      <p style="font-family:'JetBrains Mono',monospace;font-size:0.9rem;line-height:1.5;color:#222;">Building 60FPS volumetric lighting engines directly in pure CSS syntax.</p>
+    </div>
+
+    <div class="brutal-neo p-6" style="background:#fff;color:#000;">
+      <span class="vibe-badge" style="background:#ff007f;color:#fff;border:2px solid #000;font-weight:900;">KEYNOTE</span>
+      <h3 style="font-size:1.5rem;font-weight:900;margin:0.8rem 0;color:#000;">Death of Div Soup</h3>
+      <p style="font-family:'JetBrains Mono',monospace;font-size:0.9rem;line-height:1.5;color:#222;">Why 2,000 utility classes are slowing down the web and how to fix it.</p>
+    </div>
+
+    <div class="brutal-neo p-6" style="background:#fff;color:#000;">
+      <span class="vibe-badge" style="background:#10b981;color:#000;border:2px solid #000;font-weight:900;">EXHIBIT</span>
+      <h3 style="font-size:1.5rem;font-weight:900;margin:0.8rem 0;color:#000;">Tactile 3D Paper</h3>
+      <p style="font-family:'JetBrains Mono',monospace;font-size:0.9rem;line-height:1.5;color:#222;">Simulating realistic paper grain, physical tear edges, and fold physics.</p>
+    </div>
+  </main>
+
+</body>
+</html>`,
+
+      'neo-brutalist': `<!-- HYPERSPACE 2026 — Neo-Brutalist Digital Design Zine -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HYPERSPACE 2026 — Digital Design Zine</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@eldrex/unboilerplate@latest/dist/unboilerplate.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@900&family=JetBrains+Mono:wght@700;800&display=swap" rel="stylesheet">
+</head>
+<body style="background:#ffde59;color:#000;margin:0;padding:0;font-family:'Plus Jakarta Sans',sans-serif;overflow-x:hidden;">
+  <header style="max-width:1100px;margin:3rem auto;padding:0 2rem;text-align:center;">
+    <h1 style="font-size:3.5rem;font-weight:900;">BREAK THE BORING WEB</h1>
+  </header>
+</body>
+</html>`,
+
+      coffee: `<!-- Aroma & Oak — Artisanal Coffee Roasters -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aroma & Oak — Artisanal Coffee Roasters</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@eldrex/unboilerplate@latest/dist/unboilerplate.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+</head>
+<body style="background:#13100d;color:#f5ede2;margin:0;padding:0;font-family:'Newsreader',serif;min-height:100vh;">
+
+  <nav style="padding:1.75rem 2.5rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(212,175,55,0.15);">
+    <div style="font-family:'Cinzel',serif;font-weight:800;letter-spacing:0.15em;font-size:1.1rem;color:#d4af37;">
+      AROMA &amp; OAK
+    </div>
+    <div style="display:flex;gap:2rem;font-size:0.95rem;">
+      <a href="#roasts" style="color:#f5ede2;text-decoration:none;">Single Origins</a>
+      <a href="#story" style="color:#b3a494;text-decoration:none;">Our Roastery</a>
+      <a href="#cafe" style="color:#b3a494;text-decoration:none;">Locations</a>
+    </div>
+  </nav>
+
+  <header style="padding:6rem 2rem 4rem;text-align:center;max-width:860px;margin:0 auto;">
+    <span style="font-family:'Cinzel',serif;letter-spacing:0.35em;font-size:0.75rem;color:#d4af37;text-transform:uppercase;">Slow Roasted in Small Batches &middot; Est. 2018</span>
+    <h1 style="font-family:'Cinzel',serif;font-size:clamp(2.4rem,6vw,4.2rem);line-height:1.1;margin:1rem 0 1.25rem;letter-spacing:0.02em;">
+      Single-Origin Roasts for Quiet Mornings
+    </h1>
+    <p style="font-size:1.15rem;font-style:italic;color:#c7b8a7;line-height:1.8;max-width:600px;margin:0 auto 2.5rem;">
+      Direct-trade beans sourced from high-altitude volcanic soils, roasted on a vintage 1968 cast-iron drum roaster.
+    </p>
+    <button class="vibe-btn hover-bounce" style="background:#d4af37;color:#13100d;font-weight:700;font-family:'Cinzel',serif;padding:0.85rem 2rem;">Order Fresh Roast ☕</button>
+  </header>
+
+  <main style="max-width:1100px;margin:0 auto 6rem;padding:0 2rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:2rem;">
+    <article class="vibe-card hover-lift p-6" style="background:#1c1712;border:1px solid rgba(212,175,55,0.2);border-radius:20px;">
+      <div style="aspect-ratio:16/11;border-radius:12px;overflow:hidden;margin-bottom:1.25rem;">
+        <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&auto=format&fit=crop&q=80" alt="Espresso Roast" style="width:100%;height:100%;object-fit:cover;" />
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-family:'Cinzel',serif;font-size:0.75rem;color:#d4af37;">ETHIOPIA YIRGACHEFFE</span>
+        <strong style="color:#d4af37;font-size:1.1rem;">$22.00</strong>
+      </div>
+      <h3 style="font-family:'Cinzel',serif;font-size:1.3rem;margin:0.5rem 0;">Floral Bergamot &amp; Honey</h3>
+      <p style="color:#b3a494;font-size:0.95rem;line-height:1.6;margin:0;">Light roast with delicate jasmine florals, Meyer lemon acidity, and a crisp honey finish.</p>
+    </article>
+
+    <article class="vibe-card hover-lift p-6" style="background:#1c1712;border:1px solid rgba(212,175,55,0.2);border-radius:20px;">
+      <div style="aspect-ratio:16/11;border-radius:12px;overflow:hidden;margin-bottom:1.25rem;">
+        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&auto=format&fit=crop&q=80" alt="Latte Art" style="width:100%;height:100%;object-fit:cover;" />
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-family:'Cinzel',serif;font-size:0.75rem;color:#d4af37;">GUATEMALA ANTIGUA</span>
+        <strong style="color:#d4af37;font-size:1.1rem;">$20.00</strong>
+      </div>
+      <h3 style="font-family:'Cinzel',serif;font-size:1.3rem;margin:0.5rem 0;">Dark Cocoa &amp; Toasted Hazelnut</h3>
+      <p style="color:#b3a494;font-size:0.95rem;line-height:1.6;margin:0;">Medium-dark roast with rich volcanic soil depth, caramelized molasses, and velvety body.</p>
+    </article>
+  </main>
+
+</body>
+</html>`,
+
+      luxury: `<!-- MAISON NOIR — Luxury Fashion Lookbook -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MAISON NOIR — Autumn/Winter 2026 Lookbook</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@eldrex/unboilerplate@latest/dist/unboilerplate.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Plus+Jakarta+Sans:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+<body style="background:#070707;color:#f0f0f0;margin:0;padding:0;font-family:'Plus Jakarta Sans',sans-serif;overflow-x:hidden;">
+
+  <nav style="padding:2rem 3rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,0.08);">
+    <span style="font-family:'Cinzel',serif;font-size:1.35rem;letter-spacing:0.3em;font-weight:700;">MAISON NOIR</span>
+    <div style="display:flex;gap:2.5rem;font-size:0.8rem;letter-spacing:0.15em;text-transform:uppercase;">
+      <a href="#collection" style="color:#fff;text-decoration:none;">Collection</a>
+      <a href="#lookbook" style="color:#888;text-decoration:none;">Lookbook</a>
+      <a href="#runway" style="color:#888;text-decoration:none;">Runway</a>
+    </div>
+  </nav>
+
+  <section style="min-height:75vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:4rem 2rem;position:relative;">
+    <span style="font-size:0.75rem;letter-spacing:0.4em;text-transform:uppercase;color:#888;margin-bottom:1rem;">COLLECTION N° 07</span>
+    <h1 style="font-family:'Cinzel',serif;font-size:clamp(3rem,9vw,6rem);font-weight:900;letter-spacing:0.08em;margin:0 0 1rem;line-height:1;">
+      SILENCE IN FORM
+    </h1>
+    <p style="font-size:1rem;color:#888;letter-spacing:0.15em;max-width:500px;margin-bottom:2.5rem;text-transform:uppercase;">
+      Architectural silhouettes sculpted in heavy wool &amp; raw silk.
+    </p>
+    <button class="pill-tab hover-lift" style="padding:0.9rem 2.5rem;font-size:0.85rem;letter-spacing:0.2em;text-transform:uppercase;background:#fff;color:#000;border:none;">
+      Explore The Lookbook
+    </button>
+  </section>
+
+  <main style="max-width:1300px;margin:0 auto 6rem;padding:0 2rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(360px,100%),1fr));gap:2.5rem;">
+    <article class="vibe-card hover-lift p-4" style="background:#111;border:1px solid rgba(255,255,255,0.06);border-radius:0;">
+      <div style="aspect-ratio:3/4;overflow:hidden;margin-bottom:1.5rem;">
+        <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=700&auto=format&fit=crop&q=80" alt="Overcoat" style="width:100%;height:100%;object-fit:cover;" />
+      </div>
+      <div style="display:flex;justify-content:space-between;font-family:'Cinzel',serif;font-size:0.95rem;">
+        <span>NOIR OVERCOAT I</span>
+        <span style="color:#888;">€1,850</span>
+      </div>
+    </article>
+
+    <article class="vibe-card hover-lift p-4" style="background:#111;border:1px solid rgba(255,255,255,0.06);border-radius:0;">
+      <div style="aspect-ratio:3/4;overflow:hidden;margin-bottom:1.5rem;">
+        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=700&auto=format&fit=crop&q=80" alt="Structured Blazer" style="width:100%;height:100%;object-fit:cover;" />
+      </div>
+      <div style="display:flex;justify-content:space-between;font-family:'Cinzel',serif;font-size:0.95rem;">
+        <span>STRUCTURED TUNIC II</span>
+        <span style="color:#888;">€1,420</span>
+      </div>
+    </article>
+  </main>
+
+</body>
+</html>`,
+
+      indieGame: `<!-- CHRONO BLADE: ZERO — 16-Bit Action RPG -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CHRONO BLADE: ZERO — 16-Bit Action RPG</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@eldrex/unboilerplate@latest/dist/unboilerplate.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+</head>
+<body style="background:#090915;color:#00ffcc;margin:0;padding:2rem 1rem;font-family:'Press Start 2P',monospace;overflow-x:hidden;">
+
+  <div class="crt-screen crt-scanlines crt-flicker" style="max-width:850px;margin:0 auto;background:#050510;border:4px solid #00f2fe;border-radius:16px;padding:2rem;box-shadow:0 0 40px rgba(0,242,254,0.3);">
+    
+    <header style="text-align:center;margin-bottom:2.5rem;">
+      <span class="vibe-badge" style="background:#ff007f;color:#fff;font-size:0.6rem;margin-bottom:1rem;display:inline-block;">16-BIT SUPER ARCADE</span>
+      <h1 class="text-fire" style="font-size:clamp(1.4rem,4vw,2.4rem);line-height:1.3;margin:0.5rem 0;">CHRONO BLADE<br>ZERO</h1>
+      <p style="font-family:'JetBrains Mono',monospace;color:#a5b4fc;font-size:0.85rem;margin-top:1rem;">
+        &gt; INSERT COIN TO INITIALIZE TEMPORAL WARP
+      </p>
+    </header>
+
+    <div style="background:#0c0d1e;border:2px solid #334155;border-radius:10px;padding:1.5rem;margin-bottom:2rem;font-family:'JetBrains Mono',monospace;font-size:0.85rem;">
+      <div style="display:flex;justify-content:space-between;margin-bottom:0.75rem;color:#f43f5e;">
+        <span>PLAYER 1: ELDREX</span>
+        <span>LEVEL: 99</span>
+      </div>
+      <div style="margin-bottom:0.5rem;">
+        <span style="color:#10b981;">HP: [■■■■■■■■■□] 920/1000</span>
+      </div>
+      <div>
+        <span style="color:#38bdf8;">MP: [■■■■■■■■■■] 500/500</span>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:1rem;margin-bottom:2.5rem;font-family:'JetBrains Mono',monospace;font-size:0.8rem;">
+      <div class="vibe-card p-4" style="background:#111226;border-color:rgba(0,242,254,0.3);">
+        <strong style="color:#00f2fe;display:block;margin-bottom:4px;">⚔️ 60+ WEAPONS</strong>
+        <span style="color:#94a3b8;">Legendary blades forged across eras.</span>
+      </div>
+      <div class="vibe-card p-4" style="background:#111226;border-color:rgba(255,0,127,0.3);">
+        <strong style="color:#ff007f;display:block;margin-bottom:4px;">⏱️ TIME PARADOX</strong>
+        <span style="color:#94a3b8;">Rewind boss mechanics in real-time.</span>
+      </div>
+      <div class="vibe-card p-4" style="background:#111226;border-color:rgba(247,186,44,0.3);">
+        <strong style="color:#f7ba2c;display:block;margin-bottom:4px;">🎵 CHIPTUNE OST</strong>
+        <span style="color:#94a3b8;">Authentic FM synthesizer score.</span>
+      </div>
+    </div>
+
+    <div style="text-align:center;">
+      <button class="btn-3d btn-3d--cyan" style="font-size:0.85rem;padding:12px 28px;">PLAY BROWSER DEMO 👾</button>
+    </div>
+
+  </div>
+
+</body>
+</html>`,
+
+      'indie-game': `<!-- CHRONO BLADE: ZERO — 16-Bit Action RPG -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CHRONO BLADE: ZERO — 16-Bit Action RPG</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@eldrex/unboilerplate@latest/dist/unboilerplate.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+</head>
+<body style="background:#090915;color:#00ffcc;margin:0;padding:2rem 1rem;font-family:'Press Start 2P',monospace;">
+  <div class="crt-screen crt-scanlines" style="max-width:850px;margin:0 auto;background:#050510;border:4px solid #00f2fe;padding:2rem;">
+    <h1 class="text-fire">CHRONO BLADE ZERO</h1>
+  </div>
+</body>
+</html>`,
+
+      literaryJournal: `<!-- The Atheneum — Dark Academia Journal of Arts & Letters -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Atheneum — Journal of Arts & Letters</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@eldrex/unboilerplate@latest/dist/unboilerplate.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+</head>
+<body class="theme-dark-academia" style="margin:0;padding:0;min-height:100vh;font-family:'Newsreader',serif;background:#0f0d0b;color:#f5f0e8;">
+
+  <header style="padding:3.5rem 2rem;text-align:center;border-bottom:1px solid rgba(212,175,55,0.2);">
+    <p style="font-family:'Cinzel',serif;letter-spacing:0.4em;font-size:0.75rem;color:#d4af37;margin-bottom:0.5rem;">EST. MMXXVI &middot; VOLUME IX</p>
+    <h1 style="font-family:'Cinzel',serif;font-size:clamp(2.2rem,6vw,4rem);margin:0;letter-spacing:0.05em;">THE ATHENEUM</h1>
+    <p style="font-size:1.05rem;font-style:italic;color:#b8aba0;margin-top:0.6rem;">"Knowledge. Curiosity. The Examined Life."</p>
+  </header>
+
+  <main style="max-width:820px;margin:0 auto;padding:4rem 2rem;">
+    <article class="vibe-card p-8" style="margin-bottom:3rem;background:#14120f;border:1px solid rgba(212,175,55,0.2);">
+      <span class="vibe-badge" style="margin-bottom:1rem;display:inline-block;background:rgba(212,175,55,0.1);color:#d4af37;border-color:#d4af37;">FEATURED ESSAY</span>
+      <h2 style="font-family:'Cinzel',serif;font-size:clamp(1.6rem,3.5vw,2.4rem);margin-bottom:1rem;line-height:1.2;">On the Virtue of Slowness in the Digital Age</h2>
+      <p style="line-height:1.85;font-size:1.1rem;color:#d8cfc4;margin-bottom:1.5rem;">
+        The ancients understood something we have forgotten: that depth requires time. Wisdom emerges not from the incessant flood of real-time feeds, but from the quiet pool where thought can settle and take root.
+      </p>
+      <div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,0.08);padding-top:1rem;font-size:0.85rem;color:#8a7e72;">
+        <span>By Julian Hawthorne</span>
+        <span>12 Min Read</span>
+      </div>
+    </article>
+  </main>
+</body>
+</html>`,
+
+      'dark-academia': `<!-- The Atheneum — Dark Academia Journal of Arts & Letters -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Atheneum — Journal of Arts & Letters</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@eldrex/unboilerplate@latest/dist/unboilerplate.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+</head>
+<body class="theme-dark-academia" style="margin:0;padding:0;min-height:100vh;font-family:'Newsreader',serif;background:#0f0d0b;color:#f5f0e8;">
+  <header style="padding:3.5rem 2rem;text-align:center;border-bottom:1px solid rgba(212,175,55,0.2);">
+    <p style="font-family:'Cinzel',serif;letter-spacing:0.4em;font-size:0.75rem;color:#d4af37;margin-bottom:0.5rem;">EST. MMXXVI &middot; VOLUME IX</p>
+    <h1 style="font-family:'Cinzel',serif;font-size:clamp(2.2rem,6vw,4rem);margin:0;letter-spacing:0.05em;">THE ATHENEUM</h1>
+  </header>
+</body>
+</html>`,
+
+      cyberDashboard: `<!-- NEO TOKYO 2099 — Cyberpunk System HUD -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEO TOKYO 2099 — System HUD</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@eldrex/unboilerplate@latest/dist/unboilerplate.min.css">
+</head>
+<body class="theme-cyberpunk" style="margin:0;min-height:100vh;background:#050508;">
+
+  <header style="padding:1rem 2rem;border-bottom:1px solid rgba(0,242,254,0.2);display:flex;justify-content:space-between;align-items:center;background:#0c0d14;">
+    <div style="display:flex;align-items:center;gap:1rem;">
+      <h1 class="text-neon" style="font-size:1.1rem;letter-spacing:0.15em;margin:0;">NEO TOKYO // HUD</h1>
+      <span class="vibe-badge vibe-badge--neon">SYSTEM ACTIVE</span>
+    </div>
+    <button class="btn-3d btn-3d--cyan" style="font-size:0.75rem;padding:4px 12px;">OVERRIDE</button>
+  </header>
+
+  <main style="padding:2rem;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:1.5rem;">
+    <div class="vibe-card p-6">
+      <span class="text-cyber" style="font-size:0.75rem;">TELEMETRY FEED</span>
+      <h2 class="text-gradient" style="font-size:2.4rem;font-weight:900;margin:0.5rem 0;">99.98%</h2>
+      <p style="font-size:0.85rem;color:#8b949e;">Quantum network throughput optimal.</p>
+      <div class="marquee --neon mt-4" style="font-size:0.7rem;padding:4px 0;">
+        <span>PING: 1.2ms // PACKETS: 0 DROPPED // SECTOR: CYBER-01 //</span>
+      </div>
+    </div>
+
+    <div class="card-conic-glow">
+      <div class="card-conic-content p-6">
+        <span class="text-cyber" style="font-size:0.75rem;">NEURAL COUPLING</span>
+        <h2 style="font-size:1.8rem;font-weight:900;color:#fff;margin:0.5rem 0;">SYNAPSE ONLINE</h2>
+        <p style="font-size:0.85rem;color:#8b949e;">Hardware accelerated buffer active.</p>
+      </div>
+    </div>
+
+    <div class="crt-screen crt-scanlines crt-flicker crt--green p-6" style="min-height:180px;">
+      <div style="font-size:0.85rem;line-height:1.6;" class="crt-glow">
+        &gt; Unboilerplate kernel 2099<br>
+        &gt; GPU compositing engaged.<br>
+        &gt; All nodes synchronized.
+      </div>
+    </div>
+  </main>
+</body>
+</html>`,
+
+      cyberpunk: `<!-- NEO TOKYO 2099 — Cyberpunk System HUD -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEO TOKYO 2099 — System HUD</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@eldrex/unboilerplate@latest/dist/unboilerplate.min.css">
+</head>
+<body class="theme-cyberpunk" style="margin:0;min-height:100vh;background:#050508;">
+  <header style="padding:1rem 2rem;border-bottom:1px solid rgba(0,242,254,0.2);display:flex;justify-content:space-between;align-items:center;">
+    <h1 class="text-neon" style="font-size:1.1rem;letter-spacing:0.15em;margin:0;">NEO TOKYO // HUD</h1>
+    <span class="vibe-badge vibe-badge--neon">SYSTEM ACTIVE</span>
+  </header>
+  <main style="padding:2rem;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:1.5rem;">
+    <div class="vibe-card p-6">
+      <span class="text-cyber" style="font-size:0.75rem;">TELEMETRY FEED</span>
+      <h2 class="text-gradient" style="font-size:2.4rem;font-weight:900;margin:0.5rem 0;">99.98%</h2>
+      <p style="font-size:0.85rem;color:#8b949e;">Quantum network throughput optimal.</p>
+    </div>
+  </main>
+</body>
+</html>`,
+
+      cleanGirl: `<!-- Sofia Lim — Clean Girl Minimal Design Studio -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sofia Lim — Design Studio</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@eldrex/unboilerplate@latest/dist/unboilerplate.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;900&display=swap" rel="stylesheet">
+</head>
+<body class="theme-clean-girl" style="margin:0;padding:0;min-height:100vh;font-family:'Plus Jakarta Sans',sans-serif;background:#faf8f5;color:#1a1816;">
+
+  <nav style="padding:1.75rem 2.5rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(0,0,0,0.06);">
+    <span style="font-weight:900;letter-spacing:-0.03em;font-size:1.1rem;">sofia lim</span>
+    <div style="display:flex;gap:2rem;font-size:0.88rem;font-weight:600;">
+      <a href="#work" style="color:#1a1816;text-decoration:none;">work</a>
+      <a href="#about" style="color:#6e645c;text-decoration:none;">about</a>
+      <a href="#contact" style="color:#6e645c;text-decoration:none;">contact</a>
+    </div>
+  </nav>
+
+  <main style="max-width:1100px;margin:0 auto;padding:5rem 2rem;">
+    <div style="margin-bottom:5rem;">
+      <span class="vibe-badge" style="background:#000;color:#fff;font-size:0.7rem;letter-spacing:0.1em;">PRODUCT &amp; BRAND DESIGN</span>
+      <h1 style="font-size:clamp(2.6rem,7vw,4.5rem);font-weight:900;line-height:1.08;letter-spacing:-0.04em;margin:1rem 0 1.25rem;color:#1a1816;">I craft digital products<br>that feel inevitable.</h1>
+      <p style="font-size:1.1rem;color:#6e645c;max-width:540px;line-height:1.7;">Clean typography, serene neutral spaces, and thoughtful micro-interactions.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:2.5rem;">
+      <article class="vibe-card hover-lift p-6" style="border-radius:20px;background:#fff;border:1px solid rgba(0,0,0,0.06);">
+        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&auto=format&fit=crop&q=80" alt="Architecture" style="width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:12px;margin-bottom:1rem;" />
+        <h3 style="font-size:1.15rem;font-weight:800;color:#1a1816;">Aura Health OS</h3>
+        <p style="font-size:0.88rem;color:#6e645c;margin-top:0.35rem;">Product Architecture &middot; 2026</p>
+      </article>
+
+      <article class="vibe-card hover-lift p-6" style="border-radius:20px;background:#fff;border:1px solid rgba(0,0,0,0.06);">
+        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&auto=format&fit=crop&q=80" alt="Minimal Workspace" style="width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:12px;margin-bottom:1rem;" />
+        <h3 style="font-size:1.15rem;font-weight:800;color:#1a1816;">Kinfolk Studio</h3>
+        <p style="font-size:0.88rem;color:#6e645c;margin-top:0.35rem;">Brand Identity &middot; 2025</p>
+      </article>
+    </div>
+  </main>
+</body>
+</html>`,
+
+      'clean-girl': `<!-- Sofia Lim — Clean Girl Minimal Design Studio -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sofia Lim — Design Studio</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@eldrex/unboilerplate@latest/dist/unboilerplate.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;900&display=swap" rel="stylesheet">
+</head>
+<body class="theme-clean-girl" style="margin:0;padding:0;min-height:100vh;font-family:'Plus Jakarta Sans',sans-serif;background:#faf8f5;color:#1a1816;">
+  <nav style="padding:1.75rem 2.5rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(0,0,0,0.06);">
+    <span style="font-weight:900;letter-spacing:-0.03em;font-size:1.1rem;">sofia lim</span>
+  </nav>
+  <main style="max-width:1100px;margin:0 auto;padding:5rem 2rem;">
+    <h1 style="font-size:3rem;font-weight:900;color:#1a1816;">I craft digital products that feel inevitable.</h1>
+  </main>
+</body>
+</html>`,
+
+      polaroidStack: `<!-- 3D Fan Stack Polaroid Deck -->
+<div class="flex justify-center items-center" style="min-height: 320px; width: 100%;">
+  <div class="image-stack-3d" style="cursor: pointer;">
+    <div class="stack-item --back" style="background:#fff; padding:6px 6px 20px; border-radius:4px; box-shadow:0 10px 25px rgba(0,0,0,0.5);">
+      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&auto=format&fit=crop&q=80" alt="Coast" style="width:140px; aspect-ratio:1/1; object-fit:cover;" />
+      <small style="color:#222; display:block; text-align:center; margin-top:6px; font-style:italic;">Amalfi Coast</small>
+    </div>
+    <div class="stack-item --middle" style="background:#fff; padding:6px 6px 20px; border-radius:4px; box-shadow:0 10px 25px rgba(0,0,0,0.5);">
+      <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=400&auto=format&fit=crop&q=80" alt="Kyoto" style="width:140px; aspect-ratio:1/1; object-fit:cover;" />
+      <small style="color:#222; display:block; text-align:center; margin-top:6px; font-style:italic;">Kyoto Rain</small>
+    </div>
+    <div class="stack-item --front" style="background:#fff; padding:6px 6px 20px; border-radius:4px; box-shadow:0 10px 25px rgba(0,0,0,0.5);">
+      <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&auto=format&fit=crop&q=80" alt="Light" style="width:140px; aspect-ratio:1/1; object-fit:cover;" />
+      <small style="color:#222; display:block; text-align:center; margin-top:6px; font-style:italic;">Tokyo Lights</small>
+    </div>
+  </div>
+</div>`,
+
+      polaroid: `<!-- 3D Fan Stack Polaroid Deck -->
+<div class="flex justify-center items-center" style="min-height: 320px; width: 100%;">
+  <div class="image-stack-3d" style="cursor: pointer;">
+    <div class="stack-item --back" style="background:#fff; padding:6px 6px 20px; border-radius:4px; box-shadow:0 10px 25px rgba(0,0,0,0.5);">
+      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&auto=format&fit=crop&q=80" alt="Coast" style="width:140px; aspect-ratio:1/1; object-fit:cover;" />
+      <small style="color:#222; display:block; text-align:center; margin-top:6px; font-style:italic;">Amalfi Coast</small>
+    </div>
+    <div class="stack-item --middle" style="background:#fff; padding:6px 6px 20px; border-radius:4px; box-shadow:0 10px 25px rgba(0,0,0,0.5);">
+      <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=400&auto=format&fit=crop&q=80" alt="Kyoto" style="width:140px; aspect-ratio:1/1; object-fit:cover;" />
+      <small style="color:#222; display:block; text-align:center; margin-top:6px; font-style:italic;">Kyoto Rain</small>
+    </div>
+    <div class="stack-item --front" style="background:#fff; padding:6px 6px 20px; border-radius:4px; box-shadow:0 10px 25px rgba(0,0,0,0.5);">
+      <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&auto=format&fit=crop&q=80" alt="Light" style="width:140px; aspect-ratio:1/1; object-fit:cover;" />
+      <small style="color:#222; display:block; text-align:center; margin-top:6px; font-style:italic;">Tokyo Lights</small>
+    </div>
+  </div>
+</div>`,
+
+      canvasLayers: `<!-- Photoshop-like Image Layering with Blend Modes -->
+<div class="canvas canvas-landscape" style="max-width: 620px; width: 100%; min-height: 320px; position: relative; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.6);">
+  <div class="layer-back bg-gradient --mesh"></div>
+  <div class="layer-mid flex justify-center items-center p-6 text-center">
+    <div>
+      <span class="vibe-badge vibe-badge--neon mb-2">PHOTOSHOP IN PURE CSS</span>
+      <h1 class="text-gradient --sunset font-bold" style="font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.05; letter-spacing: -1.5px;">
+        CREATIVE FLOW
+      </h1>
+      <p style="color: #cbd5e1; font-size: 0.95rem; margin-top: 0.5rem;">Hardware accelerated blend modes &amp; layered depth.</p>
+    </div>
+  </div>
+  <div class="layer-front flex justify-between items-end p-6">
+    <span class="vibe-badge vibe-badge--neon">.blend-screen</span>
+    <span class="vibe-badge">.layer-front</span>
+  </div>
+</div>`,
+
+      book3d: `<!-- Interactive Pure CSS 3D Book (Hover to Turn Pages) -->
+<div class="flex justify-center items-center p-4" style="min-height: 340px; width: 100%;">
+  <div class="book-3d" onclick="this.classList.toggle('is-open')" title="Hover or click to flip pages">
+    <div class="book-cover" style="background: linear-gradient(135deg, #1e1b4b, #312e81); border: 1.5px solid #6366f1;">
+      <span class="vibe-badge" style="background: #6366f1; color: #fff;">VOL. I</span>
+      <h2 style="color: #fff; font-size: 1.4rem; font-weight: 900; margin-top: 10px; font-family: serif;">CSS FREEDOM</h2>
+      <small style="color: #a5b4fc; font-size: 0.75rem;">Hover or click to flip pages</small>
+    </div>
+    <div class="book-pages">
+      <div class="page --page1" style="padding: 1.25rem;">
+        <h4 style="color: #0f172a; font-weight: 800;">Chapter 1</h4>
+        <p style="font-size: 0.85rem; color: #334155; margin-top: 8px; line-height: 1.6;">Zero JavaScript 3D transforms with preserve-3d matrix acceleration.</p>
+      </div>
+      <div class="page --page2" style="padding: 1.25rem;">
+        <h4 style="color: #0f172a; font-weight: 800;">Chapter 2</h4>
+        <p style="font-size: 0.85rem; color: #334155; margin-top: 8px; line-height: 1.6;">Cascading CSS variables allow total design freedom with instant overrides.</p>
+      </div>
+      <div class="page --page3" style="padding: 1.25rem;">
+        <h4 style="color: #0f172a; font-weight: 800;">Chapter 3</h4>
+        <p style="font-size: 0.85rem; color: #334155; margin-top: 8px; line-height: 1.6;">You own your code forever.</p>
+      </div>
+    </div>
+  </div>
+</div>`,
+
+      carousel3d: `<!-- 3D Orbital Carousel (Pauses on Hover) -->
+<div class="flex justify-center items-center" style="min-height: 300px; width: 100%;">
+  <div class="carousel-3d">
+    <div class="carousel-3d-container">
+      <div class="carousel-3d-item"><span>1. Vibe</span></div>
+      <div class="carousel-3d-item"><span>2. Glow</span></div>
+      <div class="carousel-3d-item"><span>3. Float</span></div>
+      <div class="carousel-3d-item"><span>4. Shine</span></div>
+      <div class="carousel-3d-item"><span>5. Pure</span></div>
+    </div>
+  </div>
+</div>`,
+
+      retro1999: `<!-- 1999 Personal Homepage Builder -->
+<div class="site-retro" style="max-width: 680px; width: 100%; background: #c0c0c0; border: 3px outset #fff; box-shadow: 8px 8px 0 rgba(0,0,0,0.5);">
+  <header class="retro-header" style="background: linear-gradient(90deg, #000080, #1084d0); color: #fff; padding: 1rem; text-align: center;">
+    <h1 class="text-rainbow" style="font-size: 1.8rem; margin: 0;">~*~ Welcome to My Oasis ~*~</h1>
+    <div class="marquee" style="background: #000; color: #00ff00; padding: 4px; margin-top: 6px; font-size: 0.75rem;">
+      <span>★ BEST VIEWED IN 800x600 ★ ZERO JAVASCRIPT ★ NETSCAPE 4.0 READY ★</span>
+    </div>
+  </header>
+  
+  <nav class="retro-nav" style="padding: 0.5rem; background: #808080; display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap;">
+    <button class="btn-3d" style="font-size: 0.75rem; padding: 2px 10px;">Home</button>
+    <button class="btn-3d" style="font-size: 0.75rem; padding: 2px 10px;">About</button>
+    <button class="btn-3d" style="font-size: 0.75rem; padding: 2px 10px;">Photos</button>
+    <button class="btn-3d" style="font-size: 0.75rem; padding: 2px 10px;">Guestbook</button>
+  </nav>
+  
+  <main class="p-4" style="color: #000;">
+    <div class="window-95" style="width: 100%; margin-bottom: 1rem;">
+      <div class="window-titlebar">
+        <span class="window-title">C:\\ABOUT_ME\\PROFILE.TXT</span>
+        <div class="window-buttons">
+          <button class="win-btn">_</button>
+          <button class="win-btn">□</button>
+          <button class="win-btn win-close">×</button>
+        </div>
+      </div>
+      <div class="window-content p-4" style="background: #fff;">
+        <p style="font-size: 0.9rem; line-height: 1.6;">Welcome to my corner of cyberspace. Built with pure CSS architecture.</p>
+        <span class="blink" style="color: #000080; font-weight: 700; font-size: 0.8rem;">● SYSTEM ONLINE</span>
+      </div>
+    </div>
+    
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <div class="visitor-counter">
+        <span style="color: #333; font-size: 0.75rem;">HIT COUNTER:</span>
+        <span class="counter-digits">004299</span>
+      </div>
+      <span class="badge" style="background: #000; color: #00ff00; padding: 2px 6px; font-size: 0.7rem;">HANDCRAFTED</span>
+    </div>
+  </main>
+</div>`,
+
+      retro: `<!-- 1999 Personal Homepage Builder -->
+<div class="site-retro" style="max-width: 680px; width: 100%; background: #c0c0c0; border: 3px outset #fff; box-shadow: 8px 8px 0 rgba(0,0,0,0.5);">
+  <header class="retro-header" style="background: linear-gradient(90deg, #000080, #1084d0); color: #fff; padding: 1rem; text-align: center;">
+    <h1 class="text-rainbow" style="font-size: 1.8rem; margin: 0;">~*~ Welcome to My Oasis ~*~</h1>
+    <div class="marquee" style="background: #000; color: #00ff00; padding: 4px; margin-top: 6px; font-size: 0.75rem;">
+      <span>★ BEST VIEWED IN 800x600 ★ ZERO JAVASCRIPT ★ NETSCAPE 4.0 READY ★</span>
+    </div>
+  </header>
+  
+  <nav class="retro-nav" style="padding: 0.5rem; background: #808080; display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap;">
+    <button class="btn-3d" style="font-size: 0.75rem; padding: 2px 10px;">Home</button>
+    <button class="btn-3d" style="font-size: 0.75rem; padding: 2px 10px;">About</button>
+    <button class="btn-3d" style="font-size: 0.75rem; padding: 2px 10px;">Photos</button>
+    <button class="btn-3d" style="font-size: 0.75rem; padding: 2px 10px;">Guestbook</button>
+  </nav>
+  
+  <main class="p-4" style="color: #000;">
+    <div class="window-95" style="width: 100%; margin-bottom: 1rem;">
+      <div class="window-titlebar">
+        <span class="window-title">C:\\ABOUT_ME\\PROFILE.TXT</span>
+        <div class="window-buttons">
+          <button class="win-btn">_</button>
+          <button class="win-btn">□</button>
+          <button class="win-btn win-close">×</button>
+        </div>
+      </div>
+      <div class="window-content p-4" style="background: #fff;">
+        <p style="font-size: 0.9rem; line-height: 1.6;">Welcome to my corner of cyberspace. Built with pure CSS architecture.</p>
+        <span class="blink" style="color: #000080; font-weight: 700; font-size: 0.8rem;">● SYSTEM ONLINE</span>
+      </div>
+    </div>
+    
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <div class="visitor-counter">
+        <span style="color: #333; font-size: 0.75rem;">HIT COUNTER:</span>
+        <span class="counter-digits">004299</span>
+      </div>
+      <span class="badge" style="background: #000; color: #00ff00; padding: 2px 6px; font-size: 0.7rem;">HANDCRAFTED</span>
+    </div>
+  </main>
+</div>`,
+
+      particles3d: `<!-- Pure CSS 3D Particle Universe -->
+<div class="particles-3d" style="max-width: 540px; width: 100%; min-height: 320px; background: #06070a; border-radius: 18px; border: 1px solid var(--ub-border); display: flex; align-items: center; justify-content: center; position: relative;">
+  <div class="particle --float-slow">✦</div>
+  <div class="particle --float-medium">✧</div>
+  <div class="particle --float-fast">⭐</div>
+  <div class="particle --spin">💫</div>
+  <div class="particle --orbit">✨</div>
+  
+  <div class="text-center p-6" style="position: relative; z-index: 10;">
+    <span class="vibe-badge vibe-badge--neon mb-2">PURE CSS DYNAMICS</span>
+    <h2 class="text-gradient --ocean font-bold" style="font-size: 2.2rem; margin: 0.5rem 0;">3D Particle System</h2>
+    <p class="text-muted" style="font-size: 0.92rem; max-width: 380px; margin: 0 auto;">Zero JavaScript. Hardware-accelerated perspective camera.</p>
+  </div>
+</div>`,
+
+      cube3d: `<!-- Pure CSS 3D Cube Scene -->
+<div class="cube-3d-scene">
+  <div class="cube-3d">
+    <div class="cube-face --front"><h3 class="text-gradient">NEBULA</h3></div>
+    <div class="cube-face --back"><h3 class="text-cyber">TOKYO</h3></div>
+    <div class="cube-face --left"><h3 class="text-neon">HORIZON</h3></div>
+    <div class="cube-face --right"><h3 class="text-fire">SOLAR</h3></div>
+    <div class="cube-face --top"><h3 class="text-ice">ZENITH</h3></div>
+    <div class="cube-face --bottom"><h3 class="text-3d">CORE</h3></div>
+  </div>
+</div>`,
+
+      cube: `<!-- Pure CSS 3D Cube Scene -->
+<div class="cube-3d-scene">
+  <div class="cube-3d">
+    <div class="cube-face --front"><h3 class="text-gradient">NEBULA</h3></div>
+    <div class="cube-face --back"><h3 class="text-cyber">TOKYO</h3></div>
+    <div class="cube-face --left"><h3 class="text-neon">HORIZON</h3></div>
+    <div class="cube-face --right"><h3 class="text-fire">SOLAR</h3></div>
+    <div class="cube-face --top"><h3 class="text-ice">ZENITH</h3></div>
+    <div class="cube-face --bottom"><h3 class="text-3d">CORE</h3></div>
+  </div>
+</div>`,
+
+      win95: `<!-- Windows 95 System Window -->
+<div class="window-95" style="max-width: 440px; width: 100%;">
+  <div class="window-titlebar">
+    <span class="window-title">C:\\UNBOILERPLATE\\APP.EXE</span>
+    <div class="window-buttons">
+      <button class="win-btn">_</button>
+      <button class="win-btn">□</button>
+      <button class="win-btn win-close">×</button>
+    </div>
+  </div>
+  <div class="window-content stack gap-3 p-4">
+    <div class="marquee --neon --pause-hover" style="background: #000; color: #00f2fe; padding: 4px;">
+      <span>SYSTEM ONLINE: 100% HARDWARE ACCELERATED</span>
+    </div>
+    <p style="font-size: 0.9rem; color: #0f172a;">Beveled classic window with tactile button feedback.</p>
+    <div class="visitor-counter">
+      <span style="color: #64748b; font-size: 0.75rem;">VISITORS:</span>
+      <span class="counter-digits">004299</span>
+    </div>
+    <div class="flex justify-between items-center mt-2">
+      <span class="blink blink--soft" style="color: #000080; font-weight: 700;">AUTHENTIC RETRO</span>
+      <button class="win-btn" style="padding: 2px 14px; font-weight: 700;">OK</button>
+    </div>
+  </div>
+</div>`,
+
+      crtScreen: `<!-- Phosphor CRT Terminal -->
+<div class="crt-screen crt-scanlines crt-flicker crt--green p-6 stack justify-between" style="max-width: 480px; width: 100%; min-height: 240px;">
+  <div>
+    <div class="flex justify-between items-center">
+      <span>[SYSTEM_V1]</span>
+      <span class="blink">● ONLINE</span>
+    </div>
+    <p class="crt-glow mt-3" style="font-size: 0.95rem; line-height: 1.6;">
+      &gt; Initializing unboilerplate kernel...<br>
+      &gt; Zero JavaScript dependencies loaded.<br>
+      &gt; Display mode: Phosphor Green CRT.
+    </p>
+  </div>
+  <div class="flex justify-between items-center mt-4">
+    <small>.crt-screen</small>
+    <button class="btn-8bit" style="font-size: 0.75rem; padding: 4px 10px;">EXECUTE</button>
+  </div>
+</div>`,
+
+      neoBrutal: `<!-- Neo-Brutalism High Contrast Card -->
+<div class="brutal-neo p-6 stack justify-between" style="max-width: 440px; width: 100%; background: #fef08a;">
+  <header>
+    <span class="vibe-badge" style="background: #000; color: #fff; border: none;">.brutal-neo</span>
+    <h2 style="margin-top: 0.5rem; color: #000; font-size: 1.8rem; font-weight: 900;">BOLD ATTITUDE</h2>
+  </header>
+  <p style="color: #222; font-weight: 600; margin: 1rem 0;">Hard 6px black offset drop shadows. Raw, unfiltered design confidence.</p>
+  <footer>
+    <button class="btn-brutal" style="background: #000; color: #fff;">TAKE ACTION →</button>
+  </footer>
+</div>`,
+
+      vaporwave: `<!-- Vaporwave Retro Gradient Box -->
+<div class="vapor-sunset p-8 rounded-xl stack justify-between" style="max-width: 500px; width: 100%; min-height: 260px; text-align: center;">
+  <header>
+    <span class="vibe-badge" style="background: rgba(0,0,0,0.6); color: #f472b6; border: 1px solid #f472b6;">SYNTHWAVE 1984</span>
+    <h2 class="vapor-chrome" style="margin-top: 0.75rem; font-size: 2.4rem;">VAPORWAVE</h2>
+  </header>
+  <p style="color: #ffe6ff; margin: 1rem 0;">80s grid horizon, chrome typography, and neon dusk palette.</p>
+  <footer>
+    <button class="btn-3d btn-3d--cyan">ENTER THE GRID</button>
+  </footer>
+</div>`
+    };
+
+    const snippetLibrary = {
+      cardFlip: `<!-- 3D 180° Flip Card -->
+<div class="card-3d-flip" style="max-width: 320px; width: 100%; height: 200px; cursor: pointer;">
+  <div class="card-3d-inner">
+    <div class="card-3d-front p-6 flex center text-center" style="background: linear-gradient(135deg, #1e1b4b, #4338ca); border-radius: 18px; border: 1px solid #6366f1;">
+      <div>
+        <span class="vibe-badge vibe-badge--neon mb-2">FRONT FACE</span>
+        <h3 style="color:#fff; font-size:1.3rem; font-weight:800;">Hover Me 🎴</h3>
+      </div>
+    </div>
+    <div class="card-3d-back p-6 flex center text-center" style="background: linear-gradient(135deg, #ff007a, #7928ca); border-radius: 18px; border: 1px solid #f472b6;">
+      <div>
+        <span class="vibe-badge vibe-badge--sunset mb-2">BACK FACE</span>
+        <h3 style="color:#fff; font-size:1.3rem; font-weight:800;">Pure CSS 3D! ✨</h3>
+      </div>
+    </div>
+  </div>
+</div>`,
+
+      book: `<!-- 3D Interactive Storybook (Hover to Open) -->
+<div class="book-3d" onclick="this.classList.toggle('is-open')" style="cursor: pointer;">
+  <div class="book-cover" style="background: linear-gradient(135deg, #1e1b4b, #312e81); border: 1.5px solid #6366f1;">
+    <span class="vibe-badge">VOL. I</span>
+    <h3 style="color:#fff; margin-top:8px;">STORYBOOK</h3>
+    <small style="color:#a5b4fc;">Hover or click to open</small>
+  </div>
+  <div class="book-pages">
+    <div class="page --page1 p-4">
+      <strong style="color:#0f172a;">Chapter 1</strong>
+      <p style="font-size:0.8rem; color:#334155; margin-top:4px;">Pure CSS hardware page turns.</p>
+    </div>
+  </div>
+</div>`,
+
+      fanStack: `<!-- 3D Fan Stack Photo Deck -->
+<div class="image-stack-3d" style="cursor: pointer;">
+  <div class="stack-item --back" style="background:#fff; padding:6px 6px 18px; border-radius:4px;">
+    <div style="width:110px; aspect-ratio:1/1; background:linear-gradient(135deg,#3b82f6,#1d4ed8);"></div>
+    <small style="color:#000; display:block; text-align:center; margin-top:4px;">Deck 1</small>
+  </div>
+  <div class="stack-item --middle" style="background:#fff; padding:6px 6px 18px; border-radius:4px;">
+    <div style="width:110px; aspect-ratio:1/1; background:linear-gradient(135deg,#ec4899,#be185d);"></div>
+    <small style="color:#000; display:block; text-align:center; margin-top:4px;">Deck 2</small>
+  </div>
+  <div class="stack-item --front" style="background:#fff; padding:6px 6px 18px; border-radius:4px;">
+    <div style="width:110px; aspect-ratio:1/1; background:linear-gradient(135deg,#00f2fe,#4facfe);"></div>
+    <small style="color:#000; display:block; text-align:center; margin-top:4px;">Deck 3</small>
+  </div>
+</div>`,
+
+      cube: `<!-- Rotating 3D Cube -->
+<div class="cube-3d-scene">
+  <div class="cube-3d">
+    <div class="cube-face --front"><h4 class="text-gradient">3D</h4></div>
+    <div class="cube-face --back"><h4 class="text-cyber">CSS</h4></div>
+    <div class="cube-face --left"><h4 class="text-neon">ART</h4></div>
+    <div class="cube-face --right"><h4 class="text-fire">GO</h4></div>
+    <div class="cube-face --top"><h4>TOP</h4></div>
+    <div class="cube-face --bottom"><h4>BOT</h4></div>
+  </div>
+</div>`,
+
+      btn3d: `<!-- Physical 3D Spring Button -->
+<button class="btn-3d btn-3d--cyan" style="font-size:0.95rem; padding:0.75rem 2rem;">
+  Press Me Down 🔘
+</button>`,
+
+      carousel: `<!-- 3D Orbital Ring -->
+<div class="carousel-3d">
+  <div class="carousel-3d-container">
+    <div class="carousel-3d-item"><span>1</span></div>
+    <div class="carousel-3d-item"><span>2</span></div>
+    <div class="carousel-3d-item"><span>3</span></div>
+    <div class="carousel-3d-item"><span>4</span></div>
+    <div class="carousel-3d-item"><span>5</span></div>
+  </div>
+</div>`,
+
+      vibeCard: `<!-- Glassmorphic Frosted Card -->
+<div class="vibe-card effect-glass hover-lift p-6" style="max-width: 440px; width: 100%;">
+  <span class="vibe-badge vibe-badge--neon mb-2">GLASSMORPHISM</span>
+  <h3 class="text-gradient font-bold" style="font-size:1.4rem;">Frosted Glass Card</h3>
+  <p style="color:#94a3b8; font-size:0.9rem; line-height:1.6; margin:0.5rem 0 1rem;">
+    Beautiful blurred backdrop filter with subtle border light and spring hover elevation.
+  </p>
+  <button class="vibe-btn --sm">Take Action →</button>
+</div>`,
+
+      conicGlow: `<!-- 360° Conic Rotating Glow Card -->
+<div class="card-conic-glow" style="max-width: 420px; width: 100%;">
+  <div class="card-conic-content p-6 text-center">
+    <span class="vibe-badge vibe-badge--sunset mb-2">CONIC GLOW</span>
+    <h3 style="color:#fff; font-size:1.4rem; font-weight:800; margin:0.4rem 0;">Rotating Border</h3>
+    <p style="color:#94a3b8; font-size:0.88rem; line-height:1.6;">
+      Infinite 360-degree rainbow rotating light edge powered by pure CSS keyframes.
+    </p>
+  </div>
+</div>`,
+
+      priceCard: `<!-- SaaS Pricing Tier Card -->
+<div class="price-card p-6 stack justify-between" style="max-width: 320px; width: 100%; border-radius:20px; background:#0c0e17;">
+  <div>
+    <span class="vibe-badge vibe-badge--neon">PRO CREATOR</span>
+    <div class="flex items-baseline gap-1 mt-3 mb-4">
+      <span style="font-size:2.4rem; font-weight:900; color:#fff;">$29</span>
+      <span style="color:#64748b; font-size:0.85rem;">/month</span>
+    </div>
+    <ul style="color:#cbd5e1; font-size:0.88rem; line-height:2; padding-left:1.2rem;">
+      <li>Unlimited 3D Canvas</li>
+      <li>All 10+ Aesthetic Themes</li>
+      <li>Zero JavaScript Overhead</li>
+    </ul>
+  </div>
+  <button class="vibe-btn mt-6 w-full">Upgrade Now →</button>
+</div>`,
+
+      brutalCard: `<!-- Neo-Brutalist Bold Card -->
+<div class="brutal-neo p-6 stack gap-3" style="max-width: 380px; width: 100%; background:#fef08a;">
+  <span class="vibe-badge" style="background:#000; color:#fff;">NEO BRUTALISM</span>
+  <h3 style="color:#000; font-size:1.6rem; font-weight:900;">BOLD ATTITUDE</h3>
+  <p style="color:#222; font-weight:600; font-size:0.9rem;">Hard 6px black drop shadows with high contrast borders.</p>
+  <button class="btn-brutal" style="background:#000; color:#fff;">DISCOVER →</button>
+</div>`,
+
+      woodCard: `<!-- Mahogany Grain Card -->
+<div class="card-wood p-6 rounded-lg text-center" style="max-width: 380px; width: 100%;">
+  <h3 style="color:#ffd700; font-family:serif; font-size:1.4rem;">Skeuomorphic Wood</h3>
+  <p style="color:#e2d8c3; font-size:0.88rem; margin:0.5rem 0 1rem;">Rich mahogany texture with stitched leather button.</p>
+  <button class="btn-leather" style="color:#fff; font-size:0.85rem;">Inspect Specimen</button>
+</div>`,
+
+      neonText: `<!-- Cyberpunk Neon Text -->
+<div class="p-6 text-center" style="max-width: 440px; width: 100%;">
+  <h1 class="text-neon" style="font-size: 2.8rem; font-weight: 900; letter-spacing: 2px;">
+    NEO TOKYO
+  </h1>
+  <p class="text-cyber mt-2" style="font-size: 0.9rem;">&gt; SYSTEM_READY_2099</p>
+</div>`,
+
+      textGradient: `<!-- Vibrant Text Gradient -->
+<div class="p-6 text-center" style="max-width: 460px; width: 100%;">
+  <h1 class="text-gradient --sunset font-bold" style="font-size: 3rem; line-height: 1.1;">
+    CREATIVE DESIGN
+  </h1>
+  <p class="text-gradient --rainbow font-bold mt-2" style="font-size: 1.2rem;">
+    Infinite hue shifting rainbow gradient
+  </p>
+</div>`,
+
+      typewriter: `<!-- Pure CSS Typewriter -->
+<div class="p-6 text-center" style="max-width: 480px; width: 100%;">
+  <h2 class="text-animate --typewriter font-mono font-bold" style="font-size: 1.6rem; color:#00f2fe; display:inline-block;">
+    CSS that speaks human.
+  </h2>
+</div>`,
+
+      crtGlow: `<!-- Phosphor Terminal Glow -->
+<div class="crt-screen crt-scanlines crt--green p-6" style="max-width: 420px; width: 100%;">
+  <p class="crt-glow font-mono" style="font-size: 0.95rem; line-height: 1.6;">
+    &gt; Booting Unboilerplate OS...<br>
+    &gt; 0 dependencies found.<br>
+    &gt; System 100% operational.
+  </p>
+</div>`,
+
+      vibeGrid: `<!-- Auto-Fill Responsive Grid -->
+<div class="vibe-grid" style="width: 100%; max-width: 540px;">
+  <div class="vibe-card p-4 text-center">Grid Item 1</div>
+  <div class="vibe-card p-4 text-center">Grid Item 2</div>
+  <div class="vibe-card p-4 text-center">Grid Item 3</div>
+</div>`,
+
+      flexRow: `<!-- Flexbox Centered Row -->
+<div class="flex justify-between items-center wrap gap-3 p-4 vibe-card" style="width: 100%; max-width: 480px;">
+  <strong>Left Brand</strong>
+  <div class="flex gap-2">
+    <button class="pill-tab">Option 1</button>
+    <button class="vibe-btn --sm">Option 2</button>
+  </div>
+</div>`,
+
+      boxmodel: `<!-- Box Model Visualizer -->
+<div class="box-model-visual" style="max-width: 440px; width: 100%;">
+  <div class="margin-box">
+    Margin (.m-4 = outer)
+    <div class="border-box mt-2">
+      Border (2px boundary)
+      <div class="padding-box mt-2">
+        Padding (.p-4 = inner)
+        <div class="content-box mt-2">Content (.vibe-card)</div>
+      </div>
+    </div>
+  </div>
+</div>`,
+
+      marquee: `<!-- Smooth Marquee Banner -->
+<div class="marquee --neon --pause-hover p-2" style="background:#000; width:100%; max-width:500px; border-radius:8px;">
+  <span>✨ BREAKING NEWS: PURE CSS FRAMEWORK WITH ZERO JAVASCRIPT OVERHEAD IS LIVE ✨</span>
+</div>`,
+
+      badges: `<!-- Status Badges & Chips -->
+<div class="flex wrap gap-2 p-4 justify-center" style="max-width: 440px;">
+  <span class="vibe-badge">DEFAULT</span>
+  <span class="vibe-badge vibe-badge--neon">ELECTRIC</span>
+  <span class="vibe-badge vibe-badge--sunset">SUNSET</span>
+  <span class="pill-tab">PILL TAB</span>
+</div>`,
+
+      win95: `<!-- Windows 95 Classic Window -->
+<div class="window-95" style="max-width: 400px; width: 100%;">
+  <div class="window-titlebar">
+    <span class="window-title">C:\\DESKTOP\\WELCOME.TXT</span>
+    <div class="window-buttons">
+      <button class="win-btn">_</button>
+      <button class="win-btn">□</button>
+      <button class="win-btn win-close">×</button>
+    </div>
+  </div>
+  <div class="window-content p-4">
+    <p style="color:#000; font-size:0.9rem;">Hello from 1995! Built with pure CSS.</p>
+  </div>
+</div>`,
+
+      counter: `<!-- 90s Web Hit Counter -->
+<div class="visitor-counter p-4" style="display:inline-flex; align-items:center; gap:0.5rem; background:#111; border-radius:8px; border:1px solid #333;">
+  <span style="color:#94a3b8; font-size:0.8rem;">HITS:</span>
+  <span class="counter-digits">004299</span>
+</div>`,
+
+      pixelBtn: `<!-- 8-Bit Retro Button -->
+<button class="btn-8bit" style="font-size:0.85rem; padding:0.6rem 1.4rem;">
+  START GAME 👾
+</button>`
+    };
+
+    let monacoEditor = null;
+    const fallbackEditor = document.getElementById('fallback-editor');
+    const previewStage = document.getElementById('preview-stage');
+
+    function updatePreview(code) {
+      if (!previewStage) return;
+      let renderCode = code;
+
+      const bodyMatch = code.match(/<body([^>]*)>([\s\S]*)<\/body>/i);
+      if (bodyMatch) {
+        const bodyAttrs = bodyMatch[1] || '';
+        renderCode = bodyMatch[2];
+
+        // Extract class from template body tag
+        const classMatch = bodyAttrs.match(/class=["']([^"']*)["']/i);
+        const styleMatch = bodyAttrs.match(/style=["']([^"']*)["']/i);
+
+        previewStage.className = 'preview-stage';
+        if (classMatch && classMatch[1]) {
+          previewStage.className = `preview-stage ${classMatch[1]}`;
+        }
+        
+        if (styleMatch && styleMatch[1]) {
+          previewStage.style.cssText = styleMatch[1];
+        } else {
+          previewStage.style.cssText = '';
+        }
+      } else {
+        previewStage.style.cssText = '';
+        // For standalone snippets, apply user-selected theme from dropdown
+        const themeSelect = document.getElementById('select-theme');
+        const currentTheme = themeSelect ? themeSelect.value : 'default';
+        previewStage.className = 'preview-stage';
+        if (currentTheme !== 'default') {
+          previewStage.classList.add(currentTheme);
+        }
+      }
+      previewStage.innerHTML = renderCode;
+    }
+
+    function initMonaco() {
+      try { localStorage.removeItem('ub_load_tpl'); } catch(e) {}
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const tplParam = urlParams.get('template') || urlParams.get('preset');
+      
+      const aliasMap = {
+        'artist': 'artistPortfolio',
+        'dark-academia': 'literaryJournal',
+        'cyberpunk': 'cyberDashboard',
+        'clean-girl': 'cleanGirl',
+        'polaroid': 'polaroidStack',
+        'retro': 'retro1999',
+        'cube': 'cube3d',
+        'neo-brutalist': 'neoBrutal',
+        'indie-game': 'indieGame',
+      };
+
+      let initialTemplateKey = 'helloWorld';
+      if (tplParam) {
+        initialTemplateKey = aliasMap[tplParam] || tplParam;
+      }
+
+      const presetSelect = document.getElementById('select-preset');
+      if (presetSelect && ideTemplates[initialTemplateKey]) {
+        presetSelect.value = initialTemplateKey;
+      }
+
+      const initialCode = ideTemplates[initialTemplateKey] || ideTemplates.helloWorld;
+
+      if (window.require) {
+        require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs' } });
+        require(['vs/editor/editor.main'], function () {
+          fallbackEditor.style.display = 'none';
+          monacoEditor = monaco.editor.create(document.getElementById('monaco-editor-box'), {
+            value: initialCode,
+            language: 'html',
+            theme: 'vs-dark',
+            automaticLayout: true,
+            fontSize: 13,
+            fontFamily: "'JetBrains Mono', Consolas, monospace",
+            minimap: { enabled: false },
+            lineNumbers: 'on',
+            scrollBeyondLastLine: false,
+            padding: { top: 12, bottom: 12 },
+            lineHeight: 20
+          });
+
+          monacoEditor.onDidChangeModelContent(() => {
+            updatePreview(monacoEditor.getValue());
+          });
+
+          updatePreview(initialCode);
+        });
+      } else {
+        fallbackEditor.value = initialCode;
+        fallbackEditor.addEventListener('input', () => updatePreview(fallbackEditor.value));
+        updatePreview(initialCode);
+      }
+    }
+
+    function setCode(code) {
+      if (monacoEditor) {
+        monacoEditor.setValue(code);
+      } else {
+        fallbackEditor.value = code;
+      }
+      updatePreview(code);
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast-popup');
+      toast.textContent = msg;
+      toast.classList.add('is-visible');
+      setTimeout(() => toast.classList.remove('is-visible'), 2200);
+    }
+
+    // Mobile Tab Switcher
+    const tabCode = document.getElementById('tab-code');
+    const tabPreview = document.getElementById('tab-preview');
+    const editorPane = document.querySelector('.editor-pane');
+    const previewPane = document.querySelector('.preview-pane');
+
+    function setMobileTab(tab) {
+      if (!tabCode || !tabPreview) return;
+      if (tab === 'code') {
+        tabCode.classList.add('active');
+        tabPreview.classList.remove('active');
+        editorPane?.classList.remove('mobile-hidden');
+        previewPane?.classList.add('mobile-hidden');
+      } else {
+        tabPreview.classList.add('active');
+        tabCode.classList.remove('active');
+        previewPane?.classList.remove('mobile-hidden');
+        editorPane?.classList.add('mobile-hidden');
+      }
+    }
+
+    tabCode?.addEventListener('click', () => setMobileTab('code'));
+    tabPreview?.addEventListener('click', () => setMobileTab('preview'));
+
+    if (window.innerWidth < 900) {
+      setMobileTab('code');
+    }
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 900) {
+        editorPane?.classList.remove('mobile-hidden');
+        previewPane?.classList.remove('mobile-hidden');
+      } else {
+        const activeTab = tabCode?.classList.contains('active') ? 'code' : 'preview';
+        setMobileTab(activeTab);
+      }
+    });
+
+    // 1. Preset Dropdown Handler
+    document.getElementById('select-preset')?.addEventListener('change', (e) => {
+      const key = e.target.value;
+      if (ideTemplates[key]) {
+        const themeSelect = document.getElementById('select-theme');
+        if (themeSelect) themeSelect.value = 'default';
+        setCode(ideTemplates[key]);
+        showToast(`Loaded ${e.target.options[e.target.selectedIndex].text}`);
+      }
+    });
+
+    // 2. Component Snippet Dropdown Handler
+    document.getElementById('select-snippet')?.addEventListener('change', (e) => {
+      const key = e.target.value;
+      if (snippetLibrary[key]) {
+        setCode(snippetLibrary[key]);
+        showToast(`Inserted ${e.target.options[e.target.selectedIndex].text}`);
+      }
+    });
+
+    // 3. Theme Dropdown Handler
+    document.getElementById('select-theme')?.addEventListener('change', (e) => {
+      const currentCode = monacoEditor ? monacoEditor.getValue() : fallbackEditor.value;
+      updatePreview(currentCode);
+      showToast(`Applied ${e.target.options[e.target.selectedIndex].text}`);
+    });
+
+    // Action: Format Code
+    document.getElementById('btn-format')?.addEventListener('click', () => {
+      try {
+        if (monacoEditor) {
+          const action = monacoEditor.getAction('editor.action.formatDocument');
+          if (action) {
+            action.run().catch(() => {});
+          }
+        }
+        showToast('Code formatted ✨');
+      } catch (e) {
+        showToast('Code formatted ✨');
+      }
+    });
+
+    // Action: Copy Code (with CDN and selectable @latest / @1.0.0 version)
+    document.getElementById('btn-copy')?.addEventListener('click', () => {
+      const code = monacoEditor ? monacoEditor.getValue() : fallbackEditor.value;
+      const cdnVersion = document.getElementById('select-cdn-version')?.value || 'latest';
+      
+      // If code is already a complete standalone HTML document, copy it directly with normalized CDN
+      if (code.includes('<!DOCTYPE html>') || code.includes('<html')) {
+        const updatedCode = code.replace(
+          /unboilerplate@(latest|[0-9\.]+)\/dist\/unboilerplate\.min\.css/g,
+          `unboilerplate@${cdnVersion}/dist/unboilerplate.min.css`
+        );
+        navigator.clipboard.writeText(updatedCode).then(() => {
+          showToast(`Copied complete HTML with CDN @${cdnVersion}!`);
+        });
+        return;
+      }
+
+      // If snippet only, wrap in standalone boilerplate with active theme
+      const themeSelect = document.getElementById('select-theme');
+      const currentTheme = themeSelect ? themeSelect.value : 'default';
+      const themeClassAttr = currentTheme !== 'default' ? ` class="${currentTheme}"` : '';
+
+      const fullHTML = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unboilerplate Project</title>
+  <!-- Unboilerplate Pure CSS CDN (use @latest for auto-updates, or @1.0.0 for a locked version) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@eldrex/unboilerplate@${cdnVersion}/dist/unboilerplate.min.css">
+</head>
+<body${themeClassAttr} style="min-height: 100vh; margin: 0; padding: 2rem; display: flex; align-items: center; justify-content: center;">
+${code}
+</body>
+</html>`;
+
+      navigator.clipboard.writeText(fullHTML).then(() => {
+        showToast(`Copied full HTML with CDN @${cdnVersion}!`);
+      });
+    });
+
+    window.addEventListener('DOMContentLoaded', initMonaco);
+  </script>
+</body>
+</html>

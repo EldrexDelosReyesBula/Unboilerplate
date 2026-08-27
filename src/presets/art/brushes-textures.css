@@ -1,0 +1,128 @@
+/**
+ * UNBOILERPLATE - Presets: Artistic Brushes & Textures
+ * Watercolor, charcoal, oil paint, marble, wood, holographic, VHS, and organic shapes.
+ */
+
+/* ==========================================================================
+   1. ORGANIC & PHYSICAL ART TEXTURES
+   ========================================================================== */
+.texture-watercolor {
+  background-color: #fdfbf7;
+  background-image: 
+    radial-gradient(at 20% 30%, rgba(255, 107, 107, 0.25) 0px, transparent 50%),
+    radial-gradient(at 80% 20%, rgba(78, 205, 196, 0.25) 0px, transparent 50%),
+    radial-gradient(at 40% 80%, rgba(255, 217, 61, 0.25) 0px, transparent 50%),
+    radial-gradient(at 90% 85%, rgba(157, 78, 221, 0.2) 0px, transparent 50%);
+  filter: contrast(110%) brightness(105%);
+}
+
+.texture-charcoal {
+  background-color: #1a1a1a;
+  background-image: 
+    radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 0),
+    radial-gradient(rgba(0, 0, 0, 0.8) 1px, transparent 0);
+  background-size: 4px 4px, 3px 3px;
+  color: #f0f0f0;
+}
+
+.texture-oil {
+  background: linear-gradient(135deg, #1b263b 0%, #415a77 50%, #778da9 100%);
+  box-shadow: inset 0 2px 8px rgba(255, 255, 255, 0.3), inset 0 -2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.texture-marble {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background-image: repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.03) 0px, rgba(0, 0, 0, 0.03) 2px, transparent 2px, transparent 8px);
+  color: #1e293b;
+}
+
+.texture-holographic {
+  background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 20%, #a1c4fd 40%, #c2e9fb 60%, #fdcbf1 80%, #e6dee9 100%);
+  background-size: 300% 300%;
+  animation: ub-holo-flow 6s ease infinite;
+}
+
+@keyframes ub-holo-flow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.texture-scanlines {
+  position: relative;
+}
+.texture-scanlines::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.3));
+  background-size: 100% 4px;
+  pointer-events: none;
+}
+
+.texture-vhs {
+  position: relative;
+  overflow: hidden;
+}
+.texture-vhs::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(255,0,0,0.1), rgba(0,255,0,0.1), rgba(0,0,255,0.1));
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   2. SHAPE BRUSHES
+   ========================================================================== */
+.shape-blob {
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  transition: border-radius 0.6s ease;
+}
+.shape-blob:hover {
+  border-radius: 40% 60% 70% 30% / 40% 40% 60% 60%;
+}
+
+.shape-squircle {
+  border-radius: 28%;
+}
+
+.shape-organic {
+  border-radius: 54% 46% 38% 62% / 49% 70% 30% 51%;
+}
+
+.shape-amoeba {
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+}
+
+.shape-star {
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.shape-hexagon {
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+}
+
+.shape-wave {
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+}
+
+/* ==========================================================================
+   3. BRUSH GRADIENTS
+   ========================================================================== */
+.brush-gradient-conic {
+  background: conic-gradient(from 180deg at 50% 50%, #ff007f, #00f2fe, #ffd60a, #9d4edd, #ff007f);
+}
+
+.brush-gradient-radial {
+  background: radial-gradient(circle at center, #ff007f 0%, #7928ca 50%, #000000 100%);
+}
+
+.brush-gradient-bold {
+  background: linear-gradient(135deg, #ff0844 0%, #ffb199 100%);
+}
+
+.brush-gradient-soft {
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+}

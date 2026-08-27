@@ -1,0 +1,79 @@
+/**
+ * UNBOILERPLATE - Presets: Pure CSS Lightbox
+ * Pure CSS modal lightbox triggered by target/focus/hover states without JavaScript.
+ */
+
+.lightbox {
+  position: relative;
+  display: inline-block;
+}
+
+.lightbox-thumb {
+  cursor: pointer;
+  border-radius: var(--ub-radius-md, 8px);
+  transition: transform 0.25s ease, filter 0.25s ease;
+  max-width: 100%;
+}
+
+.lightbox-thumb:hover {
+  transform: scale(1.03);
+}
+
+.lightbox-full {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 5, 8, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.lightbox-full img {
+  max-width: 90vw;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: var(--ub-radius-lg, 16px);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  transform: scale(0.95);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Lightbox active / target / focus states */
+.lightbox:focus-within .lightbox-full,
+.lightbox-full:target,
+.lightbox:hover:has(.lightbox-full:hover) .lightbox-full,
+.lightbox:active .lightbox-full {
+  display: flex;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.lightbox:focus-within .lightbox-full img,
+.lightbox-full:target img,
+.lightbox:active .lightbox-full img {
+  transform: scale(1);
+}
+
+/* Pure CSS close button indicator */
+.lightbox-full::after {
+  content: '✕';
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  color: #fff;
+  font-size: 1.75rem;
+  font-weight: 300;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.lightbox-full:hover::after {
+  opacity: 1;
+}

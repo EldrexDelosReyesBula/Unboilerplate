@@ -1,0 +1,19 @@
+/**
+ * UNBOILERPLATE - Theme: Dark
+ */
+
+:root[data-theme="dark"],
+.theme-dark {
+  --ub-bg: #0b0c12;
+  --ub-bg-subtle: #12141f;
+  --ub-bg-surface: #1a1c2b;
+  --ub-text: #f3f4f8;
+  --ub-text-muted: #9499ad;
+  --ub-text-subtle: #626880;
+  --ub-border: rgba(255, 255, 255, 0.08);
+  --ub-border-hover: rgba(255, 255, 255, 0.18);
+  --ub-glass-bg: rgba(26, 28, 43, 0.65);
+  --ub-glass-border: rgba(255, 255, 255, 0.12);
+  --ub-shadow-soft: 0 4px 12px -2px rgba(0, 0, 0, 0.35);
+  --ub-shadow-float: 0 16px 36px -6px rgba(0, 0, 0, 0.55);
+}

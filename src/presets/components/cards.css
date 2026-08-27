@@ -1,0 +1,153 @@
+/**
+ * UNBOILERPLATE - Component Presets: Cards
+ * "One-Class Wonder" Card System & Presets
+ * .card, .card.pretty, .card.glass, .card.hover, .card.tilt, .card.flip, .card.shine, .card.border
+ */
+
+/* ==========================================================================
+   ONE-CLASS WONDER: .card
+   ========================================================================== */
+.card,
+.vibe-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: var(--ub-space-6, 1.5rem);
+  background: var(--ub-glass-bg, rgba(255, 255, 255, 0.05));
+  backdrop-filter: blur(var(--ub-glass-blur, 16px));
+  -webkit-backdrop-filter: blur(var(--ub-glass-blur, 16px));
+  border: 1px solid var(--ub-glass-border, rgba(255, 255, 255, 0.12));
+  border-radius: var(--ub-radius-lg, 1rem);
+  box-shadow: var(--ub-shadow-soft, 0 10px 30px rgba(0, 0, 0, 0.15));
+  color: var(--ub-text, #f1f5f9);
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+/* Modifiers chained directly onto .card */
+.card.pretty,
+.card-pretty {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03));
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 20px 40px -15px rgba(0, 242, 254, 0.2), 0 0 25px rgba(255, 0, 127, 0.15);
+}
+
+.card.glass,
+.card-glass {
+  background: var(--ub-glass-bg, rgba(255, 255, 255, 0.04));
+  backdrop-filter: blur(var(--ub-glass-blur, 20px));
+  -webkit-backdrop-filter: blur(var(--ub-glass-blur, 20px));
+  border: 1px solid var(--ub-glass-border, rgba(255, 255, 255, 0.15));
+  box-shadow: var(--ub-shadow-soft, 0 8px 32px rgba(0, 0, 0, 0.2));
+}
+
+.card.hover:hover,
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--ub-shadow-float, 0 20px 40px rgba(0, 0, 0, 0.25));
+}
+
+.card.tilt {
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
+}
+.card.tilt:hover {
+  transform: perspective(1000px) rotateX(6deg) rotateY(-6deg) translateY(-6px);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+}
+
+.card.flip {
+  perspective: 1000px;
+}
+.card.flip:hover {
+  transform: rotateY(180deg);
+}
+
+.card.shine,
+.card-shine {
+  position: relative;
+  overflow: hidden;
+}
+.card.shine::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.15) 50%,
+    transparent 70%
+  );
+  transform: rotate(25deg) translateY(-100%);
+  transition: transform 0.75s cubic-bezier(0.19, 1, 0.22, 1);
+  pointer-events: none;
+}
+.card.shine:hover::after {
+  transform: rotate(25deg) translateY(100%);
+}
+
+.card.border,
+.card-border {
+  position: relative;
+  background: var(--ub-bg-surface, #0f172a);
+  border: 1px solid transparent;
+  background-clip: padding-box;
+}
+.card.border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, #00f2fe, #ff007f, #fee140);
+  z-index: -1;
+  background-size: 300% 300%;
+  animation: ub-border-flow 4s ease infinite;
+}
+
+.card.float {
+  animation: ub-float 4s ease-in-out infinite;
+}
+
+/* Specific Aesthetic Card Variants */
+.card-neon,
+.card.neon {
+  background: var(--ub-bg-surface, #0b0f19);
+  border: 1px solid var(--ub-accent-cyan, #00f2fe);
+  box-shadow: 0 0 20px rgba(0, 242, 254, 0.35);
+}
+.card-neon:hover,
+.card.neon:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 35px rgba(0, 242, 254, 0.6), 0 0 15px rgba(255, 0, 127, 0.4);
+}
+
+.card-minimal,
+.card.minimal {
+  padding: var(--ub-space-5, 1.25rem);
+  background: var(--ub-bg-subtle, rgba(255, 255, 255, 0.03));
+  border: 1px solid var(--ub-border, rgba(255, 255, 255, 0.1));
+  box-shadow: none;
+}
+
+.card-sunset,
+.card.sunset {
+  background: linear-gradient(135deg, rgba(255, 107, 107, 0.12), rgba(255, 217, 61, 0.06));
+  border: 1px solid rgba(255, 107, 107, 0.35);
+}
+
+.card-bento,
+.card.bento {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: var(--ub-radius-xl, 1.5rem);
+}
+
+@keyframes ub-border-flow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+

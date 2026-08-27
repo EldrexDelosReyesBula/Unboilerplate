@@ -1,0 +1,747 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+
+const tocItems = [
+  { id: 'installation',  label: 'Installation'        },
+  { id: 'tokens',        label: 'Design Tokens'       },
+  { id: 'utilities',     label: 'Utility Classes'     },
+  { id: 'components',   label: 'Magic Components'    },
+  { id: 'effects',       label: 'Visual Effects'      },
+  { id: 'animations',   label: 'Animations'          },
+  { id: 'dimensions-3d', label: '3D Dimensions'       },
+  { id: 'retro',         label: 'Retro / Time Machine'},
+  { id: 'themes',        label: 'Aesthetic Themes'    },
+  { id: 'modifiers',     label: 'Modifiers'           },
+];
+
+interface ClassEntry {
+  cls: string;
+  desc: string;
+  example?: string;
+}
+
+const utilityClasses: ClassEntry[] = [
+  { cls: '.flex',          desc: 'display: flex' },
+  { cls: '.inline-flex',   desc: 'display: inline-flex' },
+  { cls: '.grid',          desc: 'display: grid' },
+  { cls: '.block',         desc: 'display: block' },
+  { cls: '.hidden',        desc: 'display: none !important' },
+  { cls: '.stack',         desc: 'Flex column stack (display:flex; flex-direction:column)' },
+  { cls: '.row',           desc: 'Flex row layout (display:flex; flex-direction:row)' },
+  { cls: '.center',        desc: 'Flex centering: align-items & justify-content both center' },
+  { cls: '.center-grid',   desc: 'Grid place-items: center shorthand' },
+  { cls: '.wrap',          desc: 'flex-wrap: wrap' },
+  { cls: '.items-center',  desc: 'align-items: center' },
+  { cls: '.items-start',   desc: 'align-items: flex-start' },
+  { cls: '.items-end',     desc: 'align-items: flex-end' },
+  { cls: '.justify-center',  desc: 'justify-content: center' },
+  { cls: '.justify-between', desc: 'justify-content: space-between' },
+  { cls: '.justify-start',   desc: 'justify-content: flex-start' },
+  { cls: '.justify-end',     desc: 'justify-content: flex-end' },
+  { cls: '.gap-1 → .gap-8',  desc: 'gap shorthand using fluid spacing scale' },
+  { cls: '.p-1 → .p-10',     desc: 'padding shorthand (all sides) using fluid scale' },
+  { cls: '.px-{n}',           desc: 'padding-left + padding-right' },
+  { cls: '.py-{n}',           desc: 'padding-top + padding-bottom' },
+  { cls: '.m-{n}',            desc: 'margin shorthand (all sides)' },
+  { cls: '.mt-{n}',           desc: 'margin-top fluid scale' },
+  { cls: '.mb-{n}',           desc: 'margin-bottom fluid scale' },
+  { cls: '.rounded-sm',   desc: 'border-radius: 8px' },
+  { cls: '.rounded-md',   desc: 'border-radius: 14px' },
+  { cls: '.rounded-lg',   desc: 'border-radius: 20px' },
+  { cls: '.rounded-xl',   desc: 'border-radius: 28px' },
+  { cls: '.rounded-full', desc: 'border-radius: 9999px (pill)' },
+  { cls: '.font-bold',    desc: 'font-weight: 700' },
+  { cls: '.font-black',   desc: 'font-weight: 900' },
+  { cls: '.font-mono',    desc: "font-family: 'JetBrains Mono', monospace" },
+  { cls: '.text-center',  desc: 'text-align: center' },
+  { cls: '.text-left',    desc: 'text-align: left' },
+  { cls: '.text-right',   desc: 'text-align: right' },
+  { cls: '.text-sm',      desc: 'font-size: clamp(0.8rem, …, 0.9rem)' },
+  { cls: '.text-base',    desc: 'font-size: clamp(0.95rem, …, 1.05rem)' },
+  { cls: '.text-lg',      desc: 'font-size: clamp(1.25rem, …, 1.5rem)' },
+  { cls: '.text-xl',      desc: 'font-size: clamp(1.5rem, …, 1.85rem)' },
+  { cls: '.w-full',       desc: 'width: 100%' },
+  { cls: '.h-full',       desc: 'height: 100%' },
+  { cls: '.relative',     desc: 'position: relative' },
+  { cls: '.absolute',     desc: 'position: absolute' },
+  { cls: '.overflow-hidden', desc: 'overflow: hidden' },
+  { cls: '.vibe-grid',    desc: 'Responsive auto-fill grid (minmax 280px, 1fr)' },
+];
+
+const componentClasses: ClassEntry[] = [
+  { cls: '.vibe-card',        desc: '✨ Sleek frosted card with soft rounded corners and border', example: '<div class="vibe-card p-6">Hello World</div>' },
+  { cls: '.vibe-btn',         desc: '🚀 Clicky gradient action button with a bouncy press feel', example: '<button class="vibe-btn">Click Me</button>' },
+  { cls: '.vibe-btn.--sm',    desc: 'Compact mini version of the vibe button', example: '<button class="vibe-btn --sm">Small</button>' },
+  { cls: '.vibe-badge',       desc: '🏷️ Cute chip tag badge for status labels', example: '<span class="vibe-badge">LABEL</span>' },
+  { cls: '.vibe-badge--neon', desc: '⚡ Glowing cyan electric badge', example: '<span class="vibe-badge vibe-badge--neon">LIVE</span>' },
+  { cls: '.vibe-badge--sunset', desc: '🌅 Warm sunset orange-gold badge', example: '<span class="vibe-badge vibe-badge--sunset">NEW</span>' },
+  { cls: '.vibe-hero',        desc: '🌟 Big bold hero section for landing page headers' },
+  { cls: '.pill-tab',         desc: '💊 Smooth pill-shaped link button or filter tab' },
+  { cls: '.price-card',       desc: '💎 Clean pricing tier card with ready-made layout' },
+  { cls: '.brutal-neo',       desc: '💥 Fun Neo-Brutalist card with thick borders and bold drop shadow', example: '<div class="brutal-neo p-6"><h3>Bold Attitude</h3></div>' },
+  { cls: '.btn-brutal',       desc: 'Bold retro pop-art button with hard shadow' },
+  { cls: '.card-wood',        desc: '🪵 Cozy mahogany wood texture card' },
+  { cls: '.btn-leather',      desc: '🧳 Vintage stitched leather button' },
+  { cls: '.btn-8bit',         desc: '👾 Retro chunky pixel-art video game button' },
+];
+
+const effectClasses: ClassEntry[] = [
+  { cls: '.effect-glass',     desc: '🧊 Frosted glass blur effect like modern iOS and macOS', example: '<div class="vibe-card effect-glass p-6">Frosted Glass</div>' },
+  { cls: '.effect-premium',   desc: '✨ Subtle shiny shimmer overlay for special cards' },
+  { cls: '.hover-glow',       desc: '💡 Glowing light effect when your mouse hovers over it' },
+  { cls: '.hover-bounce',     desc: '🏀 Playful bouncy pop animation when hovered' },
+  { cls: '.hover-lift',       desc: '🎈 Gently floats upward when hovered' },
+  { cls: '.text-gradient',    desc: '🌈 Beautiful vibrant gradient text fill' },
+  { cls: '.text-gradient.--sunset', desc: '🌅 Warm sunset glow gradient text' },
+  { cls: '.text-gradient.--ocean',  desc: '🌊 Teal deep ocean gradient text' },
+  { cls: '.text-gradient.--rainbow', desc: '🦄 Cycling rainbow gradient text' },
+  { cls: '.text-neon',        desc: '⚡ Glowing cyberpunk electric neon text' },
+  { cls: '.text-cyber',       desc: '💻 Retro-futuristic monospace text style' },
+  { cls: '.text-fire',        desc: '🔥 Fiery orange-red text gradient' },
+  { cls: '.text-rainbow',     desc: '🌈 Animated rainbow shifting text color' },
+  { cls: '.text-3d',          desc: '🎨 Layered 3D comic shadow text effect' },
+  { cls: '.gradient-sunset',  desc: 'Warm sunset dusk background fill' },
+  { cls: '.gradient-ocean',   desc: 'Deep soothing teal-blue ocean backdrop' },
+  { cls: '.gradient-aurora',  desc: 'Hypnotic northern lights aurora gradient' },
+  { cls: '.gradient-rainbow', desc: 'Cycling rainbow animated background' },
+  { cls: '.bg-gradient.--mesh', desc: 'Smooth blended mesh background texture' },
+  { cls: '.card-conic-glow',  desc: '💫 Card with an infinite 360° rotating glowing rainbow border', example: '<div class="card-conic-glow"><div class="card-conic-content p-6">Content</div></div>' },
+  { cls: '.vapor-sunset',     desc: '🌴 80s synthwave retro sunset background' },
+  { cls: '.vapor-chrome',     desc: '🪩 Shiny metallic 80s chrome title text' },
+  { cls: '.crt-glow',         desc: '📺 Phosphor glow text for vintage computer screens' },
+];
+
+const animClasses: ClassEntry[] = [
+  { cls: '.ambient-float',    desc: '☁️ Smooth floating cloud animation loop', example: '<div class="ambient-float">Floating</div>' },
+  { cls: '.pop-in',           desc: '🎉 Bouncy entrance pop animation on page load' },
+  { cls: '.blink',            desc: 'Classic blinking pulse indicator' },
+  { cls: '.blink.--neon',     desc: 'Electric neon flicker pulse' },
+  { cls: '.blink.--soft',     desc: 'Gentle fading breathing pulse' },
+  { cls: '.text-animate.--typewriter', desc: '⌨️ Types out your words letter-by-letter in pure CSS' },
+  { cls: '.particle',         desc: '✨ Floating particle helper. Add a speed modifier:' },
+  { cls: '.particle.--float-slow',   desc: 'Slow gentle floating particle' },
+  { cls: '.particle.--float-medium', desc: 'Medium speed floating particle' },
+  { cls: '.particle.--float-fast',   desc: 'Fast energetic floating particle' },
+  { cls: '.particle.--spin',         desc: 'Continuously spinning sparkle' },
+  { cls: '.particle.--orbit',        desc: 'Orbiting planetary particle path' },
+  { cls: '.star',             desc: '⭐ Celestial twinkling star' },
+  { cls: '.star.--twinkle-1', desc: 'Quick twinkling star animation' },
+  { cls: '.star.--twinkle-2', desc: 'Alternating twinkling star' },
+  { cls: '.star.--twinkle-3', desc: 'Slow sparkling star' },
+  { cls: '.particles-3d',     desc: '🌌 Container for floating particle universes' },
+  { cls: '.particles-stars',  desc: 'Container for starry night backgrounds' },
+  { cls: '.marquee',          desc: '📜 Smooth scrolling banner text that pauses on hover', example: '<div class="marquee"><span>Scrolling Text</span></div>' },
+  { cls: '.marquee.--neon',        desc: 'Electric cyan glowing marquee banner' },
+  { cls: '.marquee.--pause-hover', desc: 'Pauses the scroll when you hover your mouse' },
+  { cls: '.eq-bar',           desc: '🎵 Bouncing equalizer audio bar' },
+];
+
+const dims3dClasses: ClassEntry[] = [
+  { cls: '.card-3d-flip',     desc: '🎴 3D flip card that rotates 180° when you hover over it', example: '<div class="card-3d-flip"><div class="card-3d-inner"><div class="card-3d-front">Front</div><div class="card-3d-back">Back</div></div></div>' },
+  { cls: '.card-3d-inner',    desc: 'Inner 3D container holding the front and back faces' },
+  { cls: '.card-3d-front',    desc: 'The front side of your flip card' },
+  { cls: '.card-3d-back',     desc: 'The back side of your flip card' },
+  { cls: '.book-3d',          desc: '📖 Realistic 3D storybook that opens its pages when hovered', example: '<div class="book-3d"><div class="book-cover">Title</div><div class="book-pages"><div class="page --page1">P1</div></div></div>' },
+  { cls: '.book-cover',       desc: 'Front hardbound book cover' },
+  { cls: '.book-pages',       desc: 'Inside pages container for the 3D book' },
+  { cls: '.page.--page1',     desc: 'First inside page' },
+  { cls: '.page.--page2',     desc: 'Second inside page' },
+  { cls: '.page.--page3',     desc: 'Third inside page' },
+  { cls: '.cube-3d-scene',    desc: '🎲 3D rotating cube scene wrapper' },
+  { cls: '.cube-3d',          desc: 'Rotating 6-sided 3D photo cube' },
+  { cls: '.cube-face',        desc: 'A single face of the 3D cube' },
+  { cls: '.cube-face.--front', desc: 'Front face panel' },
+  { cls: '.cube-face.--back',  desc: 'Back face panel' },
+  { cls: '.cube-face.--left',  desc: 'Left face panel' },
+  { cls: '.cube-face.--right', desc: 'Right face panel' },
+  { cls: '.cube-face.--top',   desc: 'Top face panel' },
+  { cls: '.cube-face.--bottom',desc: 'Bottom face panel' },
+  { cls: '.btn-3d',           desc: '🔘 Springy 3D button that physically presses down when clicked', example: '<button class="btn-3d">Press Me</button>' },
+  { cls: '.btn-3d.btn-3d--cyan', desc: 'Electric cyan 3D spring button' },
+  { cls: '.image-stack-3d',   desc: '🃏 3D card deck that fans out across your screen when hovered' },
+  { cls: '.stack-item.--back',   desc: 'Back photo in the fan deck' },
+  { cls: '.stack-item.--middle', desc: 'Middle photo in the fan deck' },
+  { cls: '.stack-item.--front',  desc: 'Front photo in the fan deck' },
+  { cls: '.carousel-3d',      desc: '🎡 3D rotating carousel that loops smoothly' },
+  { cls: '.carousel-3d-container', desc: 'Inner rotating ring' },
+  { cls: '.carousel-3d-item', desc: 'Individual item along the 3D ring' },
+];
+
+const retroClasses: ClassEntry[] = [
+  { cls: '.window-95',        desc: '🪟 Authentic Windows 95 dialog window with title bar and buttons', example: '<div class="window-95"><div class="window-titlebar"><span class="window-title">APP.EXE</span></div><div class="window-content">Hello</div></div>' },
+  { cls: '.window-titlebar',  desc: 'Windows 95 blue header bar' },
+  { cls: '.window-title',     desc: 'Title text inside the Windows 95 bar' },
+  { cls: '.window-buttons',   desc: 'Minimize, maximize, and close buttons container' },
+  { cls: '.win-btn',          desc: 'Classic beveled square button' },
+  { cls: '.win-btn.win-close',desc: 'Red × close window button' },
+  { cls: '.window-content',   desc: 'Inner content area of the window' },
+  { cls: '.crt-screen',       desc: '📺 Curved green phosphor CRT computer monitor', example: '<div class="crt-screen crt-scanlines crt--green p-6">Terminal</div>' },
+  { cls: '.crt-scanlines',    desc: 'Authentic retro scanlines overlay' },
+  { cls: '.crt-flicker',      desc: 'Subtle retro monitor flicker effect' },
+  { cls: '.crt--green',       desc: 'Classic green phosphor color variant' },
+  { cls: '.crt--amber',       desc: 'Amber/orange phosphor CRT variant' },
+  { cls: '.winamp-player',    desc: 'Classic 2005 Winamp media player skin UI shell' },
+  { cls: '.winamp-display',   desc: 'LED-style song title display bar inside Winamp' },
+  { cls: '.winamp-eq',        desc: 'Equalizer bar group container' },
+  { cls: '.visitor-counter',  desc: 'Retro 90s LED visitor counter badge', example: '<div class="visitor-counter"><span class="counter-digits">004299</span></div>' },
+  { cls: '.counter-digits',   desc: 'Monospace LED digit display for visitor counter' },
+  { cls: '.site-retro',       desc: 'Authentic 1999 GeoCities-era homepage container' },
+  { cls: '.retro-header',     desc: 'Retro site top header bar' },
+  { cls: '.retro-nav',        desc: 'Horizontal navigation bar for retro sites' },
+  { cls: '.retro-footer',     desc: 'Footer bar for retro personal homepage' },
+  { cls: '.polaroid-stack',   desc: 'Scattered polaroid photo gallery with hover focus', example: '<div class="polaroid-stack"><figure class="polaroid --rotate-left"><img src="..." alt="Photo"><figcaption>Caption</figcaption></figure></div>' },
+  { cls: '.polaroid',         desc: 'Individual polaroid photo frame with white border and handwritten font' },
+  { cls: '.polaroid.--rotate-left',  desc: 'Slight CCW rotation for natural scatter' },
+  { cls: '.polaroid.--rotate-right', desc: 'Slight CW rotation for natural scatter' },
+  { cls: '.polaroid.--on-top',       desc: 'Center/top elevated polaroid (no rotation)' },
+  { cls: '.film-strip',       desc: 'Horizontal cinema film reel with perforated border track' },
+  { cls: '.canvas',           desc: 'Photoshop-like HTML canvas context with isolation', example: '<div class="canvas canvas-landscape"><div class="layer-back">...</div><div class="layer-mid">...</div><div class="layer-front">...</div></div>' },
+  { cls: '.canvas-landscape', desc: '16:9 landscape aspect ratio for canvas' },
+  { cls: '.canvas-portrait',  desc: '9:16 portrait aspect ratio for canvas' },
+  { cls: '.layer-back',       desc: 'Background layer (z-index: 1) in canvas sandwich' },
+  { cls: '.layer-mid',        desc: 'Midground focal layer (z-index: 2)' },
+  { cls: '.layer-front',      desc: 'Foreground sparkle / detail layer (z-index: 3)' },
+  { cls: '.blend-multiply',   desc: 'mix-blend-mode: multiply — shadows, vintage paper' },
+  { cls: '.blend-screen',     desc: 'mix-blend-mode: screen — light leaks, sparkles' },
+  { cls: '.blend-overlay',    desc: 'mix-blend-mode: overlay — intense contrast fusion' },
+];
+
+const themeClasses: ClassEntry[] = [
+  { cls: '.theme-cyberpunk',    desc: 'High voltage neon cyan/magenta grid on deep void black', example: '<div class="theme-cyberpunk p-6"><h2 class="text-neon">NEO TOKYO</h2></div>' },
+  { cls: '.theme-cottagecore',  desc: 'Earthy olive green tones, soft rounded warm cards' },
+  { cls: '.theme-dark-academia',desc: 'Vintage parchment beige, espresso borders, serif aesthetic' },
+  { cls: '.theme-clean-girl',   desc: 'Matte minimalist neutral palette, butter shadows' },
+  { cls: '.theme-y2k',          desc: 'Bubblegum chrome pink, holographic rainbow shimmer' },
+];
+
+const tokens = [
+  { name: '--ub-bg',            val: '#0d0e15',  desc: 'Primary page background' },
+  { name: '--ub-bg-surface',    val: '#1c1e2e',  desc: 'Card/surface background' },
+  { name: '--ub-text',          val: '#f3f4f8',  desc: 'Primary text color' },
+  { name: '--ub-text-muted',    val: '#9499ad',  desc: 'Secondary / muted text' },
+  { name: '--ub-text-subtle',   val: '#626880',  desc: 'Placeholder / hint text' },
+  { name: '--ub-border',        val: 'rgba(255,255,255,0.08)', desc: 'Default border color' },
+  { name: '--ub-accent',        val: '#ff007f',  desc: 'Primary accent color (pink)' },
+  { name: '--ub-focus-ring',    val: '#00f2fe',  desc: 'Focus ring / interactive cyan' },
+  { name: '--ub-accent-cyan',   val: '#00f0ff',  desc: 'Cyan neon accent solid' },
+  { name: '--ub-accent-pink',   val: '#ff2a85',  desc: 'Hot pink accent solid' },
+  { name: '--ub-accent-purple', val: '#9d4edd',  desc: 'Purple accent solid' },
+  { name: '--ub-shadow-float',  val: '0 16px 36px …', desc: 'Floating element shadow' },
+  { name: '--ub-shadow-neon',   val: '0 0 24px …',    desc: 'Neon glow box shadow' },
+  { name: '--ub-glass-bg',      val: 'rgba(28,30,46,0.55)', desc: 'Glass card background' },
+  { name: '--ub-glass-blur',    val: '16px',     desc: 'backdrop-filter blur amount' },
+  { name: '--ub-radius-sm',     val: '8px',      desc: 'Small border radius' },
+  { name: '--ub-radius-md',     val: '14px',     desc: 'Medium border radius' },
+  { name: '--ub-radius-lg',     val: '20px',     desc: 'Large border radius' },
+  { name: '--ub-radius-pill',   val: '9999px',   desc: 'Full pill / badge radius' },
+  { name: '--ub-transition-spring', val: '500ms cubic-bezier(0.34,1.56,0.64,1)', desc: 'Spring overshoot easing' },
+  { name: '--ub-font-family-sans', val: 'system-ui, …', desc: 'Default sans-serif stack' },
+  { name: '--ub-font-family-mono', val: "'JetBrains Mono', …", desc: 'Code / monospace stack' },
+];
+---
+
+<DocsLayout
+  title="API Reference — Unboilerplate"
+  description="Complete class reference, design tokens, installation guide, and usage examples for the Unboilerplate pure CSS design system."
+  activePage="docs"
+  tocItems={tocItems}
+>
+
+  <!-- SIDEBAR -->
+  <div slot="sidebar">
+    <p class="sidebar-group-title">API Reference</p>
+    <div class="sidebar-links">
+      <a href="#installation"   class="sidebar-link active">Installation</a>
+      <a href="#tokens"         class="sidebar-link">Design Tokens</a>
+      <a href="#utilities"      class="sidebar-link">Utility Classes</a>
+      <a href="#components"     class="sidebar-link">Magic Components</a>
+      <a href="#effects"        class="sidebar-link">Visual Effects</a>
+      <a href="#animations"     class="sidebar-link">Animations</a>
+      <a href="#dimensions-3d"  class="sidebar-link">3D Dimensions</a>
+      <a href="#retro"          class="sidebar-link">Retro / Time Machine</a>
+      <a href="#themes"         class="sidebar-link">Aesthetic Themes</a>
+      <a href="#modifiers"      class="sidebar-link">Modifiers</a>
+    </div>
+
+    <p class="sidebar-group-title" style="margin-top:1.5rem;">Explore</p>
+    <div class="sidebar-links">
+      <a href="/"           class="sidebar-link">Get Started</a>
+      <a href="/playground" class="sidebar-link" style="color:#00f2fe;font-weight:700;">Playground</a>
+      <a href="/components" class="sidebar-link">Component Library</a>
+      <a href="/cheatsheet" class="sidebar-link">Class Cheatsheet</a>
+      <a href="/templates"  class="sidebar-link">Templates</a>
+      <a href="/showcase"   class="sidebar-link">Showcase</a>
+    </div>
+  </div>
+
+  <!-- TOC CARD -->
+  <div slot="toc-card" style="margin-top:2rem;padding:1rem;background:rgba(0,242,254,0.05);border:1px solid rgba(0,242,254,0.15);border-radius:12px;">
+    <p style="font-size:0.78rem;font-weight:700;color:#fff;margin-bottom:0.5rem;">Quick CDN Install</p>
+    <code style="font-size:0.7rem;color:#00f2fe;word-break:break-all;display:block;line-height:1.5;">
+      &lt;link rel="stylesheet"<br>
+      href="cdn.jsdelivr.net/npm/<br>@eldrex/unboilerplate@1.0.0/<br>dist/unboilerplate.min.css"&gt;
+    </code>
+    <button id="btn-copy-cdn-docs" class="vibe-btn --sm" style="margin-top:0.75rem;font-size:0.72rem;width:100%;">Copy CDN Tag</button>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div id="installation">
+    <div class="docs-breadcrumb">
+      <a href="/" style="color:#64748b;text-decoration:none;">Unboilerplate</a>
+      <span>›</span>
+      <span>API Reference</span>
+    </div>
+
+    <h1 class="docs-page-title text-gradient">API Reference</h1>
+    <p class="docs-lead">Every class, token, and modifier in the Unboilerplate CSS system. 120+ classes documented with descriptions and usage examples.</p>
+
+    <!-- Installation -->
+    <div class="callout-box" style="margin-top:1.5rem;">
+      <strong>Zero build step required.</strong> Drop one stylesheet link into your HTML head to enable the entire design engine. No npm, no bundler, no config.
+    </div>
+
+    <h2 style="font-size:1.4rem;margin-top:2rem;">Option 1: CDN (Instant)</h2>
+    <p style="color:#94a3b8;font-size:0.9rem;margin:0.5rem 0 0.75rem;">Paste into your HTML <code>&lt;head&gt;</code>:</p>
+    <div class="docs-code-card">
+      <div class="docs-code-header">
+        <span>HTML</span>
+        <button class="pill-tab copy-code-btn" data-code='<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@eldrex/unboilerplate@1.0.0/dist/unboilerplate.min.css">'>Copy</button>
+      </div>
+      <div class="docs-code-body">
+        &lt;!-- Full bundle (3D, Retro, Art Movements, Effects) --&gt;<br>
+        &lt;link rel="stylesheet"<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;href="https://cdn.jsdelivr.net/npm/@eldrex/unboilerplate@1.0.0/dist/unboilerplate.min.css"&gt;
+      </div>
+    </div>
+
+    <h2 style="font-size:1.4rem;margin-top:1.75rem;">Option 2: npm</h2>
+    <p style="color:#94a3b8;font-size:0.9rem;margin:0.5rem 0 0.75rem;">Install and import in your project:</p>
+    <div class="docs-code-card">
+      <div class="docs-code-header"><span>Terminal</span></div>
+      <div class="docs-code-body">npm install @eldrex/unboilerplate</div>
+    </div>
+    <div class="docs-code-card">
+      <div class="docs-code-header"><span>JavaScript / TypeScript</span></div>
+      <div class="docs-code-body">import '@eldrex/unboilerplate';</div>
+    </div>
+    <div class="docs-code-card">
+      <div class="docs-code-header"><span>CSS</span></div>
+      <div class="docs-code-body">@import '@eldrex/unboilerplate';</div>
+    </div>
+
+    <h2 style="font-size:1.4rem;margin-top:1.75rem;">Selective Imports</h2>
+    <p style="color:#94a3b8;font-size:0.9rem;margin:0.5rem 0 0.75rem;">Import only what you need to reduce bundle size:</p>
+    <div class="docs-code-card">
+      <div class="docs-code-header"><span>CSS</span></div>
+      <div class="docs-code-body">
+        /* Core utilities + tokens only (smallest) */<br>
+        @import '@eldrex/unboilerplate/core';<br><br>
+        /* Aesthetic packs only */<br>
+        @import '@eldrex/unboilerplate/aesthetics';
+      </div>
+    </div>
+  </div>
+
+  <!-- DESIGN TOKENS -->
+  <hr class="section-divider" id="tokens" />
+  <section class="stack gap-4">
+    <div>
+      <h2 style="font-size:1.6rem;">Design Tokens</h2>
+      <p style="color:#94a3b8;font-size:0.9rem;margin-top:0.35rem;">Override any token via CSS custom properties on <code>:root</code> or scoped to any element. All tokens use the <code>--ub-</code> namespace.</p>
+    </div>
+
+    <div class="callout-box">
+      <strong>How to override:</strong> Declare any <code>--ub-*</code> token on <code>:root</code> in your own stylesheet after the Unboilerplate import to globally retheme the system. Or scope to an element for local overrides: <code>style="--ub-bg: #fff; --ub-text: #000;"</code>
+    </div>
+
+    <div class="ref-table-wrap">
+      <table class="ref-table">
+        <thead>
+          <tr>
+            <th>Token</th>
+            <th>Default Value</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          {tokens.map(t => (
+            <tr>
+              <td><code class="text-cyber">{t.name}</code></td>
+              <td><code style="color:#94a3b8;font-size:0.8rem;">{t.val}</code></td>
+              <td style="color:#94a3b8;font-size:0.85rem;">{t.desc}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout-box">
+      <strong>Full token list:</strong> See <code>src/core/tokens.css</code> for all 60+ tokens including fluid typography scale (<code>--ub-font-xs</code> → <code>--ub-font-6xl</code>), fluid spacing scale (<code>--ub-space-1</code> → <code>--ub-space-10</code>), all gradient palettes, and spring transition curves.
+    </div>
+  </section>
+
+  <!-- UTILITY CLASSES -->
+  <hr class="section-divider" id="utilities" />
+  <section class="stack gap-4">
+    <div>
+      <h2 style="font-size:1.6rem;">Utility Classes</h2>
+      <p style="color:#94a3b8;font-size:0.9rem;margin-top:0.35rem;">Low-level composable helpers for layout, spacing, and typography. Compose them freely with any component class.</p>
+    </div>
+    <div class="ref-table-wrap">
+      <table class="ref-table">
+        <thead><tr><th>Class</th><th>Description</th></tr></thead>
+        <tbody>
+          {utilityClasses.map(c => (
+            <tr>
+              <td><code class="text-cyber copy-class" title="Click to copy" style="cursor:pointer;">{c.cls}</code></td>
+              <td style="color:#94a3b8;font-size:0.85rem;">{c.desc}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- MAGIC COMPONENTS -->
+  <hr class="section-divider" id="components" />
+  <section class="stack gap-4">
+    <div>
+      <h2 style="font-size:1.6rem;">Magic Components</h2>
+      <p style="color:#94a3b8;font-size:0.9rem;margin-top:0.35rem;">Ready-to-use visual components with rich defaults. Apply one class for instant aesthetics.</p>
+    </div>
+    {componentClasses.map(c => (
+      <div class="ref-entry">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:0.5rem;">
+          <code class="text-cyber copy-class" title="Click to copy" style="cursor:pointer;font-size:0.95rem;">{c.cls}</code>
+        </div>
+        <p style="color:#94a3b8;font-size:0.85rem;margin-top:0.35rem;">{c.desc}</p>
+        {c.example && (
+          <div class="docs-code-card" style="margin-top:0.5rem;">
+            <div class="docs-code-header">
+              <span>Example</span>
+              <button class="pill-tab copy-code-btn" style="font-size:0.7rem;" data-code={c.example}>Copy</button>
+            </div>
+            <div class="docs-code-body" style="font-size:0.8rem;">{c.example}</div>
+          </div>
+        )}
+      </div>
+    ))}
+  </section>
+
+  <!-- VISUAL EFFECTS -->
+  <hr class="section-divider" id="effects" />
+  <section class="stack gap-4">
+    <div>
+      <h2 style="font-size:1.6rem;">Visual Effects</h2>
+      <p style="color:#94a3b8;font-size:0.9rem;margin-top:0.35rem;">GPU-composited visual effects: glassmorphism, glow, hover physics, and gradient systems.</p>
+    </div>
+    <div class="ref-table-wrap">
+      <table class="ref-table">
+        <thead><tr><th>Class</th><th>Description</th></tr></thead>
+        <tbody>
+          {effectClasses.map(c => (
+            <tr>
+              <td><code class="text-cyber copy-class" title="Click to copy" style="cursor:pointer;">{c.cls}</code></td>
+              <td style="color:#94a3b8;font-size:0.85rem;">{c.desc}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ANIMATIONS -->
+  <hr class="section-divider" id="animations" />
+  <section class="stack gap-4">
+    <div>
+      <h2 style="font-size:1.8rem; font-weight:900;">✨ Animations &amp; Micro-Interactions</h2>
+      <p style="color:#94a3b8;font-size:1rem;margin-top:0.35rem;line-height:1.6;">
+        Pure CSS animations with zero JavaScript. Powered by GPU hardware compositing and natural physics curves.
+      </p>
+    </div>
+
+    <div class="callout-box">
+      <strong>♿ Built-in Accessibility:</strong> All animations automatically respect <code>prefers-reduced-motion: reduce</code>. Decorative loops are safely disabled for sensitive users while functional feedback is preserved.
+    </div>
+
+    <!-- 1. Interactive Hover Effects -->
+    <div class="vibe-card p-6" style="background:#090a12;border-radius:18px;">
+      <h3 style="font-size:1.15rem;font-weight:800;color:#00f2fe;margin-bottom:0.5rem;">1. Hover Micro-Interactions</h3>
+      <p style="color:#cbd5e1;font-size:0.9rem;line-height:1.6;margin-bottom:1rem;">
+        Add these utility classes directly to any button, card, or image to give them instant physical feedback when hovered.
+      </p>
+      
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:center;margin-bottom:1.25rem;">
+        <button class="vibe-btn hover-bounce">.hover-bounce 🏀</button>
+        <button class="pill-tab hover-lift">.hover-lift 🎈</button>
+        <div class="vibe-card hover-glow p-3" style="font-size:0.8rem;font-weight:700;">.hover-glow 💡</div>
+      </div>
+
+      <pre style="background:rgba(0,0,0,0.65);padding:1rem;border-radius:10px;font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:#00f2fe;line-height:1.6;"><code>&lt;!-- Button with playful spring bounce --&gt;
+&lt;button class="vibe-btn hover-bounce"&gt;Click Me&lt;/button&gt;
+
+&lt;!-- Card with soft upward float --&gt;
+&lt;div class="vibe-card hover-lift p-6"&gt;Floating Card&lt;/div&gt;
+
+&lt;!-- Card with glowing aura --&gt;
+&lt;div class="vibe-card hover-glow p-6"&gt;Luminous Aura&lt;/div&gt;</code></pre>
+    </div>
+
+    <!-- 2. Pure CSS Typewriter & Text Animations -->
+    <div class="vibe-card p-6" style="background:#090a12;border-radius:18px;">
+      <h3 style="font-size:1.15rem;font-weight:800;color:#ff0080;margin-bottom:0.5rem;">2. Pure CSS Typewriter &amp; Status Lights</h3>
+      <p style="color:#cbd5e1;font-size:0.9rem;line-height:1.6;margin-bottom:1rem;">
+        Type out headlines letter-by-letter or add retro flashing status indicators with zero JavaScript scripts.
+      </p>
+
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:center;margin-bottom:1.25rem;">
+        <span class="blink" style="color:#10b981;font-weight:700;font-size:0.85rem;">● SYSTEM ONLINE (.blink)</span>
+        <span class="blink --neon" style="color:#00f2fe;font-weight:700;font-size:0.85rem;">✦ NEON PULSE (.blink.--neon)</span>
+        <span class="blink --soft" style="color:#f7ba2c;font-weight:700;font-size:0.85rem;">◆ SOFT GLOW (.blink.--soft)</span>
+      </div>
+
+      <pre style="background:rgba(0,0,0,0.65);padding:1rem;border-radius:10px;font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:#ff0080;line-height:1.6;"><code>&lt;!-- Letter-by-letter pure CSS typewriter --&gt;
+&lt;h1 class="text-animate --typewriter"&gt;Welcome to Unboilerplate&lt;/h1&gt;
+
+&lt;!-- Blinking server status indicator --&gt;
+&lt;span class="blink"&gt;● SYSTEM ACTIVE&lt;/span&gt;</code></pre>
+    </div>
+
+    <!-- 3. Infinite Smooth Marquee -->
+    <div class="vibe-card p-6" style="background:#090a12;border-radius:18px;">
+      <h3 style="font-size:1.15rem;font-weight:800;color:#f7ba2c;margin-bottom:0.5rem;">3. Smooth Hardware Marquee Tickers</h3>
+      <p style="color:#cbd5e1;font-size:0.9rem;line-height:1.6;margin-bottom:1rem;">
+        Continuous, 60fps ticker banners that automatically pause when the user hovers over them.
+      </p>
+
+      <div class="marquee --neon mb-3" style="padding:6px 0;font-size:0.8rem;border-radius:8px;">
+        <span>★ PURE CSS MARQUEE ★ PAUSES ON HOVER ★ 60FPS GPU COMPOSITING ★ NO JAVASCRIPT ★</span>
+      </div>
+
+      <pre style="background:rgba(0,0,0,0.65);padding:1rem;border-radius:10px;font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:#f7ba2c;line-height:1.6;"><code>&lt;!-- Glowing cyan marquee that pauses on hover --&gt;
+&lt;div class="marquee --neon"&gt;
+  &lt;span&gt;✦ SHIP YOUR WEBSITE IN MINUTES ✦ PURE CSS FREEDOM ✦&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <!-- Animation Classes Reference Table -->
+    <div class="ref-table-wrap mt-4">
+      <table class="ref-table">
+        <thead><tr><th>Class</th><th>Description</th></tr></thead>
+        <tbody>
+          {animClasses.map(c => (
+            <tr>
+              <td><code class="text-cyber copy-class" title="Click to copy" style="cursor:pointer;">{c.cls}</code></td>
+              <td style="color:#94a3b8;font-size:0.85rem;">{c.desc}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 3D DIMENSIONS -->
+  <hr class="section-divider" id="dimensions-3d" />
+  <section class="stack gap-4">
+    <div>
+      <h2 style="font-size:1.6rem;">3D Dimensions</h2>
+      <p style="color:#94a3b8;font-size:0.9rem;margin-top:0.35rem;">GPU-composited 3D perspective transforms using <code>transform-style: preserve-3d</code>. Zero JavaScript.</p>
+    </div>
+
+    <div class="callout-box">
+      <strong>Performance:</strong> All 3D classes use <code>will-change: transform</code> and <code>transform-style: preserve-3d</code>, promoting to their own GPU compositor layer for hardware-accelerated rendering.
+    </div>
+
+    {dims3dClasses.map(c => (
+      <div class="ref-entry">
+        <code class="text-cyber copy-class" title="Click to copy" style="cursor:pointer;font-size:0.92rem;">{c.cls}</code>
+        <p style="color:#94a3b8;font-size:0.85rem;margin-top:0.3rem;">{c.desc}</p>
+        {c.example && (
+          <div class="docs-code-card" style="margin-top:0.5rem;">
+            <div class="docs-code-header">
+              <span>Example</span>
+              <button class="pill-tab copy-code-btn" style="font-size:0.7rem;" data-code={c.example}>Copy</button>
+            </div>
+            <div class="docs-code-body" style="font-size:0.78rem;">{c.example}</div>
+          </div>
+        )}
+      </div>
+    ))}
+  </section>
+
+  <!-- RETRO / TIME MACHINE -->
+  <hr class="section-divider" id="retro" />
+  <section class="stack gap-4">
+    <div>
+      <h2 style="font-size:1.6rem;">Retro &amp; Time Machine Classes</h2>
+      <p style="color:#94a3b8;font-size:0.9rem;margin-top:0.35rem;">Authentic recreations of early web UI patterns — Windows 95, CRT monitors, Winamp, GeoCities — updated for modern GPU performance.</p>
+    </div>
+    <div class="ref-table-wrap">
+      <table class="ref-table">
+        <thead><tr><th>Class</th><th>Description</th></tr></thead>
+        <tbody>
+          {retroClasses.map(c => (
+            <tr>
+              <td><code class="text-cyber copy-class" title="Click to copy" style="cursor:pointer;">{c.cls}</code></td>
+              <td style="color:#94a3b8;font-size:0.85rem;">{c.desc}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- AESTHETIC THEMES -->
+  <hr class="section-divider" id="themes" />
+  <section class="stack gap-4">
+    <div>
+      <h2 style="font-size:1.6rem;">Aesthetic Themes</h2>
+      <p style="color:#94a3b8;font-size:0.9rem;margin-top:0.35rem;">Apply an entire aesthetic world with a single class. Themes override color tokens, typography, and border styles in scope.</p>
+    </div>
+    <div class="vibe-grid">
+      {themeClasses.map(t => (
+        <div style="padding:1.25rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:14px;">
+          <code class="text-cyber copy-class" title="Click to copy" style="cursor:pointer;font-size:0.9rem;">{t.cls}</code>
+          <p style="color:#94a3b8;font-size:0.83rem;margin-top:0.4rem;line-height:1.5;">{t.desc}</p>
+          {t.example && (
+            <div class="docs-code-card" style="margin-top:0.65rem;">
+              <div class="docs-code-header">
+                <span>Example</span>
+                <button class="pill-tab copy-code-btn" style="font-size:0.7rem;" data-code={t.example}>Copy</button>
+              </div>
+              <div class="docs-code-body" style="font-size:0.78rem;">{t.example}</div>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- MODIFIERS -->
+  <hr class="section-divider" id="modifiers" />
+  <section class="stack gap-4">
+    <div>
+      <h2 style="font-size:1.6rem;">Modifier System</h2>
+      <p style="color:#94a3b8;font-size:0.9rem;margin-top:0.35rem;">BEM-style <code>--modifier</code> classes that extend base component behavior when combined.</p>
+    </div>
+
+    <div class="ref-table-wrap">
+      <table class="ref-table">
+        <thead><tr><th>Modifier</th><th>Used With</th><th>Effect</th></tr></thead>
+        <tbody>
+          <tr><td><code class="text-cyber">.--sm</code></td><td>.vibe-btn, .pill-tab, .vibe-badge</td><td style="color:#94a3b8;font-size:0.85rem;">Compact/small size variant</td></tr>
+          <tr><td><code class="text-cyber">.--lg</code></td><td>.vibe-btn, .vibe-card</td><td style="color:#94a3b8;font-size:0.85rem;">Large size variant</td></tr>
+          <tr><td><code class="text-cyber">.--neon</code></td><td>.vibe-badge, .marquee, .blink</td><td style="color:#94a3b8;font-size:0.85rem;">Cyan neon glow variant</td></tr>
+          <tr><td><code class="text-cyber">.--sunset</code></td><td>.text-gradient, .vibe-badge</td><td style="color:#94a3b8;font-size:0.85rem;">Warm orange/gold gradient variant</td></tr>
+          <tr><td><code class="text-cyber">.--ocean</code></td><td>.text-gradient</td><td style="color:#94a3b8;font-size:0.85rem;">Teal deep sea gradient variant</td></tr>
+          <tr><td><code class="text-cyber">.--rainbow</code></td><td>.text-gradient</td><td style="color:#94a3b8;font-size:0.85rem;">Hue-rotating rainbow gradient</td></tr>
+          <tr><td><code class="text-cyber">.--mesh</code></td><td>.bg-gradient</td><td style="color:#94a3b8;font-size:0.85rem;">Layered mesh texture background</td></tr>
+          <tr><td><code class="text-cyber">.--pause-hover</code></td><td>.marquee</td><td style="color:#94a3b8;font-size:0.85rem;">Pause animation on hover</td></tr>
+          <tr><td><code class="text-cyber">.--cyan</code></td><td>.btn-3d</td><td style="color:#94a3b8;font-size:0.85rem;">Cyan drop extrusion on 3D button</td></tr>
+          <tr><td><code class="text-cyber">.--green</code></td><td>.crt-screen</td><td style="color:#94a3b8;font-size:0.85rem;">Phosphor green CRT color mode</td></tr>
+          <tr><td><code class="text-cyber">.--amber</code></td><td>.crt-screen</td><td style="color:#94a3b8;font-size:0.85rem;">Amber phosphor CRT color mode</td></tr>
+          <tr><td><code class="text-cyber">.--rotate-left</code></td><td>.polaroid</td><td style="color:#94a3b8;font-size:0.85rem;">Slight CCW natural scatter rotation</td></tr>
+          <tr><td><code class="text-cyber">.--rotate-right</code></td><td>.polaroid</td><td style="color:#94a3b8;font-size:0.85rem;">Slight CW natural scatter rotation</td></tr>
+          <tr><td><code class="text-cyber">.--on-top</code></td><td>.polaroid</td><td style="color:#94a3b8;font-size:0.85rem;">Center elevated polaroid (no rotation)</td></tr>
+          <tr><td><code class="text-cyber">.--float-slow/medium/fast</code></td><td>.particle</td><td style="color:#94a3b8;font-size:0.85rem;">Float animation speed for particles</td></tr>
+          <tr><td><code class="text-cyber">.--spin</code></td><td>.particle</td><td style="color:#94a3b8;font-size:0.85rem;">Continuous 360° rotation</td></tr>
+          <tr><td><code class="text-cyber">.--orbit</code></td><td>.particle</td><td style="color:#94a3b8;font-size:0.85rem;">Elliptical orbit animation</td></tr>
+          <tr><td><code class="text-cyber">.--twinkle-1/2/3</code></td><td>.star</td><td style="color:#94a3b8;font-size:0.85rem;">Varying speed twinkle cycles</td></tr>
+          <tr><td><code class="text-cyber">.--page1/2/3</code></td><td>.page</td><td style="color:#94a3b8;font-size:0.85rem;">Book page position (stagger offset)</td></tr>
+          <tr><td><code class="text-cyber">.--front/back/left/right/top/bottom</code></td><td>.cube-face</td><td style="color:#94a3b8;font-size:0.85rem;">3D cube face position</td></tr>
+          <tr><td><code class="text-cyber">.--back/.--middle/.--front</code></td><td>.stack-item</td><td style="color:#94a3b8;font-size:0.85rem;">Fan deck card layer position</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+  <div style="display:flex;gap:0.75rem;flex-wrap:wrap;align-items:center;">
+    <a href="/playground" class="vibe-btn hover-bounce">Try in Playground</a>
+    <a href="/components" class="pill-tab">Component Library →</a>
+    <a href="/cheatsheet" class="pill-tab">Class Cheatsheet ⚡ →</a>
+    <a href="/templates" class="pill-tab">Starter Templates →</a>
+  </div>
+
+</DocsLayout>
+
+<script>
+  // Copy class on click
+  document.querySelectorAll<HTMLElement>('.copy-class').forEach(el => {
+    el.addEventListener('click', () => {
+      navigator.clipboard.writeText(el.textContent!.trim()).then(() => {
+        (window as any).ubToast?.(`Copied ${el.textContent!.trim()}`);
+      });
+    });
+  });
+
+  // Copy code snippet
+  document.querySelectorAll<HTMLButtonElement>('.copy-code-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      navigator.clipboard.writeText(btn.dataset.code!).then(() => {
+        (window as any).ubToast?.('Copied code snippet');
+      });
+    });
+  });
+
+  // Copy CDN
+  document.getElementById('btn-copy-cdn-docs')?.addEventListener('click', () => {
+    navigator.clipboard.writeText('<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@eldrex/unboilerplate@1.0.0/dist/unboilerplate.min.css">').then(() => {
+      (window as any).ubToast?.('Copied CDN tag');
+    });
+  });
+</script>
+
+<style>
+  .section-divider { border: none; border-top: 1px solid rgba(255,255,255,0.07); margin: 2.5rem 0; }
+  .callout-box {
+    background: rgba(0,242,254,0.06);
+    border: 1px solid rgba(0,242,254,0.2);
+    border-radius: 14px;
+    padding: 1.25rem 1.5rem;
+    font-size: 0.92rem;
+    color: #cbd5e1;
+    line-height: 1.7;
+    margin: 0.75rem 0;
+  }
+  .callout-box strong { color: #00f2fe; }
+  .callout-box code { color: #00f2fe; background: rgba(0,242,254,0.08); padding: 1px 5px; border-radius: 4px; font-size: 0.85em; }
+
+  .ref-table-wrap {
+    overflow-x: auto;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.07);
+  }
+  .ref-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+  }
+  .ref-table th {
+    text-align: left;
+    padding: 0.7rem 1rem;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #64748b;
+    background: rgba(255,255,255,0.02);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .ref-table td {
+    padding: 0.65rem 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    vertical-align: top;
+  }
+  .ref-table tr:last-child td { border-bottom: none; }
+  .ref-table tr:hover td { background: rgba(255,255,255,0.02); }
+  .ref-table code.copy-class:hover { color: #fff; cursor: copy; }
+
+  .ref-entry {
+    padding: 1rem 1.25rem;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 12px;
+  }
+  .ref-entry:hover { border-color: rgba(0,242,254,0.2); }
+</style>

@@ -1,0 +1,265 @@
+/**
+ * UNBOILERPLATE - Animations: Micro-interactions & Tactile Feedback
+ * Complete Hover Suite & Tap/Click Effects
+ */
+
+/* ==========================================================================
+   1. HOVER EFFECTS SUITE
+   ========================================================================== */
+.hover-lift {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--ub-shadow-float, 0 20px 40px rgba(0, 0, 0, 0.3));
+}
+
+.hover-shrink {
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.hover-shrink:hover {
+  transform: scale(0.94);
+}
+
+.hover-grow,
+.hover-scale {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.hover-grow:hover,
+.hover-scale:hover {
+  transform: scale(1.06);
+}
+
+.hover-tilt {
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.hover-tilt:hover {
+  transform: perspective(1000px) rotateX(8deg) rotateY(-8deg);
+}
+
+.hover-shake:hover {
+  animation: ub-shake 0.5s ease-in-out;
+}
+
+.hover-wiggle:hover {
+  animation: ub-wiggle 0.6s ease-in-out;
+}
+
+.hover-pulse:hover {
+  animation: ub-pulse 1.2s ease-in-out infinite;
+}
+
+.hover-glow {
+  transition: box-shadow 0.3s ease, filter 0.3s ease;
+}
+.hover-glow:hover {
+  box-shadow: 0 0 25px rgba(0, 242, 254, 0.7), 0 0 50px rgba(255, 0, 127, 0.4);
+  filter: brightness(1.1);
+}
+.hover-glow-cyan:hover { box-shadow: var(--ub-shadow-glow-cyan); }
+.hover-glow-pink:hover { box-shadow: var(--ub-shadow-glow-pink); }
+.hover-glow-sunset:hover { box-shadow: var(--ub-shadow-glow-sunset); }
+
+.hover-shine {
+  position: relative;
+  overflow: hidden;
+}
+.hover-shine::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(60deg, transparent 30%, rgba(255, 255, 255, 0.25) 50%, transparent 70%);
+  transform: rotate(25deg) translateY(-100%);
+  transition: transform 0.6s ease;
+  pointer-events: none;
+}
+.hover-shine:hover::after {
+  transform: rotate(25deg) translateY(100%);
+}
+
+.hover-border {
+  position: relative;
+  transition: border-color 0.3s ease;
+}
+.hover-border:hover {
+  border-color: var(--ub-accent-cyan, #00f2fe);
+}
+
+.hover-rotate,
+.hover-spin {
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.hover-rotate:hover,
+.hover-spin:hover {
+  transform: rotate(360deg);
+}
+
+.hover-flip {
+  perspective: 1000px;
+  transition: transform 0.6s ease;
+}
+.hover-flip:hover {
+  transform: rotateY(180deg);
+}
+
+.hover-bounce:hover {
+  animation: ub-hover-bounce 0.5s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+}
+
+.hover-squish:hover,
+.active-squish:active {
+  transform: scale(0.92, 1.08);
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.hover-grayscale {
+  filter: none;
+  transition: filter 0.3s ease;
+}
+.hover-grayscale:hover {
+  filter: grayscale(100%);
+}
+
+.hover-color {
+  filter: grayscale(100%);
+  transition: filter 0.3s ease;
+}
+.hover-color:hover {
+  filter: grayscale(0%);
+}
+
+.hover-blur {
+  transition: filter 0.3s ease;
+}
+.hover-blur:hover {
+  filter: blur(4px);
+}
+
+.hover-zoom {
+  overflow: hidden;
+}
+.hover-zoom img,
+.hover-zoom.pic,
+.hover-zoom > * {
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.hover-zoom:hover img,
+.hover-zoom:hover.pic,
+.hover-zoom:hover > * {
+  transform: scale(1.12);
+}
+
+.hover-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.hover-3d:hover {
+  transform: perspective(800px) translateZ(30px) rotateX(4deg);
+}
+
+.hover-magnetic {
+  transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.hover-magnetic:hover {
+  transform: translate(4px, -4px);
+}
+
+.hover-morph:hover {
+  border-radius: 40% 60% 70% 30% / 40% 40% 60% 60%;
+  transition: border-radius 0.5s ease;
+}
+
+/* ==========================================================================
+   2. TAP / CLICK EFFECTS SUITE
+   ========================================================================== */
+.tap-pop:active {
+  animation: ub-tap-pop 0.25s ease-out;
+}
+
+.tap-ripple {
+  position: relative;
+  overflow: hidden;
+}
+.tap-ripple:active::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: inherit;
+  animation: ub-ripple 0.4s ease-out;
+}
+
+.tap-burst:active {
+  animation: ub-tap-burst 0.3s ease-out;
+}
+
+.tap-spin:active {
+  transform: rotate(180deg);
+  transition: transform 0.3s ease;
+}
+
+.tap-fold:active {
+  transform: perspective(600px) rotateX(-45deg);
+  opacity: 0.7;
+}
+
+.tap-explode:active {
+  transform: scale(1.3);
+  opacity: 0;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.tap-shrink:active {
+  transform: scale(0.9);
+  transition: transform 0.15s ease;
+}
+
+.tap-bounce:active {
+  animation: ub-hover-bounce 0.3s ease-in-out;
+}
+
+.focus-ring:focus-visible {
+  outline: 3px solid var(--ub-focus-ring, #00f2fe);
+  outline-offset: 3px;
+}
+
+/* ==========================================================================
+   KEYFRAMES
+   ========================================================================== */
+@keyframes ub-hover-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px) scale(1.04); }
+}
+
+@keyframes ub-shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+
+@keyframes ub-wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-5deg); }
+  75% { transform: rotate(5deg); }
+}
+
+@keyframes ub-tap-pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+@keyframes ub-ripple {
+  from { transform: scale(0); opacity: 1; }
+  to { transform: scale(2.5); opacity: 0; }
+}
+
+@keyframes ub-tap-burst {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 242, 254, 0.7); }
+  70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(0, 242, 254, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 242, 254, 0); }
+}
+

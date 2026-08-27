@@ -1,0 +1,457 @@
+/**
+ * UNBOILERPLATE - Presets: Extended 3D Component Suite
+ * Pure CSS 3D Books (turning pages), 3D Orbital Carousels,
+ * 3D Fanning Image Stacks, 3D Gallery Walls, and Conic Glow Cards.
+ */
+
+/* ==========================================================================
+   1. 3D INTERACTIVE BOOK — Physical Edition & Turning Pages
+   ========================================================================== */
+.book-3d,
+.book {
+  position: relative;
+  width: 200px;
+  height: 270px;
+  perspective: 1400px;
+  perspective-origin: 50% 50%;
+  cursor: pointer;
+  margin: 1rem auto;
+  user-select: none;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── COVER ─────────────────────────────────────── */
+.book-cover {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transform-origin: left center;
+  transition: transform 0.85s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.85s ease;
+  z-index: 10;
+  /* Aged navy leather cover with gilded border */
+  background: linear-gradient(160deg, #1c2340 0%, #0e1628 50%, #060c1a 100%);
+  border: 1px solid rgba(180, 150, 80, 0.35);
+  border-left: 8px solid #8a6d2a;
+  border-radius: 2px 8px 8px 2px;
+  box-shadow: 4px 10px 28px rgba(0, 0, 0, 0.75), 1px 2px 6px rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.25rem 1.1rem;
+}
+
+/* Spine inner groove */
+.book-cover::before {
+  content: '';
+  position: absolute;
+  left: 10px;
+  top: 8%;
+  bottom: 8%;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, rgba(255,210,120,0.25) 30%, rgba(255,210,120,0.25) 70%, transparent);
+}
+
+/* Inside paper lining on back of cover */
+.book-cover::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #f4ede0;
+  border-radius: 8px 2px 2px 8px;
+  border: 1px solid rgba(0,0,0,0.06);
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+}
+
+/* Trigger open */
+.book-3d:hover .book-cover,
+.book-3d.is-open .book-cover,
+.book-3d:has(.book-toggle:checked) .book-cover,
+.book:hover .book-cover,
+.book.is-open .book-cover {
+  transform: rotateY(-135deg);
+  box-shadow: -8px 14px 35px rgba(0, 0, 0, 0.6);
+}
+
+/* ── LEFT SPREAD (inside cover) ──────────────── */
+.book-inside-left {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: left center;
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+  background: #fdfaf3;
+  border-radius: 8px 2px 2px 8px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: inset -8px 0 16px rgba(0, 0, 0, 0.06);
+  padding: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #1a1816;
+}
+
+/* ── PAGE BLOCK (background stack) ──────────────── */
+.book-pages {
+  position: absolute;
+  inset: 2px 2px 2px 6px;
+  background: #fffdf9;
+  border-radius: 1px 7px 7px 1px;
+  box-shadow: 2px 6px 20px rgba(0, 0, 0, 0.45), inset 3px 0 10px rgba(0,0,0,0.07);
+  transform-style: preserve-3d;
+}
+
+/* ── INDIVIDUAL PAGES ──────────────────────────── */
+.book-page,
+.book-3d .page,
+.book .page {
+  position: absolute;
+  inset: 0;
+  padding: 1rem 0.9rem;
+  color: #2c1f0a;
+  background: linear-gradient(
+    90deg,
+    #ede3ce 0%,
+    #f8f2e4 6%,
+    #faf6ec 18%,
+    #fdfaf4 100%
+  );
+  transform-style: preserve-3d;
+  transform-origin: left center;
+  transition: transform 0.85s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow:
+    inset 8px 0 16px rgba(0, 0, 0, 0.08),
+    inset -2px 0 6px rgba(0, 0, 0, 0.03),
+    2px 4px 10px rgba(0,0,0,0.12);
+  border-radius: 1px 7px 7px 1px;
+  border: 1px solid rgba(180, 150, 80, 0.1);
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Rich content formatting */
+.book-page img,
+.book-3d .page img,
+.book .page img,
+.book-inside-left img {
+  width: 100%;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 0.35rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.book-page h4,
+.book-3d .page h4,
+.book .page h4,
+.book-inside-left h4 {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #1a0f00;
+  margin: 0.2rem 0;
+  font-family: inherit;
+}
+
+.book-page p,
+.book-3d .page p,
+.book .page p,
+.book-inside-left p {
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: #4a3520;
+  margin: 0;
+}
+
+/* ── PROGRESSIVE PAGE TURNS ── */
+.book-3d:hover .page.--page1,
+.book-3d.is-open .page.--page1,
+.book-3d:has(.book-toggle:checked) .page.--page1,
+.book:hover .page.--page1,
+.book.is-open .page.--page1 {
+  transform: rotateY(-115deg);
+  transition-delay: 0.04s;
+}
+
+.book-3d:hover .page.--page2,
+.book-3d.is-open .page.--page2,
+.book-3d:has(.book-toggle:checked) .page.--page2,
+.book:hover .page.--page2,
+.book.is-open .page.--page2 {
+  transform: rotateY(-85deg);
+  transition-delay: 0.08s;
+}
+
+.book-3d:hover .page.--page3,
+.book-3d.is-open .page.--page3,
+.book-3d:has(.book-toggle:checked) .page.--page3,
+.book:hover .page.--page3,
+.book.is-open .page.--page3 {
+  transform: rotateY(-55deg);
+  transition-delay: 0.12s;
+}
+
+.book-3d:hover .page.--page4,
+.book-3d.is-open .page.--page4,
+.book-3d:has(.book-toggle:checked) .page.--page4,
+.book:hover .page.--page4,
+.book.is-open .page.--page4 {
+  transform: rotateY(-20deg);
+  transition-delay: 0.16s;
+}
+
+/* Toggle Checkbox Helper */
+.book-toggle {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Toggle Checkbox Helper */
+.book-toggle {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+
+/* ==========================================================================
+   2. 3D ORBITAL CYLINDRICAL CAROUSEL
+   ========================================================================== */
+.carousel-3d,
+.my-carousel {
+  perspective: 1800px;
+  width: 100%;
+  max-width: 500px;
+  height: 260px;
+  position: relative;
+  margin: 1.5rem auto;
+  overflow: visible;
+}
+
+.carousel-3d-container,
+.my-carousel-container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transform-style: preserve-3d;
+  animation: ub-rotate-carousel 18s infinite linear;
+}
+
+.carousel-3d:hover .carousel-3d-container,
+.my-carousel:hover .my-carousel-container {
+  animation-play-state: paused;
+}
+
+.carousel-3d-item,
+.my-carousel-item {
+  position: absolute;
+  width: 180px;
+  height: 130px;
+  left: calc(50% - 90px);
+  top: calc(50% - 65px);
+  border-radius: var(--ub-radius-lg, 14px);
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #fff;
+  background: #0d0f17;
+  backface-visibility: hidden;
+}
+
+.carousel-3d-item:nth-child(1), .my-carousel-item:nth-child(1) { transform: rotateY(0deg) translateZ(240px); background: linear-gradient(135deg, #ff007a, #7928ca); }
+.carousel-3d-item:nth-child(2), .my-carousel-item:nth-child(2) { transform: rotateY(72deg) translateZ(240px); background: linear-gradient(135deg, #00f2fe, #4facfe); }
+.carousel-3d-item:nth-child(3), .my-carousel-item:nth-child(3) { transform: rotateY(144deg) translateZ(240px); background: linear-gradient(135deg, #f7ba2c, #ea5455); }
+.carousel-3d-item:nth-child(4), .my-carousel-item:nth-child(4) { transform: rotateY(216deg) translateZ(240px); background: linear-gradient(135deg, #43e97b, #38f9d7); }
+.carousel-3d-item:nth-child(5), .my-carousel-item:nth-child(5) { transform: rotateY(288deg) translateZ(240px); background: linear-gradient(135deg, #fa709a, #fee140); }
+
+@keyframes ub-rotate-carousel {
+  from { transform: rotateY(0deg); }
+  to   { transform: rotateY(360deg); }
+}
+
+/* ==========================================================================
+   3. 3D FANNING IMAGE STACK (DECK OF CARDS)
+   ========================================================================== */
+.image-stack-3d,
+.my-stack {
+  position: relative;
+  width: 220px;
+  height: 280px;
+  margin: 1.5rem auto;
+}
+
+.image-stack-3d .stack-item,
+.my-stack-item {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--ub-radius-xl, 18px);
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.image-stack-3d .stack-item.--back,
+.my-stack-item:nth-child(1) {
+  transform: rotate(-12deg) translate(-30px, 15px);
+  z-index: 1;
+  background: linear-gradient(135deg, #4338ca, #312e81);
+}
+
+.image-stack-3d .stack-item.--middle,
+.my-stack-item:nth-child(2) {
+  transform: rotate(-4deg) translate(-12px, 8px);
+  z-index: 2;
+  background: linear-gradient(135deg, #0284c7, #0369a1);
+}
+
+.image-stack-3d .stack-item.--front,
+.my-stack-item:nth-child(3) {
+  transform: rotate(4deg) translate(0, 0);
+  z-index: 3;
+  background: linear-gradient(135deg, #0d9488, #0f766e);
+}
+
+.image-stack-3d:hover .stack-item.--back,
+.my-stack:hover .my-stack-item:nth-child(1) {
+  transform: rotate(-24deg) translate(-75px, -10px) scale(0.95);
+}
+
+.image-stack-3d:hover .stack-item.--middle,
+.my-stack:hover .my-stack-item:nth-child(2) {
+  transform: rotate(-8deg) translate(-35px, -20px) scale(1);
+}
+
+.image-stack-3d:hover .stack-item.--front,
+.my-stack:hover .my-stack-item:nth-child(3) {
+  transform: rotate(10deg) translate(25px, -30px) scale(1.08);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6), 0 0 25px rgba(0, 242, 254, 0.2);
+}
+
+/* ==========================================================================
+   4. 3D GALLERY WALL (TILTED DISPLAY FRAMES)
+   ========================================================================== */
+.gallery-3d-wall,
+.gallery-wall {
+  perspective: 1500px;
+  display: flex;
+  gap: 1.25rem;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+  flex-wrap: wrap;
+  padding: 1.5rem;
+}
+
+.gallery-frame {
+  width: 180px;
+  height: 240px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+.gallery-frame:hover {
+  transform: translateZ(80px) rotateY(12deg) scale(1.05);
+  border-color: #00f2fe;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7), 0 0 30px rgba(0, 242, 254, 0.3);
+}
+
+/* ==========================================================================
+   5. CONIC GLOW BORDER CARD
+   ========================================================================== */
+.card-conic-glow {
+  position: relative;
+  border-radius: var(--ub-radius-xl, 20px);
+  overflow: hidden;
+  padding: 2px;
+  background: transparent;
+}
+
+.card-conic-glow::before {
+  content: '';
+  position: absolute;
+  inset: -50%;
+  background: conic-gradient(
+    from 0deg,
+    #ff007a,
+    #f7ba2c,
+    #00f2fe,
+    #7928ca,
+    #ff007a
+  );
+  animation: ub-spin-conic 4s linear infinite;
+  z-index: 1;
+}
+
+.card-conic-glow > .card-conic-content {
+  position: relative;
+  background: #090a10;
+  border-radius: calc(var(--ub-radius-xl, 20px) - 2px);
+  padding: 1.75rem;
+  z-index: 2;
+  height: 100%;
+}
+
+@keyframes ub-spin-conic {
+  to { transform: rotate(360deg); }
+}
+
+/* ==========================================================================
+   6. SLIDING FILL BUTTON
+   ========================================================================== */
+.btn-slide-fill {
+  position: relative;
+  padding: 0.75rem 1.75rem;
+  font-size: 1rem;
+  font-weight: 700;
+  background: transparent;
+  border: 2px solid var(--ub-accent-cyan, #00f2fe);
+  color: var(--ub-accent-cyan, #00f2fe);
+  border-radius: var(--ub-radius-md, 10px);
+  cursor: pointer;
+  overflow: hidden;
+  transition: color 0.4s ease, transform 0.3s ease, box-shadow 0.4s ease;
+  z-index: 1;
+}
+
+.btn-slide-fill::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--ub-accent-cyan, #00f2fe);
+  transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: -1;
+}
+
+.btn-slide-fill:hover::before {
+  left: 0;
+}
+
+.btn-slide-fill:hover {
+  color: #050608;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 242, 254, 0.4);
+}

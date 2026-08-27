@@ -1,0 +1,46 @@
+/**
+ * UNBOILERPLATE - Presets: Total Design Freedom & Override Engine
+ * Cascading variable support allowing granular local, scoped, and global overrides.
+ */
+
+:root {
+  /* Override Engine Defaults */
+  --card-bg: var(--ub-card-bg, rgba(13, 15, 23, 0.7));
+  --card-color: var(--ub-card-color, inherit);
+  --card-radius: var(--ub-card-radius, var(--ub-radius-xl, 20px));
+  --card-padding: var(--ub-card-padding, 1.5rem);
+  --card-shadow: var(--ub-card-shadow, 0 10px 30px rgba(0, 0, 0, 0.3));
+  --card-border: var(--ub-card-border, 1px solid var(--ub-border, rgba(255, 255, 255, 0.08)));
+
+  --btn-bg: var(--ub-btn-bg, var(--ub-bg-surface, #1e293b));
+  --btn-color: var(--ub-btn-color, #ffffff);
+  --btn-radius: var(--ub-btn-radius, var(--ub-radius-md, 10px));
+  --btn-border: var(--ub-btn-border, 1px solid rgba(255, 255, 255, 0.1));
+  --btn-padding: var(--ub-btn-padding, 0.6rem 1.25rem);
+
+  --animation-speed: var(--ub-animation-speed, 1s);
+  --animation-easing: var(--ub-animation-easing, cubic-bezier(0.16, 1, 0.3, 1));
+}
+
+/* Connect CSS Variable Overrides to core elements */
+.vibe-card,
+.card-customizable {
+  background: var(--card-bg) !important;
+  color: var(--card-color) !important;
+  border-radius: var(--card-radius) !important;
+  padding: var(--card-padding) !important;
+  box-shadow: var(--card-shadow) !important;
+  border: var(--card-border) !important;
+  backdrop-filter: blur(16px);
+  transition: all 0.3s var(--animation-easing);
+}
+
+.btn-customizable {
+  background: var(--btn-bg) !important;
+  color: var(--btn-color) !important;
+  border-radius: var(--btn-radius) !important;
+  border: var(--btn-border) !important;
+  padding: var(--btn-padding) !important;
+  cursor: pointer;
+  transition: all 0.3s var(--animation-easing);
+}

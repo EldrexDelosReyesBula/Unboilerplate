@@ -1,0 +1,12 @@
+/* ============================================================
+   GLOBAL STYLES — imported once in DocsLayout.astro
+   ============================================================ */
+
+/* Pull in the compiled Unboilerplate CSS bundle */
+@import '../../dist/unboilerplate.css';
+
+/* Pull in the docs shell layout */
+@import '../../src/core/docs-layout.css';
+
+/* Page-level resets */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }

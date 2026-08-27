@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Components Library — Unboilerplate</title>
+  <meta name="description" content="Pure CSS building blocks that go hard. 40+ buttons, 50+ cards, 3D elements, retro marquees. Zero JS. Zero stress. Just copy and paste.">
+  <link rel="icon" type="image/png" href="../assets/unboilerplate-logo.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Unboilerplate CSS Master Bundle -->
+  <link rel="stylesheet" href="../dist/unboilerplate.css">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    .comp-card {
+      background: var(--ub-bg-surface, #0d0f17);
+      border-radius: var(--ub-radius-xl, 20px);
+      border: 1px solid var(--ub-border, rgba(255, 255, 255, 0.08));
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1.25rem;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .comp-card:hover {
+      border-color: rgba(0, 242, 254, 0.4);
+      transform: translateY(-4px);
+    }
+
+    .comp-preview {
+      background: #000;
+      border-radius: 12px;
+      padding: 1.5rem;
+      min-height: 130px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      overflow: hidden;
+    }
+
+    .comp-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .filter-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin: 1.5rem 0 0.5rem;
+    }
+
+    .filter-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #94a3b8;
+      padding: 0.35rem 0.9rem;
+      border-radius: 100px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: rgba(0, 242, 254, 0.12);
+      border-color: rgba(0, 242, 254, 0.4);
+      color: #00f2fe;
+    }
+
+    .comp-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #f3f4f8;
+      margin-top: 0.5rem;
+    }
+
+    .comp-desc {
+      font-size: 0.82rem;
+      color: #64748b;
+      line-height: 1.5;
+      margin-top: 0.25rem;
+    }
+
+    .toast-popup {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: #00f2fe;
+      color: #050608;
+      font-weight: 700;
+      padding: 0.75rem 1.5rem;
+      border-radius: 100px;
+      box-shadow: 0 10px 25px rgba(0, 242, 254, 0.4);
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      z-index: 3000;
+      font-family: inherit;
+    }
+
+    .toast-popup.is-visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.25rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+      margin: 2.5rem 0;
+    }
+
+    .docs-page-title {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      margin-bottom: 0.75rem;
+    }
+
+    .docs-lead {
+      color: #94a3b8;
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+
+    .docs-footer {
+      background: #090a10;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 3rem 2rem 1.5rem;
+      margin-top: 4rem;
+    }
+
+    .docs-footer-grid {
+      max-width: 1560px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 2rem;
+    }
+
+    .docs-footer h4 {
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    .docs-footer a {
+      display: block;
+      color: #64748b;
+      text-decoration: none;
+      font-size: 0.83rem;
+      margin-bottom: 0.4rem;
+      transition: color 0.2s ease;
+    }
+
+    .docs-footer a:hover {
+      color: #00f2fe;
+    }
+
+    .docs-footer-bottom {
+      max-width: 1560px;
+      margin: 2rem auto 0;
+      padding-top: 1.25rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      font-size: 0.82rem;
+      color: #475569;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="docs-shell">
+
+    <!-- =========================================================
+       UNIFIED DOCS HEADER
+       ========================================================= -->
+    <header class="docs-header">
+      <a href="../index.html" class="docs-brand">
+        <img src="../assets/unboilerplate-logo.png" alt="Unboilerplate Logo">
+        <strong>Unboilerplate</strong>
+        <span class="docs-version-badge">v1.0</span>
+      </a>
+
+      <button class="search-btn-trigger" id="search-open-btn" aria-label="Open search">
+        <span>🔍 Search docs…</span>
+        <kbd class="search-kbd-shortcut">Ctrl K</kbd>
+      </button>
+
+      <nav class="docs-nav-links">
+        <a href="../index.html#get-started">Get Started</a>
+        <a href="../playground/index.html">Playground</a>
+        <a href="../templates/index.html">Templates</a>
+        <a href="./index.html" class="active">Components</a>
+        <a href="../learn/index.html">Learn</a>
+        <a href="../index.html#cheatsheet">Docs</a>
+        <a href="../showcase/index.html">Showcase</a>
+        <a href="../tools/index.html">Tools</a>
+      </nav>
+
+      <a href="../playground/index.html" class="vibe-btn --sm hover-bounce" style="white-space:nowrap;">Open Studio
+        🚀</a>
+    </header>
+
+    <!-- =========================================================
+       3-COLUMN LAYOUT
+       ========================================================= -->
+    <div class="docs-layout-container">
+
+      <!-- LEFT SIDEBAR -->
+      <aside class="docs-sidebar">
+
+        <div>
+          <p class="sidebar-group-title">Building Blocks</p>
+          <div class="sidebar-links">
+            <a href="#overview" class="sidebar-link active">💅 The Goods</a>
+            <a href="#buttons" class="sidebar-link">🔘 Buttons (they slap)</a>
+            <a href="#cards" class="sidebar-link">🃏 Cards (they slay)</a>
+            <a href="#3d" class="sidebar-link">🧊 3D (they go hard)</a>
+            <a href="#retro" class="sidebar-link">📼 Retro vibes</a>
+            <a href="#particles" class="sidebar-link">✨ Particles</a>
+          </div>
+        </div>
+
+        <div>
+          <p class="sidebar-group-title">Explore</p>
+          <div class="sidebar-links">
+            <a href="../index.html#get-started" class="sidebar-link">🚀 Get Started</a>
+            <a href="../learn/index.html" class="sidebar-link">📚 Learn</a>
+            <a href="../templates/index.html" class="sidebar-link">📋 Templates</a>
+            <a href="../tools/index.html" class="sidebar-link">🛠️ Tools</a>
+            <a href="../showcase/index.html" class="sidebar-link">🌟 Showcase</a>
+            <a href="../playground/index.html" class="sidebar-link">🎮 Playground</a>
+          </div>
+        </div>
+
+        <div>
+          <p class="sidebar-group-title">Quick Links</p>
+          <div class="sidebar-links">
+            <a href="../index.html#cheatsheet" class="sidebar-link">📚 API Reference</a>
+            <a href="https://github.com/eldrex/unboilerplate" class="sidebar-link" target="_blank">🐙 GitHub</a>
+          </div>
+        </div>
+
+      </aside>
+
+      <!-- MAIN CONTENT -->
+      <main class="docs-content" id="overview">
+
+        <!-- Breadcrumb -->
+        <div class="docs-breadcrumb">
+          <a href="../index.html" style="color:#64748b;text-decoration:none;">Unboilerplate</a>
+          <span>›</span>
+          <span class="vibe-badge vibe-badge--neon" style="margin-bottom:1rem;display:inline-block;">BUILDING BLOCKS 🧱</span>
+        </div>
+
+        <!-- Page Title -->
+        <h1 class="docs-page-title text-gradient --ocean">Components Library</h1>
+        <p class="docs-lead">Pure CSS building blocks that slap. Copy the snippet, paste it in, vibe check complete. No JS. No tears. Just 🔥</p>
+
+        <!-- Filter Tabs -->
+        <div class="filter-strip">
+          <button class="filter-btn active" onclick="filterComps('all', this)">All of it 🤩</button>
+          <button class="filter-btn" onclick="filterComps('buttons', this)">Buttons</button>
+          <button class="filter-btn" onclick="filterComps('cards', this)">Cards</button>
+          <button class="filter-btn" onclick="filterComps('3d', this)">3D Stuff</button>
+          <button class="filter-btn" onclick="filterComps('retro', this)">Retro era</button>
+          <button class="filter-btn" onclick="filterComps('particles', this)">Particles ✨</button>
+        </div>
+
+        <!-- Components Grid -->
+        <div class="comp-grid" id="comps-grid">
+
+          <!-- Buttons ─────────────────────────────────────────── -->
+          <div class="comp-card" id="buttons" data-cat="buttons">
+            <div>
+              <div class="comp-preview">
+                <button class="btn-3d">★ 3D BUTTON ★</button>
+              </div>
+              <p class="comp-name">Physical 3D Button</p>
+              <p class="comp-desc">Beveled, extruded, and it actually feels like a real button. Press it. You know you want to.</p>
+            </div>
+            <button class="vibe-btn --sm" onclick="copySnippet('<button class=\'btn-3d\'>★ 3D BUTTON ★</button>')">📋
+              Copy HTML</button>
+          </div>
+
+          <div class="comp-card" data-cat="buttons">
+            <div>
+              <div class="comp-preview">
+                <button class="btn-3d btn-3d--cyan">NEON SPRING</button>
+              </div>
+              <p class="comp-name">Cyan Spring Button</p>
+              <p class="comp-desc">It's giving neon. High-voltage cyan drop extrusion. Bestie this button eats.</p>
+            </div>
+            <button class="vibe-btn --sm"
+              onclick="copySnippet('<button class=\'btn-3d btn-3d--cyan\'>NEON SPRING</button>')">📋 Copy HTML</button>
+          </div>
+
+          <!-- Cards ─────────────────────────────────────────── -->
+          <div class="comp-card" id="cards" data-cat="cards">
+            <div>
+              <div class="comp-preview">
+                <div class="brutal-neo p-4 text-center" style="width:100%;">
+                  <span style="color:#000;font-weight:800;">.brutal-neo</span>
+                </div>
+              </div>
+              <p class="comp-name">Neo-Brutalism Card</p>
+              <p class="comp-desc">6px hard black offset drop shadow. Thick borders. Zero apologies. It's giving main character.</p>
+            </div>
+            <button class="vibe-btn --sm" onclick="copySnippet('<div class=\'brutal-neo p-6\'><h3>Title</h3></div>')">📋
+              Copy HTML</button>
+          </div>
+
+          <div class="comp-card" data-cat="cards">
+            <div>
+              <div class="comp-preview">
+                <div class="card-conic-glow" style="width:100%;">
+                  <div class="card-conic-content text-center" style="padding:1rem;">
+                    <span class="text-gradient font-bold" style="font-size:0.85rem;">CONIC GLOW</span>
+                  </div>
+                </div>
+              </div>
+              <p class="comp-name">Conic Glow Card</p>
+              <p class="comp-desc">Infinite rotating rainbow border glow. It never stops. Just like your creativity. ✨</p>
+            </div>
+            <button class="vibe-btn --sm"
+              onclick="copySnippet('<div class=\'card-conic-glow\'><div class=\'card-conic-content\'>Content</div></div>')">📋
+              Copy HTML</button>
+          </div>
+
+          <div class="comp-card" data-cat="cards">
+            <div>
+              <div class="comp-preview">
+                <div class="vibe-card effect-glass p-4 text-center" style="width:100%;max-width:200px;">
+                  <span style="font-size:0.85rem;">Glassmorphism</span>
+                </div>
+              </div>
+              <p class="comp-name">Glass Card</p>
+              <p class="comp-desc">Frosted glass effect. Blurred. Translucent. It's giving Apple product launch event.</p>
+            </div>
+            <button class="vibe-btn --sm"
+              onclick="copySnippet('<div class=\'vibe-card effect-glass p-6\'>Content</div>')">📋 Copy HTML</button>
+          </div>
+
+          <!-- 3D Elements ─────────────────────────────────────── -->
+          <div class="comp-card" id="3d" data-cat="3d">
+            <div>
+              <div class="comp-preview">
+                <div class="card-3d-flip" style="width:140px;height:90px;">
+                  <div class="card-3d-inner">
+                    <div class="card-3d-front" style="display:flex;align-items:center;justify-content:center;">
+                      <span>FRONT</span></div>
+                    <div class="card-3d-back" style="display:flex;align-items:center;justify-content:center;"><span
+                        class="text-cyber">BACK</span></div>
+                  </div>
+                </div>
+              </div>
+              <p class="comp-name">3D Flip Card</p>
+              <p class="comp-desc">Hover it. Just hover it. Hardware accelerated 180° flip and your jaw drops. Pure CSS. No cap.</p>
+            </div>
+            <button class="vibe-btn --sm"
+              onclick="copySnippet('<div class=\'card-3d-flip\'><div class=\'card-3d-inner\'><div class=\'card-3d-front\'>Front</div><div class=\'card-3d-back\'>Back</div></div></div>')">📋
+              Copy HTML</button>
+          </div>
+
+          <div class="comp-card" data-cat="3d">
+            <div>
+              <div class="comp-preview">
+                <div class="book-3d" style="width:100px;height:140px;">
+                  <div class="book-cover">
+                    <strong style="color:#fff;font-size:0.75rem;">CSS 3D</strong>
+                    <small style="color:#94a3b8;font-size:0.6rem;">Hover</small>
+                  </div>
+                  <div class="book-pages">
+                    <div class="page --page1">Page 1</div>
+                    <div class="page --page2">Page 2</div>
+                  </div>
+                </div>
+              </div>
+              <p class="comp-name">Interactive 3D Book</p>
+              <p class="comp-desc">Hover it to flip the cover and turn pages. Not a JavaScript book. A CSS book. We're not the same.</p>
+            </div>
+            <button class="vibe-btn --sm"
+              onclick="copySnippet('<div class=\'book-3d\'><div class=\'book-cover\'>Cover</div><div class=\'book-pages\'><div class=\'page --page1\'>P1</div><div class=\'page --page2\'>P2</div></div></div>')">📋
+              Copy HTML</button>
+          </div>
+
+          <div class="comp-card" data-cat="3d">
+            <div>
+              <div class="comp-preview">
+                <div class="image-stack-3d" style="width:100px;height:120px;">
+                  <div class="stack-item --back"></div>
+                  <div class="stack-item --middle"></div>
+                  <div class="stack-item --front"></div>
+                </div>
+              </div>
+              <p class="comp-name">3D Fan Stack Deck</p>
+              <p class="comp-desc">Deck of cards that fans out on hover. Your users will literally say "wait what."</p>
+            </div>
+            <button class="vibe-btn --sm"
+              onclick="copySnippet('<div class=\'image-stack-3d\'><div class=\'stack-item --back\'></div><div class=\'stack-item --middle\'></div><div class=\'stack-item --front\'></div></div>')">📋
+              Copy HTML</button>
+          </div>
+
+          <!-- Retro ─────────────────────────────────────────── -->
+          <div class="comp-card" id="retro" data-cat="retro">
+            <div>
+              <div class="comp-preview" style="background:#000;">
+                <div class="marquee" style="color:#ffff00;width:100%;"><span>★ 1999 VINTAGE MARQUEE ★</span></div>
+              </div>
+              <p class="comp-name">Pure CSS Marquee</p>
+              <p class="comp-desc">It scrolls. Forever. Like your TikTok fyp, but classier. And fully customizable.</p>
+            </div>
+            <button class="vibe-btn --sm"
+              onclick="copySnippet('<div class=\'marquee\'><span>★ SCROLLING TEXT ★</span></div>')">📋 Copy
+              HTML</button>
+          </div>
+
+          <!-- Particles ─────────────────────────────────────── -->
+          <div class="comp-card" id="particles" data-cat="particles">
+            <div>
+              <div class="comp-preview">
+                <div class="particles-stars" style="min-height:80px;width:100%;">
+                  <span class="star --twinkle-1">✦</span>
+                  <span class="star --twinkle-2">✧</span>
+                  <span class="star --twinkle-3">⭐</span>
+                </div>
+              </div>
+              <p class="comp-name">Twinkling 3D Stars</p>
+              <p class="comp-desc">Pure CSS twinkling stars. No JS. Just vibes and opacity keyframes. It's giving planetarium.</p>
+            </div>
+            <button class="vibe-btn --sm"
+              onclick="copySnippet('<div class=\'particles-stars\'><span class=\'star --twinkle-1\'>✦</span><span class=\'star --twinkle-2\'>✧</span></div>')">📋
+              Copy HTML</button>
+          </div>
+
+        </div><!-- /.comp-grid -->
+
+        <hr class="section-divider">
+
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;align-items:center;">
+          <a href="../playground/index.html" class="vibe-btn hover-bounce">Play with it live 🎮</a>
+          <a href="../templates/index.html" class="pill-tab">Full templates →</a>
+          <a href="../learn/index.html" class="pill-tab">Learning track →</a>
+        </div>
+
+      </main>
+
+      <!-- RIGHT TABLE OF CONTENTS -->
+      <aside class="docs-toc-sidebar">
+        <p class="toc-title">On this page</p>
+        <nav class="toc-list">
+          <a href="#overview" class="toc-link active">The Goods</a>
+          <a href="#buttons" class="toc-link">Buttons</a>
+          <a href="#cards" class="toc-link">Cards</a>
+          <a href="#3d" class="toc-link">3D Stuff</a>
+          <a href="#retro" class="toc-link">Retro era</a>
+          <a href="#particles" class="toc-link">Particles ✨</a>
+        </nav>
+
+        <div style="margin-top:2rem;padding:1rem;background:rgba(255,0,122,0.06);border:1px solid rgba(255,0,122,0.2);border-radius:12px;">
+          <p style="font-size:0.78rem;font-weight:700;color:#fff;margin-bottom:0.5rem;">🧹 Zero JS. Like, actually.</p>
+          <p style="font-size:0.75rem;color:#64748b;line-height:1.5;">Everything on this page runs on pure CSS. No JavaScript was harmed in the making of these components.</p>
+          <a href="../index.html#cheatsheet" style="display:block;margin-top:0.75rem;font-size:0.78rem;color:#ff007a;text-decoration:none;font-weight:700;">See all classes →</a>
+        </div>
+      </aside>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="docs-footer">
+      <div class="docs-footer-grid">
+        <div>
+          <h4>Learn</h4>
+          <a href="../learn/index.html#beginner">Beginner Track</a>
+          <a href="../learn/index.html#intermediate">Intermediate Track</a>
+          <a href="../learn/index.html#advanced">Advanced Track</a>
+        </div>
+        <div>
+          <h4>Docs</h4>
+          <a href="../index.html#cheatsheet">API Reference</a>
+          <a href="./index.html">Components</a>
+          <a href="../index.html#dimension-3d">3D Effects</a>
+        </div>
+        <div>
+          <h4>Tools</h4>
+          <a href="../playground/index.html">Studio IDE</a>
+          <a href="../tools/index.html#generator">Class Generator</a>
+        </div>
+        <div>
+          <h4>Community</h4>
+          <a href="https://github.com/eldrex/unboilerplate" target="_blank">GitHub</a>
+          <a href="../showcase/index.html">Showcase</a>
+        </div>
+        <div>
+          <h4>Support</h4>
+          <a href="../index.html#pricing">Pricing</a>
+          <a href="../index.html#boring-vs-us">FAQ</a>
+        </div>
+      </div>
+      <div class="docs-footer-bottom">
+        <span>© 2026 <strong>Unboilerplate</strong>. Created with 💜 by <strong>Eldrex Delos Reyes Bula</strong></span>
+        <span>Pure CSS. Pure joy. Pure you. 🎨✨</span>
+      </div>
+    </footer>
+
+  </div><!-- /.docs-shell -->
+
+  <!-- Toast -->
+  <div id="toast-popup" class="toast-popup">Copied component HTML! 🚀</div>
+
+  <!-- Search Modal -->
+  <div class="search-modal-backdrop" id="search-modal" role="dialog" aria-modal="true" aria-label="Search">
+    <div class="search-modal-box">
+      <div class="search-input-header">
+        <span style="font-size:1.2rem;">🔍</span>
+        <input type="text" id="search-input" placeholder="Search docs, components, classes…" autocomplete="off">
+        <kbd class="search-kbd-shortcut" style="cursor:pointer;" id="search-close-btn">Esc</kbd>
+      </div>
+      <div class="search-results-list" id="search-results">
+        <a href="#buttons" class="search-result-item">🔘 Buttons — 3D, Neon, Spring</a>
+        <a href="#cards" class="search-result-item">🃏 Cards — Brutal, Glass, Conic Glow</a>
+        <a href="#3d" class="search-result-item">🧊 3D Elements — Flip card, Book, Stack</a>
+        <a href="#retro" class="search-result-item">📼 Retro — Marquee, Window 95</a>
+        <a href="#particles" class="search-result-item">✨ Particles — Stars, Confetti</a>
+        <a href="../templates/index.html" class="search-result-item">📋 Templates — Full page layouts</a>
+        <a href="../learn/index.html" class="search-result-item">📚 Learn — CSS learning tracks</a>
+        <a href="../playground/index.html" class="search-result-item">🎮 Playground — Live Studio IDE</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ---- Filter ---- */
+    function filterComps(cat, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.comp-card').forEach(card => {
+        card.style.display = (cat === 'all' || card.dataset.cat === cat) ? 'flex' : 'none';
+      });
+    }
+
+    /* ---- Copy ---- */
+    function copySnippet(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        const toast = document.getElementById('toast-popup');
+        toast.classList.add('is-visible');
+        setTimeout(() => toast.classList.remove('is-visible'), 2400);
+      });
+    }
+
+    /* ---- Search modal ---- */
+    const modal = document.getElementById('search-modal');
+    const input = document.getElementById('search-input');
+    const openBtn = document.getElementById('search-open-btn');
+    const closeBtn = document.getElementById('search-close-btn');
+
+    function openSearch() { modal.classList.add('is-open'); input.focus(); }
+    function closeSearch() { modal.classList.remove('is-open'); }
+
+    openBtn.addEventListener('click', openSearch);
+    closeBtn.addEventListener('click', closeSearch);
+    modal.addEventListener('click', e => { if (e.target === modal) closeSearch(); });
+    document.addEventListener('keydown', e => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') { e.preventDefault(); openSearch(); }
+      if (e.key === 'Escape') closeSearch();
+    });
+
+    /* ---- TOC Scroll Spy ---- */
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const sections = document.querySelectorAll('main [id]');
+    const sideLinks = document.querySelectorAll('.sidebar-link');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          tocLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+          sideLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+
+    sections.forEach(s => observer.observe(s));
+  </script>
+</body>
+
+</html>

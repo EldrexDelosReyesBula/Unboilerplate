@@ -1,0 +1,99 @@
+/**
+ * UNBOILERPLATE - Presets: Creative Hover Effects Library
+ * Image hovers (zoom, blur, grayscale, sepia, invert, rotate, tilt) and button micro-animations.
+ */
+
+/* ==========================================================================
+   1. IMAGE HOVER EFFECTS
+   ========================================================================== */
+.hover {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease, box-shadow 0.35s ease;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.hover.--zoom:hover,
+.--hover-zoom:hover {
+  transform: scale(1.08);
+}
+
+.hover.--blur:hover {
+  filter: blur(4px);
+}
+
+.hover.--grayscale:hover {
+  filter: grayscale(100%);
+}
+
+.hover.--sepia:hover {
+  filter: sepia(100%);
+}
+
+.hover.--invert:hover {
+  filter: invert(100%);
+}
+
+.hover.--rotate:hover {
+  transform: rotate(5deg) scale(1.05);
+}
+
+.hover.--scale:hover {
+  transform: scale(1.05);
+}
+
+.hover.--tilt:hover {
+  transform: perspective(600px) rotateX(8deg) rotateY(-8deg) scale(1.04);
+}
+
+/* ==========================================================================
+   2. BUTTON HOVER EFFECTS
+   ========================================================================== */
+.btn.--hover-fill {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: color 0.3s ease;
+}
+
+.btn.--hover-fill::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--ub-accent-gradient, linear-gradient(135deg, #ff007a, #7928ca));
+  z-index: -1;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn.--hover-fill:hover::before {
+  transform: scaleX(1);
+}
+
+.btn.--hover-glow:hover {
+  box-shadow: 0 0 20px rgba(0, 242, 254, 0.6), 0 0 40px rgba(255, 0, 122, 0.4);
+}
+
+.btn.--hover-shake:hover {
+  animation: ub-shake 0.4s ease-in-out;
+}
+
+.btn.--hover-bounce:hover {
+  animation: ub-bounce 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.btn.--hover-morph:hover {
+  border-radius: 50px 10px 50px 10px;
+  transform: scale(1.03);
+}
+
+@keyframes ub-shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-4px); }
+  40%, 80% { transform: translateX(4px); }
+}
+
+@keyframes ub-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}

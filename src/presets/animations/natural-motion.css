@@ -1,0 +1,76 @@
+/**
+ * UNBOILERPLATE - Presets: Natural Motion & Ambient Art
+ * Organic rhythms: breathe, sway, drift, flow, shatter, and starry ambient nights.
+ */
+
+.animate-breathe {
+  animation: ub-breathe 4.5s ease-in-out infinite;
+}
+
+.animate-sway {
+  animation: ub-sway 5s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+.animate-drift {
+  animation: ub-drift 8s ease-in-out infinite alternate;
+}
+
+.animate-flow {
+  animation: ub-flow 6s linear infinite;
+}
+
+@keyframes ub-breathe {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 15px rgba(0, 242, 254, 0.2);
+  }
+  50% {
+    transform: scale(1.04);
+    box-shadow: 0 0 35px rgba(255, 0, 127, 0.45);
+  }
+}
+
+@keyframes ub-sway {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+
+@keyframes ub-drift {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(12px, -8px); }
+  100% { transform: translate(-10px, 6px); }
+}
+
+@keyframes ub-flow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* Ambient Art Backgrounds */
+.ambient-stars {
+  background-color: #05050d;
+  background-image: 
+    radial-gradient(1.5px 1.5px at 20px 30px, #ffffff, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 40px 70px, #ffffff, rgba(0,0,0,0)),
+    radial-gradient(1.5px 1.5px at 90px 40px, #00f2fe, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 160px 120px, #ff007f, rgba(0,0,0,0));
+  background-size: 200px 200px;
+}
+
+.ambient-ocean {
+  background: linear-gradient(180deg, #0b132b 0%, #1c2541 50%, #3a506b 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .animate-breathe,
+  .animate-sway,
+  .animate-drift,
+  .animate-flow {
+    animation: none !important;
+    transform: none !important;
+  }
+}

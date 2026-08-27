@@ -1,0 +1,489 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+
+const tocItems = [
+  { id: 'overview',  label: 'Overview'           },
+  { id: 'buttons',   label: 'Buttons & Controls' },
+  { id: 'cards',     label: 'Cards & Surfaces'   },
+  { id: '3d',        label: '3D Spatial'         },
+  { id: 'retro',     label: 'Retro Elements'     },
+  { id: 'particles', label: 'Motion & FX'        },
+  { id: 'badges',    label: 'Badges & Shaders'   },
+];
+
+type ComponentCategory = 'buttons' | 'cards' | '3d' | 'retro' | 'particles' | 'badges';
+
+interface Component {
+  name: string;
+  desc: string;
+  category: ComponentCategory;
+  snippet: string;
+  preview: string;
+}
+
+const components: Component[] = [
+  // ── BUTTONS & CONTROLS ──────────────────────────────────────────
+  {
+    name: 'Physical 3D Button',
+    desc: "Beveled, extruded tactile button with authentic active spring press physics.",
+    category: 'buttons',
+    snippet: '<button class="btn-3d">3D BUTTON</button>',
+    preview: '<button class="btn-3d">EXPLORE SYSTEM</button>',
+  },
+  {
+    name: 'Cyan Spring Button',
+    desc: "High-voltage cyan drop extrusion with active hardware-accelerated press state.",
+    category: 'buttons',
+    snippet: '<button class="btn-3d btn-3d--cyan">NEON SPRING</button>',
+    preview: '<button class="btn-3d btn-3d--cyan">LAUNCH PROJECT</button>',
+  },
+  {
+    name: 'Sunset Flare Button',
+    desc: "Warm neon coral gradient button with lift elevation and dynamic hover bounce.",
+    category: 'buttons',
+    snippet: '<button class="vibe-btn --sunset hover-bounce">SUNSET FLARE</button>',
+    preview: '<button class="vibe-btn --sunset hover-bounce" style="padding:0.6rem 1.4rem;font-size:0.82rem;">START EXPLORING 🚀</button>',
+  },
+  {
+    name: 'Gold Trophy 3D Button',
+    desc: "Extruded golden metallic luxury button with bevel drop shadow and spring action.",
+    category: 'buttons',
+    snippet: '<button class="btn-3d btn-3d--gold">CLAIM REWARD</button>',
+    preview: '<button class="btn-3d btn-3d--gold">CLAIM VIP TROPHY 🏆</button>',
+  },
+  {
+    name: 'Neo-Brutalism Button',
+    desc: "Hard-edged black button with offset drop shadow for bold, confrontational UI.",
+    category: 'buttons',
+    snippet: '<button class="btn-brutal">CLAIM ACCESS</button>',
+    preview: '<button class="btn-brutal" style="background:#ffeb3b;color:#000;">CLAIM ACCESS →</button>',
+  },
+  {
+    name: 'Leather Skeuomorphic Button',
+    desc: "Stitched leather texture button for realistic tactile skeuomorphic interfaces.",
+    category: 'buttons',
+    snippet: '<button class="btn-leather">STITCHED LEATHER</button>',
+    preview: '<button class="btn-leather">VINTAGE LEATHER</button>',
+  },
+  {
+    name: '8-bit Pixel Button',
+    desc: "Retro pixel-art chunky border button for 8-bit game and chiptune UIs.",
+    category: 'buttons',
+    snippet: '<button class="btn-8bit">PRESS START</button>',
+    preview: '<button class="btn-8bit">PRESS START</button>',
+  },
+  {
+    name: 'Pill Segmented Tab Bar',
+    desc: "Smooth pill switcher with active neon indicators for tabs and filter controls.",
+    category: 'buttons',
+    snippet: '<div class="pill-tab-group"><button class="pill-tab active">Overview</button><button class="pill-tab">Features</button><button class="pill-tab">Pricing</button></div>',
+    preview: '<div style="display:flex;gap:0.4rem;"><span class="pill-tab hover-lift" style="background:#00f2fe;color:#06070a;font-weight:700;">Design</span><span class="pill-tab hover-lift">Code</span><span class="pill-tab hover-lift">Assets</span></div>',
+  },
+
+  // ── CARDS & SURFACES ───────────────────────────────────────────
+  {
+    name: 'Neo-Brutalism Card',
+    desc: "6px hard black offset drop shadow with thick high-contrast borders.",
+    category: 'cards',
+    snippet: '<div class="brutal-neo p-6" style="background:#fef08a;"><span class="vibe-badge" style="background:#000;color:#fff;">EDITION 01</span><h3 style="color:#000;font-weight:900;margin-top:0.5rem;">BOLD CONFIDENCE</h3><p style="color:#222;font-size:0.88rem;margin-top:0.5rem;">Pure CSS hard shadow geometry.</p></div>',
+    preview: '<div class="brutal-neo" style="padding:0.85rem;background:#fef08a;width:100%;max-width:200px;"><span style="background:#000;color:#fff;font-size:0.6rem;font-weight:800;padding:2px 6px;border-radius:2px;">FEATURED</span><h4 style="color:#000;font-size:0.85rem;font-weight:900;margin-top:4px;">NEO BRUTAL</h4></div>',
+  },
+  {
+    name: 'Conic Glow Card',
+    desc: "Infinite rotating 360° gradient border glow in pure CSS.",
+    category: 'cards',
+    snippet: '<div class="card-conic-glow"><div class="card-conic-content"><span class="vibe-badge vibe-badge--neon">ACTIVE</span><h4 class="text-gradient mt-2">Quantum Core</h4></div></div>',
+    preview: '<div class="card-conic-glow" style="width:170px;height:95px;"><div class="card-conic-content" style="padding:0.75rem;text-align:center;"><span style="font-size:0.65rem;color:#00f2fe;font-weight:700;">✦ 360° ROTATING GLOW</span><strong style="color:#fff;font-size:0.85rem;display:block;margin-top:3px;">Quantum Engine</strong></div></div>',
+  },
+  {
+    name: 'Glassmorphic Profile Card',
+    desc: "Frosted translucent glass backdrop with real-world avatar and depth lighting.",
+    category: 'cards',
+    snippet: '<div class="vibe-card effect-glass p-6" style="display:flex;align-items:center;gap:1rem;"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" style="width:48px;height:48px;border-radius:50%;object-fit:cover;" /><div><strong style="color:#fff;">Elena Vance</strong><p style="color:#00f2fe;font-size:0.82rem;">Creative Technologist</p></div></div>',
+    preview: '<div class="vibe-card effect-glass" style="padding:0.75rem 1rem;display:flex;align-items:center;gap:0.75rem;width:100%;max-width:210px;"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&auto=format&fit=crop&q=80" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:1.5px solid #00f2fe;" /><div><strong style="font-size:0.8rem;color:#fff;display:block;">Elena Vance</strong><span style="font-size:0.68rem;color:#00f2fe;">Lead Architect</span></div></div>',
+  },
+  {
+    name: 'Holographic Shimmer Card',
+    desc: "Metallic holographic rainbow surface with active dynamic sheen reflection on hover.",
+    category: 'cards',
+    snippet: '<div class="card-holographic p-6"><span class="vibe-badge">GEN-Z HOLOGRAPHIC</span><h3>Metallic Prism</h3><p>GPU-composited color dispersion.</p></div>',
+    preview: '<div class="card-holographic" style="padding:0.85rem 1rem;border-radius:12px;width:100%;max-width:200px;text-align:center;"><span style="font-size:0.6rem;color:#06070a;background:rgba(255,255,255,0.7);padding:2px 6px;border-radius:4px;font-weight:800;">PRISM REFLECTION</span><strong style="color:#06070a;font-size:0.95rem;display:block;margin-top:4px;">Holographic VIP</strong></div>',
+  },
+  {
+    name: 'Memphis Pattern Card',
+    desc: "Playful 90s Memphis geometric pattern with vibrant shapes and retro flair.",
+    category: 'cards',
+    snippet: '<div class="memphis-pattern p-6 rounded-xl"><span class="vibe-badge" style="background:#000;color:#fff;">MEMPHIS 1990</span><h3 style="color:#000;font-weight:900;">GEOMETRIC ART</h3></div>',
+    preview: '<div class="memphis-pattern" style="padding:0.85rem;border-radius:10px;width:100%;max-width:190px;text-align:center;border:2px solid #000;"><span style="background:#000;color:#fff;font-size:0.6rem;font-weight:800;padding:2px 6px;">RETRO ART</span><strong style="color:#000;font-size:0.85rem;display:block;margin-top:4px;">Memphis Pop</strong></div>',
+  },
+  {
+    name: 'Vaporwave Sunset Card',
+    desc: "80s retro grid horizon, chrome typography, and neon dusk gradient background.",
+    category: 'cards',
+    snippet: '<div class="vapor-sunset p-6 rounded-xl"><span class="vibe-badge" style="background:rgba(0,0,0,0.5);">RETROWAVE</span><h2 class="vapor-chrome" style="margin-top:0.5rem;">VAPORWAVE</h2></div>',
+    preview: '<div class="vapor-sunset" style="padding:0.85rem 1rem;border-radius:12px;width:100%;max-width:200px;text-align:center;"><span style="font-size:0.6rem;background:rgba(0,0,0,0.5);padding:2px 8px;border-radius:100px;color:#f472b6;">SYNTH 1984</span><strong class="vapor-chrome" style="font-size:1.1rem;display:block;margin-top:4px;">VAPORWAVE</strong></div>',
+  },
+  {
+    name: 'Mahogany Skeuomorphic Card',
+    desc: "Skeuomorphic mahogany grain with realistic stitched border for tactile UI.",
+    category: 'cards',
+    snippet: '<div class="card-wood p-6"><h3>Tactile Craft</h3><p>Real stitched border skeuomorphism.</p></div>',
+    preview: '<div class="card-wood" style="padding:0.75rem 1rem;width:100%;max-width:190px;"><span style="font-size:0.65rem;color:#fef3c7;letter-spacing:0.05em;">TACTILE GRAIN</span><strong style="color:#fff;font-size:0.82rem;display:block;margin-top:2px;">Handcrafted Audio</strong></div>',
+  },
+  {
+    name: 'Obsidian Cyber Tech Card',
+    desc: "Sleek dark mode card with neon hairline border and hover elevation lift.",
+    category: 'cards',
+    snippet: '<div class="vibe-card hover-lift p-6"><span class="vibe-badge vibe-badge--neon">SYSTEM ACTIVE</span><h3 class="text-gradient mt-2">Neural Link</h3><p class="text-muted mt-1">High-speed data bus initialized.</p></div>',
+    preview: '<div class="vibe-card hover-lift" style="padding:0.85rem;width:100%;max-width:200px;"><span class="vibe-badge vibe-badge--neon" style="font-size:0.6rem;">NEURAL LINK</span><strong style="color:#fff;font-size:0.85rem;display:block;margin-top:4px;">Obsidian Engine</strong></div>',
+  },
+
+  // ── 3D SPATIAL ────────────────────────────────────────────────
+  {
+    name: '3D VIP Flip Card',
+    desc: "Hardware-accelerated 180° front-to-back perspective card flip on hover with holographic metallic finish.",
+    category: '3d',
+    snippet: '<div class="card-3d-flip" style="width:240px;height:140px;"><div class="card-3d-inner"><div class="card-3d-front" style="background:linear-gradient(135deg,#00f2fe,#4facfe);color:#06070a;padding:1.25rem;border-radius:14px;display:flex;flex-direction:column;justify-content:space-between;"><div style="display:flex;justify-content:space-between;"><span style="font-weight:900;">VIP PASS</span><span>✦✦✦</span></div><strong style="font-size:1.1rem;">Alex Rivera</strong></div><div class="card-3d-back" style="background:#0b0d17;border:1px solid #00f2fe;color:#fff;padding:1.25rem;border-radius:14px;display:flex;flex-direction:column;justify-content:space-between;"><p style="font-size:0.8rem;color:#94a3b8;">ID: #9942-UB</p><div style="font-size:0.75rem;color:#00f2fe;">ALL ACCESS GRANTED</div></div></div></div>',
+    preview: '<div class="card-3d-flip" style="width:160px;height:100px;cursor:pointer;"><div class="card-3d-inner"><div class="card-3d-front" style="background:linear-gradient(135deg,#ff007f,#7928ca);color:#fff;padding:0.75rem;border-radius:10px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 8px 20px rgba(255,0,127,0.3);"><div style="display:flex;justify-content:space-between;font-size:0.65rem;font-weight:800;"><span>VIP ACCESS</span><span>✦</span></div><strong style="font-size:0.82rem;">Alex Rivera</strong></div><div class="card-3d-back" style="background:#090a14;border:1.5px solid #00f2fe;color:#00f2fe;padding:0.75rem;border-radius:10px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;"><span style="font-size:0.65rem;color:#94a3b8;">SECURE CHIP</span><strong style="font-size:0.78rem;margin-top:2px;">#0042-VERIFIED</strong></div></div></div>',
+  },
+  {
+    name: 'Interactive 3D Book',
+    desc: "Hover or click to flip the realistic 3D hardbound cover and turn interior pages in pure CSS.",
+    category: '3d',
+    snippet: '<div class="book-3d" onclick="this.classList.toggle(\'is-open\')"><div class="book-cover"><span class="vibe-badge">VOL. I</span><h3 style="color:#fff;font-size:1.3rem;margin-top:8px;">CSS FREEDOM</h3><small style="color:#94a3b8;">Hover to open</small></div><div class="book-pages"><div class="page --page1"><h4 style="color:#0f172a;">Chapter 1</h4><p style="font-size:0.85rem;color:#334155;margin-top:6px;">Zero JS transforms with preserve-3d.</p></div><div class="page --page2"><h4 style="color:#0f172a;">Chapter 2</h4><p style="font-size:0.85rem;color:#334155;margin-top:6px;">You own your code forever.</p></div></div></div>',
+    preview: '<div class="book-3d" style="width:105px;height:130px;margin:0;cursor:pointer;"><div class="book-cover" style="padding:0.65rem;background:linear-gradient(135deg,#1e1b4b,#312e81);border:1px solid #6366f1;"><span style="background:#6366f1;color:#fff;font-size:0.5rem;font-weight:800;padding:1px 4px;border-radius:2px;">VOL. I</span><strong style="color:#fff;font-size:0.75rem;display:block;margin-top:6px;font-family:serif;">CSS ART</strong><small style="color:#a5b4fc;font-size:0.55rem;">Hover to open</small></div><div class="book-pages"><div class="page --page1" style="padding:0.5rem;"><strong style="font-size:0.6rem;color:#0f172a;">Chap. 1</strong><p style="font-size:0.52rem;color:#475569;margin-top:2px;">Pure CSS 3D pages.</p></div></div></div>',
+  },
+  {
+    name: '3D Photo Fan Stack Deck',
+    desc: 'Three stacked photography cards that dynamically fan out with spatial perspective on hover.',
+    category: '3d',
+    snippet: '<div class="image-stack-3d"><div class="stack-item --back"><img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=300&auto=format&fit=crop&q=80" alt="Venice" style="width:100%;height:100%;object-fit:cover;border-radius:12px;" /></div><div class="stack-item --middle"><img src="https://images.unsplash.com/photo-1503899036084-c55cdd92da26?w=300&auto=format&fit=crop&q=80" alt="Tokyo" style="width:100%;height:100%;object-fit:cover;border-radius:12px;" /></div><div class="stack-item --front"><img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=300&auto=format&fit=crop&q=80" alt="Alps" style="width:100%;height:100%;object-fit:cover;border-radius:12px;" /></div></div>',
+    preview: '<div class="image-stack-3d" style="width:125px;height:90px;margin:0;cursor:pointer;"><div class="stack-item --back"><img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=200&auto=format&fit=crop&q=80" alt="Venice" style="width:100%;height:100%;object-fit:cover;border-radius:8px;" /></div><div class="stack-item --middle"><img src="https://images.unsplash.com/photo-1503899036084-c55cdd92da26?w=200&auto=format&fit=crop&q=80" alt="Tokyo" style="width:100%;height:100%;object-fit:cover;border-radius:8px;" /></div><div class="stack-item --front"><img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=200&auto=format&fit=crop&q=80" alt="Alps" style="width:100%;height:100%;object-fit:cover;border-radius:8px;border:1px solid rgba(255,255,255,0.4);" /></div></div>',
+  },
+  {
+    name: '3D Orbital Planet Carousel',
+    desc: 'Orbiting ring carousel that pauses smoothly on hover in pure CSS.',
+    category: '3d',
+    snippet: '<div class="carousel-3d"><div class="carousel-3d-container"><div class="carousel-3d-item"><span>1. Vibe</span></div><div class="carousel-3d-item"><span>2. Glow</span></div><div class="carousel-3d-item"><span>3. Float</span></div><div class="carousel-3d-item"><span>4. Shine</span></div><div class="carousel-3d-item"><span>5. Pure</span></div></div></div>',
+    preview: '<div class="carousel-3d" style="width:120px;height:70px;margin:0;"><div class="carousel-3d-container"><div class="carousel-3d-item" style="font-size:0.6rem;padding:4px 6px;">Orbit 1</div><div class="carousel-3d-item" style="font-size:0.6rem;padding:4px 6px;">Orbit 2</div><div class="carousel-3d-item" style="font-size:0.6rem;padding:4px 6px;">Orbit 3</div><div class="carousel-3d-item" style="font-size:0.6rem;padding:4px 6px;">Orbit 4</div></div></div>',
+  },
+  {
+    name: '3D Rotating Cube',
+    desc: 'Auto-rotating six-face 3D CSS cube with hardware-accelerated perspective camera.',
+    category: '3d',
+    snippet: '<div class="cube-3d-scene"><div class="cube-3d"><div class="cube-face --front"><h3 class="text-gradient">3D</h3></div><div class="cube-face --back"><h3 class="text-cyber">CSS</h3></div><div class="cube-face --left"><h3 class="text-neon">GPU</h3></div><div class="cube-face --right"><h3 class="text-fire">ART</h3></div><div class="cube-face --top"><h3>TOP</h3></div><div class="cube-face --bottom"><h3>BOT</h3></div></div></div>',
+    preview: '<div class="cube-3d-scene" style="width:75px;height:75px;margin:0;"><div class="cube-3d" style="width:55px;height:55px;"><div class="cube-face --front" style="background:#111420;border:1px solid #00f2fe;"><span style="font-size:0.75rem;font-weight:900;color:#00f2fe;">3D</span></div><div class="cube-face --back" style="background:#111420;border:1px solid #ff007f;"><span style="font-size:0.75rem;font-weight:900;color:#ff007f;">CSS</span></div><div class="cube-face --left" style="background:#111420;border:1px solid #7928ca;"><span style="font-size:0.75rem;font-weight:900;color:#a78bfa;">GPU</span></div><div class="cube-face --right" style="background:#111420;border:1px solid #f7ba2c;"><span style="font-size:0.75rem;font-weight:900;color:#f7ba2c;">ART</span></div><div class="cube-face --top" style="background:#090a10;"></div><div class="cube-face --bottom" style="background:#090a10;"></div></div></div>',
+  },
+  {
+    name: 'Photoshop Layer Canvas',
+    desc: 'Photoshop-grade layer sandwich blending background, middle, and foreground with screen blend modes.',
+    category: '3d',
+    snippet: '<div class="canvas" style="min-height:220px;position:relative;"><div class="layer-back bg-gradient --mesh"></div><div class="layer-mid flex center"><h2 class="text-gradient">CREATIVE</h2></div><div class="layer-front flex justify-between p-4"><span class="vibe-badge">.blend-screen</span></div></div>',
+    preview: '<div class="canvas" style="width:100%;max-width:190px;height:75px;background:linear-gradient(135deg,#1f1c2c,#928dab);border-radius:8px;position:relative;display:flex;align-items:center;justify-content:center;"><span class="text-gradient --sunset" style="font-size:1.1rem;font-weight:900;">PURE ART</span></div>',
+  },
+
+  // ── RETRO ───────────────────────────────────────────────────
+  {
+    name: 'Modern GPU Marquee',
+    desc: "Continuous hardware-accelerated horizontal scrolling marquee with hover pause.",
+    category: 'retro',
+    snippet: '<div class="marquee" style="background:#000;color:#00f2fe;padding:8px;"><span>★ PURE CSS HARDWARE ACCELERATED MARQUEE ★</span></div>',
+    preview: '<div class="marquee" style="color:#00f2fe;font-size:0.75rem;background:#000;padding:4px;border:1px solid rgba(0,242,254,0.3);width:100%;"><span>★ SCROLLING MARQUEE BANNER ★</span></div>',
+  },
+  {
+    name: 'Windows 95 Window Frame',
+    desc: "Authentic beveled Windows 95 dialog frame with inset borders and control buttons.",
+    category: 'retro',
+    snippet: '<div class="window-95"><div class="window-titlebar"><span class="window-title">SYSTEM.EXE</span><div class="window-buttons"><button class="win-btn">_</button><button class="win-btn">□</button><button class="win-btn win-close">×</button></div></div><div class="window-content p-4"><p>Classic Windows 95 component</p></div></div>',
+    preview: '<div class="window-95" style="width:100%;max-width:180px;"><div class="window-titlebar" style="padding:2px 4px;"><span class="window-title" style="font-size:0.68rem;">APP.EXE</span><div class="window-buttons"><button class="win-btn">_</button><button class="win-btn win-close">×</button></div></div><div class="window-content" style="padding:6px;font-size:0.7rem;color:#000;background:#c0c0c0;"><span style="font-weight:700;">OK</span></div></div>',
+  },
+  {
+    name: 'CRT Phosphor Terminal (Green)',
+    desc: "Curved CRT monitor viewport with green phosphor scanline overlay and glow effect.",
+    category: 'retro',
+    snippet: '<div class="crt-screen crt-scanlines crt-flicker crt--green p-6"><p class="crt-glow">&gt; Kernel initialized...<br>&gt; Zero JS loaded.<br>&gt; Status: Online</p></div>',
+    preview: '<div class="crt-screen crt-scanlines crt--green" style="padding:0.65rem;min-height:75px;font-size:0.7rem;width:100%;max-width:190px;"><span class="crt-glow">&gt; SYSTEM ONLINE</span><br><small style="opacity:0.8;">&gt; Green Phosphor CRT</small></div>',
+  },
+  {
+    name: 'CRT Amber Terminal Monitor',
+    desc: "Warm amber monochrome CRT scanline display with vintage phosphor persistence.",
+    category: 'retro',
+    snippet: '<div class="crt-screen crt-scanlines crt-flicker crt--amber p-6"><p class="crt-glow">&gt; VINTAGE AMBER DISPLAY<br>&gt; Baud: 9600</p></div>',
+    preview: '<div class="crt-screen crt-scanlines crt--amber" style="padding:0.65rem;min-height:75px;font-size:0.7rem;width:100%;max-width:190px;"><span class="crt-glow">&gt; AMBER DISPLAY</span><br><small style="opacity:0.8;">&gt; Baud: 9600 OK</small></div>',
+  },
+  {
+    name: 'Winamp Media Player',
+    desc: "Classic 2005 Winamp media player skin with animated equalizer bars.",
+    category: 'retro',
+    snippet: '<div class="winamp-player"><div class="winamp-display"><span>1. Track_Vibes.mp3</span></div><div class="winamp-eq"><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div></div></div>',
+    preview: '<div class="winamp-player" style="max-width:170px;width:100%;"><div class="winamp-display" style="font-size:0.65rem;"><span>1. Symphony.mp3</span></div><div class="winamp-eq"><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div></div></div>',
+  },
+  {
+    name: 'Retro Visitor Counter',
+    desc: "90s LED-style visitor counter badge. Classic web nostalgia staple.",
+    category: 'retro',
+    snippet: '<div class="visitor-counter"><span style="color:#aaa;font-size:0.75rem;">VISITORS:</span><span class="counter-digits">004299</span></div>',
+    preview: '<div class="visitor-counter" style="margin:0;"><span style="color:#94a3b8;font-size:0.65rem;">VISITORS:</span><span class="counter-digits" style="font-size:0.85rem;">004299</span></div>',
+  },
+
+  // ── MOTION & FX ──────────────────────────────────────────────
+  {
+    name: 'Pure CSS Typewriter Headline',
+    desc: "Hardware-accelerated typewriter animation with blinking cursor in pure CSS.",
+    category: 'particles',
+    snippet: '<h1 class="text-animate --typewriter" style="font-size:2rem;">Hello World ✨</h1>',
+    preview: '<div style="padding:0.5rem;text-align:center;"><span class="text-animate --typewriter" style="font-size:1.1rem;font-weight:900;color:#00f2fe;">Pure CSS Motion</span></div>',
+  },
+  {
+    name: 'Twinkling 3D Stars',
+    desc: "Pure CSS twinkling celestial starfield with varying opacity cycles.",
+    category: 'particles',
+    snippet: '<div class="particles-stars" style="min-height:120px;"><span class="star --twinkle-1">✦</span><span class="star --twinkle-2">✧</span><span class="star --twinkle-3">✨</span></div>',
+    preview: '<div class="particles-stars" style="min-height:85px;width:100%;position:relative;display:flex;align-items:center;justify-content:center;"><span class="star --twinkle-1" style="color:#00f2fe;font-size:1.4rem;">✦</span><span class="star --twinkle-2" style="color:#ff007f;font-size:1rem;margin-left:14px;">✧</span><span class="star --twinkle-3" style="color:#ffff00;font-size:1.2rem;margin-left:14px;">✨</span></div>',
+  },
+  {
+    name: 'Floating Particle Universe',
+    desc: "Pure CSS 3D floating particles with slow/medium/fast/spin/orbit motion modifiers.",
+    category: 'particles',
+    snippet: '<div class="particles-3d" style="min-height:200px;"><div class="particle --float-slow">✦</div><div class="particle --float-medium">✧</div><div class="particle --spin">💫</div><div class="particle --orbit">✨</div></div>',
+    preview: '<div class="particles-3d" style="min-height:85px;width:100%;background:#06070a;border-radius:10px;border:1px solid rgba(255,255,255,0.08);"><div class="particle --float-slow">✦</div><div class="particle --spin">💫</div><div class="particle --orbit">✨</div></div>',
+  },
+  {
+    name: 'Stacked Polaroid Gallery',
+    desc: "Scattered authentic polaroid photo frames with rotational offsets and spring hover elevation.",
+    category: 'particles',
+    snippet: '<div class="polaroid-stack"><figure class="polaroid --rotate-left"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&auto=format&fit=crop&q=80" alt="Beach" /><figcaption>Summer Coast</figcaption></figure><figure class="polaroid --on-top"><img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=400&auto=format&fit=crop&q=80" alt="Roadtrip" /><figcaption>Pacific Highway</figcaption></figure></div>',
+    preview: '<div class="polaroid-stack" style="min-height:105px;margin:0;cursor:pointer;"><figure class="polaroid --rotate-left" style="width:75px;padding:4px 4px 14px;box-shadow:0 6px 15px rgba(0,0,0,0.5);"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=150&auto=format&fit=crop&q=80" alt="Beach" style="width:100%;aspect-ratio:1/1;object-fit:cover;" /><figcaption style="font-size:0.5rem;font-family:sans-serif;">Summer</figcaption></figure><figure class="polaroid --on-top" style="width:75px;padding:4px 4px 14px;margin-left:-25px;box-shadow:0 10px 20px rgba(0,0,0,0.6);"><img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=150&auto=format&fit=crop&q=80" alt="Roadtrip" style="width:100%;aspect-ratio:1/1;object-fit:cover;" /><figcaption style="font-size:0.5rem;font-family:sans-serif;">Roadtrip</figcaption></figure></div>',
+  },
+
+  // ── BADGES & SHADERS ──────────────────────────────────────────
+  {
+    name: 'Pulsing Status Dots',
+    desc: "Live status indicators with soft and neon glow pulses for monitoring and dashboards.",
+    category: 'badges',
+    snippet: '<div class="flex items-center gap-2"><span class="blink" style="color:#10b981;">●</span><span>Production Healthy</span></div>',
+    preview: '<div style="display:flex;flex-direction:column;gap:0.4rem;"><div class="flex items-center gap-2"><span class="blink" style="color:#10b981;font-size:0.9rem;">●</span><span style="font-size:0.75rem;color:#94a3b8;">SYSTEM OK</span></div><div class="flex items-center gap-2"><span class="blink --neon" style="color:#00f2fe;font-size:0.9rem;">●</span><span style="font-size:0.75rem;color:#00f2fe;">NEON SYNC</span></div></div>',
+  },
+  {
+    name: 'Curated Gradient Badges',
+    desc: "Capsule tag chips styled in curated neon, sunset, ocean, and cyber palettes.",
+    category: 'badges',
+    snippet: '<span class="vibe-badge vibe-badge--neon">NEON</span> <span class="vibe-badge vibe-badge--sunset">SUNSET</span> <span class="vibe-badge">DEFAULT</span>',
+    preview: '<div style="display:flex;gap:0.35rem;flex-wrap:wrap;justify-content:center;"><span class="vibe-badge vibe-badge--neon" style="font-size:0.62rem;">NEON</span><span class="vibe-badge vibe-badge--sunset" style="font-size:0.62rem;">SUNSET</span><span class="vibe-badge vibe-badge--cyber" style="font-size:0.62rem;">CYBER</span></div>',
+  },
+  {
+    name: 'Cosmic Text Shaders',
+    desc: "High-impact pure CSS text gradients and glow shaders for heroic typography.",
+    category: 'badges',
+    snippet: '<h2 class="text-gradient --ocean">OCEAN GLOW</h2> <h2 class="text-fire">SOLAR FIRE</h2> <h2 class="text-ice">CRYSTAL ICE</h2>',
+    preview: '<div style="text-align:center;line-height:1.3;"><span class="text-fire font-bold" style="font-size:0.9rem;display:block;">SOLAR FLARE</span><span class="text-ice font-bold" style="font-size:0.9rem;display:block;">CRYSTAL ICE</span><span class="text-neon font-bold" style="font-size:0.9rem;display:block;">CYAN GLOW</span></div>',
+  },
+];
+
+---
+
+<DocsLayout
+  title="Component Library — Unboilerplate"
+  description="Production-ready pure CSS building blocks. Buttons, cards, 3D elements, retro marquees, and dynamic particles with zero JavaScript."
+  activePage="components"
+  tocItems={tocItems}
+>
+
+  <!-- SIDEBAR -->
+  <div slot="sidebar">
+    <p class="sidebar-group-title">Components</p>
+    <div class="sidebar-links">
+      <a href="#overview"  class="sidebar-link active">Overview</a>
+      <a href="#buttons"   class="sidebar-link">Buttons &amp; Controls</a>
+      <a href="#cards"     class="sidebar-link">Cards &amp; Surfaces</a>
+      <a href="#3d"        class="sidebar-link">3D Spatial</a>
+      <a href="#retro"     class="sidebar-link">Retro &amp; Vintage</a>
+      <a href="#particles" class="sidebar-link">Motion &amp; FX</a>
+      <a href="#badges"    class="sidebar-link">Badges &amp; Shaders</a>
+    </div>
+
+    <p class="sidebar-group-title" style="margin-top:1.5rem;">Explore</p>
+    <div class="sidebar-links">
+      <a href="/"           class="sidebar-link">Get Started</a>
+      <a href="/playground" class="sidebar-link" style="color:#00f2fe;font-weight:700;">Playground</a>
+      <a href="/templates"  class="sidebar-link">Templates</a>
+      <a href="/docs"       class="sidebar-link">API Docs</a>
+      <a href="/cheatsheet" class="sidebar-link">Class Cheatsheet</a>
+      <a href="/showcase"   class="sidebar-link">Showcase</a>
+    </div>
+
+    <p class="sidebar-group-title" style="margin-top:1.5rem;">Quick Links</p>
+    <div class="sidebar-links">
+      <a href="/docs" class="sidebar-link">API Reference</a>
+      <a href="https://github.com/EldrexDelosReyesBula/unboilerplate" class="sidebar-link" target="_blank">GitHub Repository</a>
+    </div>
+  </div>
+
+  <!-- TOC CARD -->
+  <div slot="toc-card" style="margin-top:2rem;padding:1rem;background:rgba(255,0,122,0.06);border:1px solid rgba(255,0,122,0.2);border-radius:12px;">
+    <p style="font-size:0.78rem;font-weight:700;color:#fff;margin-bottom:0.5rem;">Zero JavaScript</p>
+    <p style="font-size:0.75rem;color:#64748b;line-height:1.5;">Every component runs purely on standard HTML5 and modern CSS3 specification.</p>
+    <a href="/cheatsheet" style="display:block;margin-top:0.75rem;font-size:0.78rem;color:#ff007a;text-decoration:none;font-weight:700;">Explore All Classes →</a>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div id="overview">
+    <div class="docs-breadcrumb">
+      <a href="/" style="color:#64748b;text-decoration:none;">Unboilerplate</a>
+      <span>›</span>
+      <span>Components</span>
+    </div>
+
+    <h1 class="docs-page-title text-gradient --ocean">Component Library</h1>
+    <p class="docs-lead">Pre-built interactive UI elements built entirely in pure CSS. Copy the markup and start building.</p>
+
+    <div class="how-to-box">
+      <strong>How to use:</strong> Each component is a single HTML class. Add it to any element in your markup. Pair with utility classes (<code>.p-6</code>, <code>.stack</code>, <code>.flex</code>) for spacing and layout. Override CSS variables inline for custom colors.
+    </div>
+
+    <!-- Filter Strip -->
+    <div class="filter-strip" id="filter-strip" style="margin-top:1.5rem;">
+      <button class="filter-btn active" data-filter="all">All Components</button>
+      <button class="filter-btn" data-filter="buttons">Buttons &amp; Controls</button>
+      <button class="filter-btn" data-filter="cards">Cards &amp; Surfaces</button>
+      <button class="filter-btn" data-filter="3d">3D Spatial</button>
+      <button class="filter-btn" data-filter="retro">Retro</button>
+      <button class="filter-btn" data-filter="particles">Motion &amp; FX</button>
+      <button class="filter-btn" data-filter="badges">Badges &amp; Shaders</button>
+    </div>
+  </div>
+
+
+  <!-- Sections per category with How-To callouts -->
+  {(['buttons','cards','3d','retro','particles','badges'] as const).map(cat => (
+    <div>
+      <hr class="section-divider" id={cat} />
+      <div class="how-to-box" style={`margin-bottom:1.25rem; ${cat === '3d' ? 'border-color:rgba(0,242,254,0.3);background:rgba(0,242,254,0.06);' : cat === 'retro' ? 'border-color:rgba(255,200,0,0.3);background:rgba(255,200,0,0.04);' : cat === 'badges' ? 'border-color:rgba(255,0,127,0.3);background:rgba(255,0,127,0.04);' : ''}`}>
+        {cat === 'buttons' && (<><strong>Buttons &amp; Controls</strong> — Drop a button class on any <code>&lt;button&gt;</code> element. The <code>:active</code> press state and hover lift are built-in. No extra markup needed.</>)}
+        {cat === 'cards' && (<><strong>Cards &amp; Surfaces</strong> — Apply to any <code>&lt;div&gt;</code> container. Combine with <code>.p-6</code> for padding, <code>.stack</code> for internal layout. Override <code>--card-bg</code> to change background.</>)}
+        {cat === '3d' && (<><strong>3D Spatial</strong> — These use <code>transform-style: preserve-3d</code> and GPU compositing. Hover and click interactions are purely CSS-driven with hardware matrices.</>)}
+        {cat === 'retro' && (<><strong>Retro / Time Machine</strong> — Drop the class on a container and add the correct child elements shown in the snippets. Mix with <code>.marquee--pause-hover</code> to pause on hover.</>)}
+        {cat === 'particles' && (<><strong>Motion &amp; FX</strong> — Add <code>.particle</code> with a motion modifier (<code>--float-slow</code>, <code>--spin</code>, <code>--orbit</code>) inside a <code>.particles-3d</code> container, or <code>.text-animate.--typewriter</code> on headings.</>)}
+        {cat === 'badges' && (<><strong>Badges, Chips &amp; Typography Shaders</strong> — Add tag chips (<code>.vibe-badge</code>, <code>.vibe-badge--neon</code>) or headline text shaders (<code>.text-gradient</code>, <code>.text-fire</code>, <code>.text-ice</code>) for vibrant accents.</>)}
+      </div>
+      <div class="comp-grid">
+        {components.filter(c => c.category === cat).map(comp => (
+          <div class="comp-card" data-category={comp.category}>
+            <div>
+              <div class="comp-preview-box" set:html={comp.preview} />
+              <p class="comp-name">{comp.name}</p>
+              <p class="comp-desc">{comp.desc}</p>
+            </div>
+            <button
+              class="vibe-btn --sm copy-btn"
+              data-snippet={comp.snippet}
+              style="margin-top:1rem;"
+            >
+              Copy HTML
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
+  ))}
+
+
+  <hr class="section-divider" />
+  <div style="display:flex;gap:0.75rem;flex-wrap:wrap;align-items:center;">
+    <a href="/playground" class="vibe-btn hover-bounce">Edit in Playground</a>
+    <a href="/templates" class="pill-tab">Starter Templates →</a>
+    <a href="/cheatsheet" class="pill-tab">Class Cheatsheet →</a>
+  </div>
+
+</DocsLayout>
+
+<div id="toast" style="display:none;"></div>
+
+<script>
+  // Filter
+  const strip = document.getElementById('filter-strip')!;
+  strip.addEventListener('click', e => {
+    const btn = (e.target as HTMLElement).closest<HTMLButtonElement>('.filter-btn');
+    if (!btn) return;
+    strip.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter!;
+    document.querySelectorAll<HTMLElement>('.comp-card').forEach(card => {
+      card.style.display = (f === 'all' || card.dataset.category === f) ? '' : 'none';
+    });
+  });
+
+  // Copy
+  document.querySelectorAll<HTMLButtonElement>('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      navigator.clipboard.writeText(btn.dataset.snippet!).then(() => {
+        (window as any).ubToast?.('Copied snippet to clipboard');
+      });
+    });
+  });
+</script>
+
+<style>
+  .section-divider { border: none; border-top: 1px solid rgba(255,255,255,0.07); margin: 2.5rem 0; }
+  .how-to-box {
+    background: rgba(0,242,254,0.04);
+    border: 1px solid rgba(0,242,254,0.18);
+    border-radius: 12px;
+    padding: 0.9rem 1.1rem;
+    font-size: 0.88rem;
+    color: #cbd5e1;
+    line-height: 1.6;
+  }
+  .how-to-box strong { color: #00f2fe; }
+  .how-to-box code { color: #00f2fe; background: rgba(0,242,254,0.08); padding: 1px 5px; border-radius: 4px; font-size: 0.83em; }
+  .comp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 1.25rem; }
+  .comp-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 16px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: border-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  }
+  .comp-card:hover {
+    border-color: rgba(0,242,254,0.35);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  }
+  .comp-preview-box {
+    background: radial-gradient(circle at 50% 50%, #0d0f1a 0%, #06070a 100%);
+    border-radius: 12px;
+    padding: 1.25rem 1rem;
+    min-height: 135px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.85rem;
+    border: 1px solid rgba(255,255,255,0.06);
+    overflow: hidden;
+    perspective: 900px;
+  }
+  .comp-name { font-weight: 800; font-size: 0.92rem; color: #f3f4f8; }
+  .comp-desc { font-size: 0.82rem; color: #94a3b8; line-height: 1.5; margin-top: 0.35rem; }
+  .filter-strip { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .filter-btn {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #94a3b8;
+    padding: 0.35rem 0.9rem;
+    border-radius: 100px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+  }
+  .filter-btn:hover, .filter-btn.active {
+    background: rgba(0,242,254,0.12);
+    border-color: rgba(0,242,254,0.4);
+    color: #00f2fe;
+  }
+</style>
+

@@ -1,0 +1,137 @@
+/**
+ * UNBOILERPLATE - Component Presets: Forms
+ * "One-Class Wonder" Form System & Presets
+ * .form, .input, .input.floating, .select, .switch
+ */
+
+/* ==========================================================================
+   ONE-CLASS WONDER: .form, .input, .select, .switch
+   ========================================================================== */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ub-space-4, 1rem);
+  width: 100%;
+}
+
+.input,
+.vibe-input {
+  width: 100%;
+  min-height: 44px;
+  padding: var(--ub-space-3, 0.75rem) var(--ub-space-4, 1rem);
+  font-family: var(--ub-font-family-sans, system-ui, sans-serif);
+  font-size: var(--ub-font-base, 1rem);
+  color: var(--ub-text, #f1f5f9);
+  background: var(--ub-bg-surface, rgba(255, 255, 255, 0.05));
+  border: 1px solid var(--ub-border, rgba(255, 255, 255, 0.12));
+  border-radius: var(--ub-radius-md, 0.5rem);
+  outline: none;
+  box-shadow: var(--ub-shadow-inner-glass, inset 0 2px 4px rgba(0, 0, 0, 0.06));
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.input:focus,
+.vibe-input:focus {
+  border-color: var(--ub-accent-cyan, #00f2fe);
+  box-shadow: 0 0 0 3px rgba(0, 242, 254, 0.25), 0 0 15px rgba(0, 242, 254, 0.15);
+}
+
+.input::placeholder {
+  color: var(--ub-text-muted, rgba(255, 255, 255, 0.45));
+}
+
+textarea.input,
+.vibe-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.input.floating {
+  padding-top: var(--ub-space-5, 1.25rem);
+  padding-bottom: var(--ub-space-2, 0.5rem);
+}
+
+.select,
+.vibe-select {
+  width: 100%;
+  min-height: 44px;
+  padding: var(--ub-space-3, 0.75rem) var(--ub-space-4, 1rem);
+  font-family: var(--ub-font-family-sans, system-ui, sans-serif);
+  font-size: var(--ub-font-base, 1rem);
+  color: var(--ub-text, #f1f5f9);
+  background-color: var(--ub-bg-surface, rgba(255, 255, 255, 0.05));
+  border: 1px solid var(--ub-border, rgba(255, 255, 255, 0.12));
+  border-radius: var(--ub-radius-md, 0.5rem);
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.select:focus {
+  border-color: var(--ub-accent-cyan, #00f2fe);
+  box-shadow: 0 0 0 3px rgba(0, 242, 254, 0.25);
+}
+
+.switch,
+.vibe-switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 48px;
+  height: 26px;
+  cursor: pointer;
+  user-select: none;
+}
+.switch input,
+.vibe-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.slider,
+.vibe-slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: var(--ub-bg-surface, rgba(255, 255, 255, 0.1));
+  border: 1px solid var(--ub-border, rgba(255, 255, 255, 0.15));
+  border-radius: var(--ub-radius-pill, 9999px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.slider::before,
+.vibe-slider::before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.switch input:checked + .slider,
+.switch input:checked + .vibe-slider,
+.vibe-switch input:checked + .vibe-slider {
+  background: var(--ub-primary, linear-gradient(135deg, #00f2fe 0%, #ff007f 100%));
+  border-color: transparent;
+}
+.switch input:checked + .slider::before,
+.switch input:checked + .vibe-slider::before,
+.vibe-switch input:checked + .vibe-slider::before {
+  transform: translateX(22px);
+}
+
+.vibe-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ub-space-2, 0.5rem);
+  width: 100%;
+}
+
+.vibe-label {
+  font-size: var(--ub-font-sm, 0.875rem);
+  font-weight: 500;
+  color: var(--ub-text, #f1f5f9);
+}
+

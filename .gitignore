@@ -1,0 +1,68 @@
+# ==========================================================================
+# UNBOILERPLATE — .gitignore
+# ==========================================================================
+
+# ── Dependencies ────────────────────────────────────────────────────────
+node_modules/
+package-lock.json.bak
+.pnpm-store/
+.yarn/cache/
+.yarn/unplugged/
+
+# ── Build & Documentation Artifacts ─────────────────────────────────────
+# Note: Keep root `dist/` tracked for CDN releases and direct npm distribution.
+# Ignore generated documentation static builds and dev caches.
+docs/dist-docs/
+docs/.astro/
+.astro/
+
+# ── DevDiff Memory & Agent Sessions ─────────────────────────────────────
+.devdiff/memory/
+.gemini/
+
+# ── Operating System & File System Junk ─────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ── Editor & IDE Configurations ─────────────────────────────────────────
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+
+# ── Environment & Secrets ──────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# ── Logs & Debugging ───────────────────────────────────────────────────
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ── Caches & Temporary Files ───────────────────────────────────────────
+.cache/
+.tmp/
+tmp/
+temp/
+.turbo/
+.parcel-cache/
+.devdiffignore
+.devdiff.config.js
+.devdiff/

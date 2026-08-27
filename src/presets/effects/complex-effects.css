@@ -1,0 +1,166 @@
+/**
+ * UNBOILERPLATE - Presets: Complex Visual Effects
+ * Glassmorphism, Neumorphism, Claymorphism, Aurora Mesh, and Extruded 3D Text.
+ */
+
+/* ==========================================================================
+   1. ULTRA GLASSMORPHISM
+   ========================================================================== */
+.effect-glass,
+.glass-morphism {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.35), inset 0 1px 1px 0 rgba(255, 255, 255, 0.25);
+  border-radius: var(--ub-radius-lg);
+}
+
+/* ==========================================================================
+   2. NEUMORPHISM (SOFT UI 3D)
+   ========================================================================== */
+.effect-neumorphic,
+.neo-morphism {
+  background: #181a24;
+  border-radius: var(--ub-radius-xl);
+  box-shadow: 12px 12px 24px #0c0d13,
+              -12px -12px 24px #242735;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  color: var(--ub-text);
+  transition: all var(--ub-transition-base);
+}
+
+.effect-neumorphic--inset,
+.neo-morphism--inset {
+  background: #181a24;
+  border-radius: var(--ub-radius-xl);
+  box-shadow: inset 8px 8px 16px #0c0d13,
+              inset -8px -8px 16px #242735;
+  border: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+.effect-neumorphic:hover {
+  box-shadow: 16px 16px 32px #0a0b10,
+              -16px -16px 32px #262938;
+}
+
+.effect-neumorphic:active {
+  box-shadow: inset 6px 6px 12px #0c0d13,
+              inset -6px -6px 12px #242735;
+}
+
+/* Light Mode Neumorphism */
+[data-theme="light"] .effect-neumorphic {
+  background: #e6ebf4;
+  box-shadow: 10px 10px 20px #c2c7cf,
+              -10px -10px 20px #ffffff;
+  color: #1e293b;
+}
+
+/* ==========================================================================
+   3. CLAYMORPHISM (INFLATED 3D CLAY)
+   ========================================================================== */
+.effect-clay,
+.clay-morphism {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05)), #25283b;
+  border-radius: var(--ub-radius-2xl);
+  box-shadow: 
+    16px 16px 32px 0 rgba(0, 0, 0, 0.35),
+    inset -8px -8px 16px 0 rgba(0, 0, 0, 0.4),
+    inset 8px 8px 16px 0 rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  transition: transform var(--ub-transition-spring), box-shadow var(--ub-transition-base);
+}
+
+.effect-clay:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 
+    20px 20px 40px 0 rgba(0, 0, 0, 0.45),
+    inset -8px -8px 16px 0 rgba(0, 0, 0, 0.4),
+    inset 8px 8px 16px 0 rgba(255, 255, 255, 0.25);
+}
+
+.effect-clay--pink {
+  background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
+  box-shadow: 
+    14px 14px 28px 0 rgba(255, 117, 140, 0.4),
+    inset -6px -6px 12px 0 rgba(180, 40, 70, 0.5),
+    inset 6px 6px 12px 0 rgba(255, 255, 255, 0.4);
+}
+
+/* ==========================================================================
+   4. AURORA & GRADIENT MESH
+   ========================================================================== */
+.effect-aurora,
+.aurora-bg {
+  position: relative;
+  background: #07080d;
+  overflow: hidden;
+}
+
+.effect-aurora::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 0, 127, 0.25), transparent 45%),
+              radial-gradient(circle at 70% 60%, rgba(0, 242, 254, 0.3), transparent 45%),
+              radial-gradient(circle at 40% 80%, rgba(157, 78, 221, 0.35), transparent 40%),
+              radial-gradient(circle at 80% 20%, rgba(255, 214, 10, 0.2), transparent 40%);
+  animation: ub-aurora-shift 12s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes ub-aurora-shift {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.15); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+.effect-mesh {
+  background-color: #0b0c16;
+  background-image: 
+    radial-gradient(at 10% 20%, rgba(255, 0, 127, 0.3) 0px, transparent 50%),
+    radial-gradient(at 90% 10%, rgba(0, 242, 254, 0.35) 0px, transparent 50%),
+    radial-gradient(at 50% 80%, rgba(121, 40, 202, 0.4) 0px, transparent 50%);
+}
+
+.effect-premium {
+  background: var(--ub-glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 242, 254, 0.25);
+}
+
+/* ==========================================================================
+   5. EXTRUDED 3D TEXT & TYPOGRAPHY EFFECTS
+   ========================================================================== */
+.text-3d {
+  font-weight: 900;
+  color: #ffffff;
+  text-shadow: 
+    0 1px 0 #cccccc,
+    0 2px 0 #c9c9c9,
+    0 3px 0 #bbbbbb,
+    0 4px 0 #b0b0b0,
+    0 5px 0 #a0a0a0,
+    0 6px 1px rgba(0, 0, 0, 0.1),
+    0 0 5px rgba(0, 0, 0, 0.1),
+    0 1px 3px rgba(0, 0, 0, 0.3),
+    0 3px 5px rgba(0, 0, 0, 0.2),
+    0 5px 10px rgba(0, 0, 0, 0.25),
+    0 10px 20px rgba(0, 0, 0, 0.35);
+}
+
+.text-stroke {
+  -webkit-text-stroke: 1.5px var(--ub-accent-cyan);
+  color: transparent;
+}
+
+.reflection {
+  -webkit-box-reflect: below 2px linear-gradient(transparent 60%, rgba(255, 255, 255, 0.25));
+}

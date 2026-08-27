@@ -1,0 +1,233 @@
+/**
+ * UNBOILERPLATE - Presets: Canvas & Photoshop-like Layer Blending System
+ * Digital canvas ratios, Photoshop-like art layers, blend modes, parallax scenes, and polaroid stacks.
+ */
+
+/* ==========================================================================
+   1. CANVAS RATIOS & PAPERS
+   ========================================================================== */
+.canvas {
+  position: relative;
+  width: 100%;
+  border-radius: var(--ub-radius-lg, 16px);
+  overflow: hidden;
+  background: var(--ub-bg-surface, #0d0f17);
+  border: 1px solid var(--ub-border, rgba(255, 255, 255, 0.08));
+  box-shadow: var(--ub-shadow-float, 0 20px 40px rgba(0, 0, 0, 0.4));
+  isolation: isolate;
+}
+
+.canvas-portrait {
+  aspect-ratio: 3 / 4;
+  max-width: 420px;
+}
+
+.canvas-landscape {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+}
+
+.canvas-square {
+  aspect-ratio: 1 / 1;
+  max-width: 480px;
+}
+
+.canvas-watercolor-paper {
+  background-color: #faf6ee;
+  background-image: radial-gradient(#ece3d0 15%, transparent 16%), radial-gradient(#e5dbc3 15%, transparent 16%);
+  background-size: 16px 16px;
+  background-position: 0 0, 8px 8px;
+  color: #2b2219;
+  border: 8px solid #ffffff;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+}
+
+.canvas-oil-canvas {
+  background-color: #f4eee1;
+  background-image: 
+    linear-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+  background-size: 6px 6px;
+  border: 12px solid #3d2b1f;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3), 0 15px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* ==========================================================================
+   2. DIRECT IMAGE LAYERING (Photoshop-like HTML Art)
+   ========================================================================== */
+.canvas > img,
+.canvas > div,
+.canvas > svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+}
+
+.layer-back {
+  z-index: 1;
+}
+
+.layer-mid {
+  z-index: 2;
+  object-fit: contain !important;
+}
+
+.layer-front {
+  z-index: 3;
+  object-fit: contain !important;
+}
+
+.layer-top {
+  z-index: 4;
+  object-fit: contain !important;
+}
+
+/* Legacy structured containers */
+.art-layers {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.art-layer--background { position: absolute; inset: 0; z-index: 1; }
+.art-layer--midground { position: absolute; inset: 0; z-index: 2; display: flex; align-items: center; justify-content: center; }
+.art-layer--foreground { position: absolute; inset: 0; z-index: 3; padding: var(--ub-space-6, 1.5rem); display: flex; flex-direction: column; justify-content: space-between; }
+.art-layer--overlay { position: absolute; inset: 0; z-index: 4; pointer-events: none; }
+
+/* ==========================================================================
+   3. BLEND MODES
+   ========================================================================== */
+.blend-multiply { mix-blend-mode: multiply; }
+.blend-screen { mix-blend-mode: screen; }
+.blend-overlay { mix-blend-mode: overlay; }
+.blend-soft-light { mix-blend-mode: soft-light; }
+.blend-color-dodge { mix-blend-mode: color-dodge; }
+.blend-luminosity { mix-blend-mode: luminosity; }
+.blend-difference { mix-blend-mode: difference; }
+.blend-hard-light { mix-blend-mode: hard-light; }
+.blend-color-burn { mix-blend-mode: color-burn; }
+
+/* ==========================================================================
+   4. PARALLAX SCENE (Pure CSS Layers)
+   ========================================================================== */
+.parallax-scene {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  min-height: 380px;
+  border-radius: var(--ub-radius-xl, 24px);
+  background: #06070a;
+}
+
+.parallax-scene > * {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.parallax-slow {
+  z-index: 1;
+  animation: ub-drift-slow 20s ease-in-out infinite alternate;
+}
+
+.parallax-medium {
+  z-index: 2;
+  animation: ub-drift-med 12s ease-in-out infinite alternate;
+}
+
+.parallax-fast {
+  z-index: 3;
+  animation: ub-drift-fast 6s ease-in-out infinite alternate;
+}
+
+.parallax-static {
+  z-index: 4;
+}
+
+@keyframes ub-drift-slow {
+  0% { transform: scale(1.05) translateY(0); }
+  100% { transform: scale(1.1) translateY(-12px); }
+}
+
+@keyframes ub-drift-med {
+  0% { transform: scale(1.08) translateY(4px) translateX(-6px); }
+  100% { transform: scale(1.12) translateY(-18px) translateX(6px); }
+}
+
+@keyframes ub-drift-fast {
+  0% { transform: scale(1.1) translateY(8px) translateX(-12px); }
+  100% { transform: scale(1.15) translateY(-26px) translateX(12px); }
+}
+
+/* ==========================================================================
+   5. STACKED POLAROIDS
+   ========================================================================== */
+.polaroid-stack {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2.5rem 1rem;
+  isolation: isolate;
+  min-height: 360px;
+}
+
+.polaroid-stack .polaroid,
+.gallery-polaroid .polaroid,
+.polaroid {
+  background: #ffffff;
+  padding: 12px 12px 36px 12px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28), 0 2px 6px rgba(0, 0, 0, 0.12);
+  border-radius: 2px;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease, z-index 0.35s ease;
+  cursor: pointer;
+  max-width: 240px;
+  position: relative;
+  display: inline-block;
+  color: #1a1a1a;
+  text-decoration: none;
+}
+
+.polaroid img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+  border-radius: 1px;
+}
+
+.polaroid figcaption,
+.polaroid .polaroid-caption {
+  font-family: 'Playfair Display', 'Caveat', 'Comic Sans MS', cursive, serif;
+  font-size: 0.95rem;
+  color: #333333;
+  text-align: center;
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+.polaroid.--rotate-left { transform: rotate(-6deg); }
+.polaroid.--rotate-right { transform: rotate(6deg); }
+.polaroid.--rotate-more { transform: rotate(-14deg); }
+.polaroid.--on-top { z-index: 10; transform: scale(1.04) rotate(1deg); }
+
+.polaroid:hover,
+.polaroid-stack .polaroid:hover {
+  transform: scale(1.1) rotate(0deg) !important;
+  z-index: 50 !important;
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.45);
+}
+
+.gallery-polaroid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  padding: 1.5rem 0;
+}

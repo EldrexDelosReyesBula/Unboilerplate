@@ -1,0 +1,168 @@
+/**
+ * UNBOILERPLATE - Presets: Pure CSS 3D Particle System
+ * Zero-JS 3D floating particles, stars, bubbles, confetti, and orbital dynamics.
+ */
+
+/* ==========================================================================
+   1. PARTICLE CONTAINER
+   ========================================================================== */
+.particles-3d,
+.particles-stars,
+.particles-bubbles,
+.particles-confetti {
+  position: relative;
+  width: 100%;
+  min-height: 260px;
+  overflow: hidden;
+  perspective: 1000px;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.particle,
+.star,
+.bubble,
+.confetti {
+  position: absolute;
+  user-select: none;
+  pointer-events: none;
+  font-size: 1.5rem;
+}
+
+/* ==========================================================================
+   2. PARTICLE 3D DYNAMICS
+   ========================================================================== */
+.particle.--float-slow {
+  top: 20%;
+  left: 25%;
+  animation: ub-particle-float 7s ease-in-out infinite;
+}
+
+.particle.--float-medium {
+  top: 50%;
+  left: 65%;
+  animation: ub-particle-float 4.5s ease-in-out infinite 1s;
+}
+
+.particle.--float-fast {
+  top: 70%;
+  left: 35%;
+  animation: ub-particle-float 2.8s ease-in-out infinite 0.5s;
+}
+
+.particle.--spin {
+  top: 30%;
+  right: 20%;
+  animation: ub-particle-spin 6s linear infinite;
+}
+
+.particle.--orbit {
+  top: 50%;
+  left: 50%;
+  animation: ub-particle-orbit 8s linear infinite;
+  transform-origin: 60px 60px;
+}
+
+/* ==========================================================================
+   3. STARS (Twinkle Dynamics)
+   ========================================================================== */
+.star.--twinkle-1 {
+  top: 15%;
+  left: 20%;
+  animation: ub-twinkle 2s ease-in-out infinite;
+  color: #ffd700;
+}
+
+.star.--twinkle-2 {
+  top: 45%;
+  left: 75%;
+  animation: ub-twinkle 3.2s ease-in-out infinite 0.7s;
+  color: #00f2fe;
+}
+
+.star.--twinkle-3 {
+  top: 75%;
+  left: 40%;
+  animation: ub-twinkle 1.8s ease-in-out infinite 1.2s;
+  color: #ff007a;
+}
+
+/* ==========================================================================
+   4. BUBBLES (Rising Dynamics)
+   ========================================================================== */
+.bubble.--rise-1 {
+  bottom: -10%;
+  left: 30%;
+  animation: ub-bubble-rise 5s ease-in infinite;
+}
+
+.bubble.--rise-2 {
+  bottom: -10%;
+  left: 55%;
+  animation: ub-bubble-rise 6.5s ease-in infinite 1.5s;
+}
+
+.bubble.--rise-3 {
+  bottom: -10%;
+  left: 75%;
+  animation: ub-bubble-rise 4.2s ease-in infinite 0.8s;
+}
+
+/* ==========================================================================
+   5. CONFETTI (Falling Dynamics)
+   ========================================================================== */
+.confetti.--fall-1 {
+  top: -10%;
+  left: 25%;
+  animation: ub-confetti-fall 4s ease-out infinite;
+}
+
+.confetti.--fall-2 {
+  top: -10%;
+  left: 50%;
+  animation: ub-confetti-fall 5.2s ease-out infinite 1s;
+}
+
+.confetti.--fall-3 {
+  top: -10%;
+  left: 80%;
+  animation: ub-confetti-fall 3.8s ease-out infinite 0.4s;
+}
+
+/* ==========================================================================
+   6. KEYFRAME ANIMATIONS
+   ========================================================================== */
+@keyframes ub-particle-float {
+  0%, 100% { transform: translateY(0) rotate(0deg) translateZ(0); }
+  50% { transform: translateY(-24px) rotate(180deg) translateZ(40px); }
+}
+
+@keyframes ub-particle-spin {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.2); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+@keyframes ub-particle-orbit {
+  0% { transform: rotate(0deg) translateX(45px) rotate(0deg); }
+  100% { transform: rotate(360deg) translateX(45px) rotate(-360deg); }
+}
+
+@keyframes ub-twinkle {
+  0%, 100% { opacity: 0.25; transform: scale(0.7) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1.3) rotate(45deg); filter: drop-shadow(0 0 10px currentColor); }
+}
+
+@keyframes ub-bubble-rise {
+  0% { transform: translateY(0) scale(0.6); opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translateY(-320px) scale(1.2) translateX(20px); opacity: 0; }
+}
+
+@keyframes ub-confetti-fall {
+  0% { transform: translateY(0) rotate(0deg) translateX(0); opacity: 1; }
+  100% { transform: translateY(340px) rotate(720deg) translateX(-30px); opacity: 0; }
+}

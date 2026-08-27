@@ -1,0 +1,287 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+
+const tocItems: Array<{ id: string; label: string }> = [];
+
+const classDatabase = [
+  // ── CORE & LAYOUT ─────────────────────────────────────────
+  { name: '.vibe-card',         cat: 'magic',   desc: 'Glassmorphic card surface with hover-lift & soft glow' },
+  { name: '.vibe-btn',          cat: 'magic',   desc: 'Tactile gradient button with spring hover physics' },
+  { name: '.vibe-badge',        cat: 'magic',   desc: 'Compact pill badge for labels, tags & chips' },
+  { name: '.vibe-input',        cat: 'magic',   desc: 'Frosted input field with neon focus-ring' },
+  { name: '.vibe-grid',         cat: 'magic',   desc: 'Fluid auto-fitting responsive grid' },
+  { name: '.stack',             cat: 'magic',   desc: 'Flexbox column layout' },
+  { name: '.stack-responsive',  cat: 'magic',   desc: 'Row on desktop, auto-stack column on mobile' },
+  { name: '.center',            cat: 'magic',   desc: 'Flexbox horizontal & vertical centering' },
+  { name: '.container',         cat: 'magic',   desc: 'Responsive max-width container with fluid padding' },
+  { name: '.flex-1',            cat: 'magic',   desc: 'Flex grow, shrink, and basis 0%' },
+
+  // ── EFFECTS & SURFACES ───────────────────────────────────
+  { name: '.effect-glass',      cat: 'effects', desc: 'Frosted backdrop blur with 1px luminous border' },
+  { name: '.effect-neon',       cat: 'effects', desc: 'High-voltage cyan glow box-shadow' },
+  { name: '.effect-hologram',   cat: 'effects', desc: 'Iridescent holographic shimmer gradient' },
+  { name: '.effect-retro',      cat: 'effects', desc: 'CRT phosphor scanline & flicker overlay' },
+  { name: '.hover-glow',        cat: 'effects', desc: 'Adds cyan neon bloom on hover' },
+  { name: '.hover-lift',        cat: 'effects', desc: 'Elevates element 6px with deep drop shadow' },
+  { name: '.hover-bounce',      cat: 'effects', desc: 'Playful spring bounce on hover' },
+  { name: '.gradient-aurora',   cat: 'effects', desc: 'Continuous flowing aurora borealis mesh' },
+  { name: '.gradient-sunset',   cat: 'effects', desc: 'Warm magenta-to-orange sunset sweep' },
+  { name: '.gradient-ocean',    cat: 'effects', desc: 'Deep electric cyan & royal blue sweep' },
+  { name: '.card-conic-glow',   cat: 'effects', desc: 'Continuous 360° spinning gradient border halo' },
+
+  // ── ANIMATIONS & KEYFRAMES ────────────────────────────────
+  { name: '.ambient-float',     cat: 'anim',    desc: 'Sinusoidal continuous vertical float (60fps GPU)' },
+  { name: '.pop-in',            cat: 'anim',    desc: 'Spring-loaded entry animation from 85% scale' },
+  { name: '.marquee',           cat: 'anim',    desc: 'Pure CSS horizontal scrolling marquee banner' },
+  { name: '.marquee--neon',     cat: 'anim',    desc: 'Neon glowing marquee variant' },
+  { name: '.marquee--pause-hover', cat: 'anim', desc: 'Pauses scrolling animation on hover' },
+  { name: '.crt-scanlines',     cat: 'anim',    desc: 'Authentic 1980s CRT monitor horizontal scanlines' },
+  { name: '.crt-flicker',       cat: 'anim',    desc: 'Subtle retro cathode ray tube flicker' },
+  { name: '.blink',             cat: 'anim',    desc: 'Classic 1-second interval blinking text' },
+  { name: '.particle',          cat: 'anim',    desc: 'Base container for floating celestial particles' },
+  { name: '.particle --spin',   cat: 'anim',    desc: 'Continuous 360° particle rotation' },
+  { name: '.particle --orbit',  cat: 'anim',    desc: 'Elliptical orbiting path animation' },
+
+  // ── 3D DIMENSIONS ─────────────────────────────────────────
+  { name: '.card-3d-flip',      cat: '3d',      desc: '180° flipping card container with perspective' },
+  { name: '.card-3d-inner',     cat: '3d',      desc: 'Inner wrapper holding front and back faces' },
+  { name: '.card-3d-front',     cat: '3d',      desc: 'Front-facing surface of the flip card' },
+  { name: '.card-3d-back',      cat: '3d',      desc: 'Back-facing surface revealed on flip' },
+  { name: '.btn-3d',            cat: '3d',      desc: 'Physical tactile button with spring press depth' },
+  { name: '.btn-3d--cyan',      cat: '3d',      desc: 'Cyan neon variant of the physical 3D button' },
+  { name: '.btn-3d--purple',    cat: '3d',      desc: 'Purple royal variant of the physical 3D button' },
+  { name: '.btn-3d--sunset',    cat: '3d',      desc: 'Sunset orange/pink variant of physical 3D button' },
+  { name: '.book-3d',           cat: '3d',      desc: 'Interactive 3D book with realistic turning pages' },
+  { name: '.book-cover',        cat: '3d',      desc: 'Embossed hard cover swinging open in 3D' },
+  { name: '.book-pages',        cat: '3d',      desc: 'Stacked realistic paper pages' },
+  { name: '.cube-3d-scene',     cat: '3d',      desc: '6-sided rotating 3D photo cube scene' },
+  { name: '.polaroid-stack',    cat: '3d',      desc: 'Stacked polaroid photos with spring hover fanning' },
+
+  // ── TIME MACHINE & RETRO ──────────────────────────────────
+  { name: '.window-95',         cat: 'retro',   desc: 'Authentic Windows 95 beveled window frame' },
+  { name: '.win-titlebar',      cat: 'retro',   desc: 'Gradient titlebar with minimize/maximize buttons' },
+  { name: '.win-btn',           cat: 'retro',   desc: 'Classic beveled Win95 command button' },
+  { name: '.crt-screen',        cat: 'retro',   desc: 'Curved phosphor CRT monitor frame' },
+  { name: '.winamp-player',     cat: 'retro',   desc: 'Legendary 1997 Winamp MP3 skin recreation' },
+  { name: '.winamp-eq',         cat: 'retro',   desc: 'Animated 5-band audio equalizer bars' },
+  { name: '.visitor-counter',   cat: 'retro',   desc: 'GeoCities style mechanical odometer digits' },
+  { name: '.btn-8bit',          cat: 'retro',   desc: 'Chunky pixel-art 8-bit game button' },
+  { name: '.btn-retro',         cat: 'retro',   desc: 'Windows 95 beveled command button' },
+
+  // ── TYPOGRAPHY & THEMES ───────────────────────────────────
+  { name: '.text-gradient',     cat: 'art',     desc: 'Text filled with cyan-to-purple gradient' },
+  { name: '.text-neon',         cat: 'art',     desc: 'Cyan high-voltage glowing text shadow' },
+  { name: '.text-cyber',        cat: 'art',     desc: 'Electric blue cybernetic headline text' },
+  { name: '.text-rainbow',      cat: 'art',     desc: 'Animated spectrum rainbow hue cycling' },
+  { name: '.vapor-chrome',      cat: 'art',     desc: 'Metallic chrome typography with bevel shimmer' },
+  { name: '.theme-cyberpunk',   cat: 'art',     desc: 'High-voltage neon grid aesthetic mode' },
+  { name: '.theme-cottagecore', cat: 'art',     desc: 'Warm earthy botanical aesthetic mode' },
+  { name: '.theme-dark-academia',cat: 'art',    desc: 'Vintage espresso & serif literature mode' },
+  { name: '.theme-clean-girl',  cat: 'art',     desc: 'Minimalist neutral luxe aesthetic mode' },
+  { name: '.theme-y2k',         cat: 'art',     desc: 'Hyper-glossy bubblegum pink Y2K mode' },
+];
+---
+
+<DocsLayout
+  title="Searchable Class Cheatsheet — Unboilerplate"
+  description="Instant searchable reference of all 75+ Unboilerplate utility, component, effect, animation, 3D, and retro classes with click-to-copy."
+  activePage="cheatsheet"
+  tocItems={tocItems}
+>
+
+  <!-- SIDEBAR -->
+  <div slot="sidebar">
+    <p class="sidebar-group-title">Reference &amp; Tools</p>
+    <div class="sidebar-links">
+      <a href="/cheatsheet" class="sidebar-link active">Class Cheatsheet</a>
+      <a href="/docs" class="sidebar-link">Full API Reference</a>
+      <a href="/components" class="sidebar-link">Components Library</a>
+      <a href="/playground" class="sidebar-link" style="color:#00f2fe;font-weight:700;">Playground</a>
+    </div>
+
+    <p class="sidebar-group-title" style="margin-top:1.5rem;">Explore</p>
+    <div class="sidebar-links">
+      <a href="/" class="sidebar-link">Home Overview</a>
+      <a href="/templates" class="sidebar-link">Starter Templates</a>
+      <a href="/showcase" class="sidebar-link">Community Showcase</a>
+    </div>
+  </div>
+
+  <!-- TOC CARD -->
+  <div slot="toc-card" style="margin-top:2rem;padding:1rem;background:rgba(0,242,254,0.05);border:1px solid rgba(0,242,254,0.15);border-radius:12px;">
+    <p style="font-size:0.78rem;font-weight:700;color:#fff;margin-bottom:0.5rem;">Instant Class Copy</p>
+    <p style="font-size:0.75rem;color:#64748b;line-height:1.5;">Click any class pill or card to immediately copy it to your clipboard.</p>
+    <a href="/docs" style="display:block;margin-top:0.75rem;font-size:0.78rem;color:#00f2fe;text-decoration:none;font-weight:700;">Full API Docs →</a>
+  </div>
+
+  <!-- MAIN HEADER -->
+  <div id="search-section">
+    <div class="docs-breadcrumb">
+      <a href="/" style="color:#64748b;text-decoration:none;">Unboilerplate</a>
+      <span>›</span>
+      <span>Class Cheatsheet</span>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem;">
+      <div>
+        <h1 class="docs-page-title text-gradient">Searchable Class Cheatsheet</h1>
+        <p class="docs-lead">Instant searchable reference for all classes in Unboilerplate. Filter by category, search by keyword, and copy in one click.</p>
+      </div>
+      <a href="/docs" class="vibe-btn --sm hover-bounce">Full API Reference →</a>
+    </div>
+
+    <!-- Search Input Bar -->
+    <div style="position:relative;margin:1.5rem 0;">
+      <input
+        type="text"
+        id="cheatsheet-search"
+        class="search-input"
+        placeholder="Search 75+ classes (e.g. glass, marquee, 3d, brutal, neon, vaporwave, theme)..."
+        style="padding:0.9rem 1.4rem;border-radius:14px;background:rgba(255,255,255,0.04);border:1px solid rgba(0,242,254,0.3);color:#fff;font-size:1rem;width:100%;outline:none;font-family:inherit;box-shadow:0 0 25px rgba(0,242,254,0.15);"
+      />
+    </div>
+
+    <!-- Category Filters -->
+    <div id="categories" class="flex wrap gap-2 my-3" style="display:flex;gap:0.45rem;flex-wrap:wrap;margin-bottom:1.5rem;">
+      <button class="pill-tab active cat-btn" data-cat="all">All Classes ({classDatabase.length})</button>
+      <button class="pill-tab cat-btn" data-cat="magic">Core &amp; Layout</button>
+      <button class="pill-tab cat-btn" data-cat="effects">Effects &amp; Surfaces</button>
+      <button class="pill-tab cat-btn" data-cat="anim">Animations &amp; Motion</button>
+      <button class="pill-tab cat-btn" data-cat="3d">3D Dimensions</button>
+      <button class="pill-tab cat-btn" data-cat="retro">Time Machine &amp; Retro</button>
+      <button class="pill-tab cat-btn" data-cat="art">Typography &amp; Themes</button>
+    </div>
+
+    <!-- Results Count -->
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;font-size:0.82rem;color:#64748b;">
+      <span id="results-count">Showing all {classDatabase.length} classes</span>
+      <span>Click any class to copy</span>
+    </div>
+
+    <!-- Cheatsheet Grid -->
+    <div id="cheatsheet-grid" class="vibe-grid">
+      {classDatabase.map(item => (
+        <div
+          class="cheat-card"
+          data-name={item.name}
+          data-cat={item.cat}
+          data-desc={item.desc}
+          style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:1.15rem;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;transition:all 0.2s ease;"
+        >
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <code class="text-cyber" style="font-size:0.92rem;font-weight:700;font-family:'JetBrains Mono',monospace;">{item.name}</code>
+              <span class="vibe-badge" style="font-size:0.6rem;text-transform:uppercase;">{item.cat}</span>
+            </div>
+            <p style="color:#94a3b8;font-size:0.82rem;margin-top:0.5rem;line-height:1.5;">{item.desc}</p>
+          </div>
+          <span style="font-size:0.72rem;color:#00f2fe;margin-top:0.75rem;display:block;">Click to copy class</span>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- QUICK TIPS SECTION -->
+  <hr class="section-divider" id="quick-tips" />
+  <section>
+    <div style="margin-bottom:1.25rem;">
+      <span class="vibe-badge">CHEAT TIPS</span>
+      <h2 style="font-size:1.5rem;margin-top:0.5rem;">How to Compose Classes</h2>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;">
+      <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:1.25rem;">
+        <strong style="color:#00f2fe;font-size:0.9rem;">1. Base + Effect + Motion</strong>
+        <p style="color:#94a3b8;font-size:0.84rem;margin-top:0.35rem;line-height:1.5;">
+          Combine a container (<code style="color:#fff;">.vibe-card</code>), surface effect (<code style="color:#fff;">.effect-glass</code>), and motion (<code style="color:#fff;">.ambient-float</code>).
+        </p>
+      </div>
+
+      <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:1.25rem;">
+        <strong style="color:#ff007a;font-size:0.9rem;">2. Instant 3D Button Depth</strong>
+        <p style="color:#94a3b8;font-size:0.84rem;margin-top:0.35rem;line-height:1.5;">
+          Use <code style="color:#fff;">.btn-3d</code> with color modifiers like <code style="color:#fff;">.btn-3d--cyan</code> for extruded physical press interactions.
+        </p>
+      </div>
+
+      <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:1.25rem;">
+        <strong style="color:#00ffa3;font-size:0.9rem;">3. Interactive Studio Web IDE</strong>
+        <p style="color:#94a3b8;font-size:0.84rem;margin-top:0.35rem;line-height:1.5;">
+          Ready to experiment? Open <a href="/playground" style="color:#00ffa3;text-decoration:underline;">Playground</a> to write HTML and test every class in real-time.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+  <div style="display:flex;gap:0.75rem;flex-wrap:wrap;align-items:center;">
+    <a href="/docs" class="vibe-btn hover-bounce">Full API Reference</a>
+    <a href="/playground" class="pill-tab">Playground</a>
+    <a href="/templates" class="pill-tab">Starter Templates</a>
+  </div>
+
+</DocsLayout>
+
+<script>
+  const searchInput = document.getElementById('cheatsheet-search') as HTMLInputElement;
+  const cards = document.querySelectorAll<HTMLElement>('.cheat-card');
+  const catButtons = document.querySelectorAll<HTMLButtonElement>('.cat-btn');
+  const countEl = document.getElementById('results-count')!;
+
+  let activeCat = 'all';
+  let searchTerm = '';
+
+  function filterClasses() {
+    let visibleCount = 0;
+    cards.forEach(card => {
+      const name = card.dataset.name!.toLowerCase();
+      const desc = card.dataset.desc!.toLowerCase();
+      const cat = card.dataset.cat!;
+
+      const matchesCat = activeCat === 'all' || cat === activeCat;
+      const matchesSearch = searchTerm === '' || name.includes(searchTerm) || desc.includes(searchTerm);
+
+      if (matchesCat && matchesSearch) {
+        card.style.display = 'flex';
+        visibleCount++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    countEl.textContent = `Showing ${visibleCount} of ${cards.length} classes`;
+  }
+
+  searchInput.addEventListener('input', () => {
+    searchTerm = searchInput.value.toLowerCase().trim();
+    filterClasses();
+  });
+
+  catButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      catButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeCat = btn.dataset.cat!;
+      filterClasses();
+    });
+  });
+
+  cards.forEach(card => {
+    card.addEventListener('click', () => {
+      const className = card.dataset.name!;
+      const cleanClass = className.startsWith('.') ? className.slice(1) : className;
+      navigator.clipboard.writeText(cleanClass).then(() => {
+        (window as any).ubToast?.(`Copied ${className}`);
+      });
+    });
+  });
+</script>
+
+<style>
+  .section-divider { border: none; border-top: 1px solid rgba(255,255,255,0.07); margin: 2.5rem 0; }
+  .cheat-card:hover {
+    border-color: rgba(0,242,254,0.4) !important;
+    transform: translateY(-2px);
+    background: rgba(0,242,254,0.03) !important;
+  }
+</style>

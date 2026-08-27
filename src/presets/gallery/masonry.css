@@ -1,0 +1,55 @@
+/**
+ * UNBOILERPLATE - Presets: Pure CSS Masonry Gallery
+ * Responsive multi-column masonry gallery with aspect-ratio helpers.
+ */
+
+.gallery-masonry {
+  column-count: 3;
+  column-gap: 1.25rem;
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .gallery-masonry {
+    column-count: 2;
+  }
+}
+
+@media (max-width: 540px) {
+  .gallery-masonry {
+    column-count: 1;
+  }
+}
+
+.gallery-item {
+  break-inside: avoid;
+  margin-bottom: 1.25rem;
+  width: 100%;
+  border-radius: var(--ub-radius-lg, 14px);
+  display: block;
+  object-fit: cover;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease, box-shadow 0.35s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.gallery-item:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+}
+
+.gallery-item.--tall {
+  aspect-ratio: 2 / 3;
+}
+
+.gallery-item.--wide {
+  aspect-ratio: 16 / 9;
+}
+
+.gallery-item.--square {
+  aspect-ratio: 1 / 1;
+}
+
+.gallery-item.--small {
+  aspect-ratio: 4 / 3;
+  max-height: 180px;
+}

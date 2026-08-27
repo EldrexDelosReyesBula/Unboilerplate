@@ -1,0 +1,53 @@
+/**
+ * UNBOILERPLATE - Aesthetic: Cottagecore
+ * Earthy botanical tones, warm cream, soft vintage serifs, delicate borders.
+ */
+
+.aesthetic-cottagecore,
+.theme-cottagecore,
+[data-aesthetic="cottagecore"],
+[data-theme="cottagecore"],
+[data-theme="theme-cottagecore"] {
+  --ub-bg: #f7f4ec;
+  --ub-bg-subtle: #eee9dc;
+  --ub-bg-surface: #ffffff;
+  --ub-text: #2d261e;
+  --ub-text-muted: #6e6457;
+  --ub-border: #dcd3c1;
+  --ub-accent: #8b5e3c;
+  --ub-primary: linear-gradient(135deg, #7c9070 0%, #9ca986 50%, #c5a880 100%);
+  --ub-radius-lg: 24px;
+  --ub-radius-md: 16px;
+  --ub-font-family-display: 'Georgia', 'Playfair Display', serif;
+}
+
+.aesthetic-cottagecore .vibe-card,
+.theme-cottagecore .vibe-card,
+[data-aesthetic="cottagecore"] .vibe-card,
+[data-theme="cottagecore"] .vibe-card,
+[data-theme="theme-cottagecore"] .vibe-card {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1.5px solid #dcd3c1;
+  box-shadow: 0 8px 24px -4px rgba(78, 62, 45, 0.08);
+}
+
+.aesthetic-cottagecore .vibe-btn,
+.theme-cottagecore .vibe-btn,
+[data-aesthetic="cottagecore"] .vibe-btn,
+[data-theme="cottagecore"] .vibe-btn,
+[data-theme="theme-cottagecore"] .vibe-btn {
+  background: #7c9070;
+  color: #fdfbf7;
+  border-radius: var(--ub-radius-pill);
+  box-shadow: 0 4px 12px rgba(124, 144, 112, 0.3);
+  font-family: var(--ub-font-family-sans);
+}
+
+.aesthetic-cottagecore .vibe-btn:hover,
+.theme-cottagecore .vibe-btn:hover,
+[data-aesthetic="cottagecore"] .vibe-btn:hover,
+[data-theme="cottagecore"] .vibe-btn:hover,
+[data-theme="theme-cottagecore"] .vibe-btn:hover {
+  background: #6b7f5f;
+  transform: translateY(-2px);
+}

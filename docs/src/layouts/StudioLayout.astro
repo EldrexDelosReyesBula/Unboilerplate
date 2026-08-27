@@ -1,0 +1,283 @@
+---
+/**
+ * StudioLayout.astro
+ * Dedicated full-screen Web App / Studio shell for Unboilerplate Creative Studios.
+ * Standalone layout separated from Docs — zero docs sidebar, zero docs TOC, pure workspace.
+ */
+
+import '../styles/global.css';
+
+export interface Props {
+  title: string;
+  description: string;
+  activeStudio: 'playground' | 'generator' | 'gradients' | 'animations' | 'tokens' | 'hub';
+  badge?: string;
+}
+
+const {
+  title,
+  description,
+  activeStudio,
+  badge = 'STUDIO',
+} = Astro.props as Props;
+
+const studioTabs = [
+  { id: 'playground', href: '/playground',        icon: '⚡', label: 'The Studio IDE' },
+  { id: 'generator',  href: '/tools/generator',   icon: '🧱', label: 'Class Generator' },
+  { id: 'gradients',  href: '/tools/gradients',   icon: '🎨', label: 'Gradient Lab' },
+  { id: 'animations', href: '/tools/animations',  icon: '🎬', label: 'Animation Studio' },
+  { id: 'tokens',     href: '/tools/tokens',      icon: '🎛️', label: 'Token Lab' },
+  { id: 'hub',        href: '/tools',             icon: '🗂️', label: 'All Studios' },
+];
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="icon" type="image/png" href="/assets/unboilerplate-logo.png" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet" />
+
+  <slot name="head" />
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #06070a;
+      color: #f3f4f8;
+      font-family: var(--ub-font-family-sans, 'Plus Jakarta Sans', sans-serif);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* ── Top Studio Header ── */
+    .studio-app-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      height: 56px;
+      background: #090b12;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.25rem;
+      gap: 1rem;
+    }
+
+    .studio-brand-left {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: inherit;
+      flex-shrink: 0;
+    }
+
+    .studio-brand-left img {
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+    }
+
+    .studio-brand-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .studio-badge {
+      background: rgba(0, 242, 254, 0.12);
+      color: #00f2fe;
+      border: 1px solid rgba(0, 242, 254, 0.3);
+      font-size: 0.62rem;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── Center Studio Switcher Tabs ── */
+    .studio-switcher-nav {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      padding: 3px;
+      border-radius: 10px;
+      overflow-x: auto;
+      max-width: 680px;
+    }
+
+    .studio-nav-tab {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.32rem 0.65rem;
+      border-radius: 7px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: #94a3b8;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: all 0.18s ease;
+    }
+
+    .studio-nav-tab:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .studio-nav-tab.active {
+      color: #00f2fe;
+      background: rgba(0, 242, 254, 0.12);
+      border: 1px solid rgba(0, 242, 254, 0.25);
+      font-weight: 700;
+    }
+
+    /* ── Right Actions ── */
+    .studio-actions-right {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-shrink: 0;
+    }
+
+    .studio-action-link {
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 0.35rem 0.65rem;
+      border-radius: 7px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.02);
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .studio-action-link:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    /* ── Main Studio App Viewport ── */
+    .studio-app-viewport {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: #06070a;
+      min-height: calc(100vh - 56px);
+    }
+
+    /* Toast container */
+    #toast {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      background: #111420;
+      border: 1px solid rgba(0, 242, 254, 0.4);
+      color: #f3f4f8;
+      padding: 0.75rem 1.25rem;
+      border-radius: 10px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      z-index: 9999;
+      display: none;
+      animation: toastIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes toastIn {
+      from { transform: translateY(16px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @media (max-width: 900px) {
+      .studio-switcher-nav {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Studio Header -->
+  <header class="studio-app-header">
+    <a href="/tools" class="studio-brand-left">
+      <img src="/assets/unboilerplate-logo.png" alt="Unboilerplate" />
+      <span class="studio-brand-title">
+        UNBOILERPLATE <strong>STUDIOS</strong>
+      </span>
+      <span class="studio-badge">{badge}</span>
+    </a>
+
+    <!-- Center Tabs -->
+    <nav class="studio-switcher-nav" aria-label="Studio Switcher">
+      {studioTabs.map(tab => (
+        <a
+          href={tab.href}
+          class={`studio-nav-tab ${activeStudio === tab.id ? 'active' : ''}`}
+        >
+          <span>{tab.icon}</span>
+          <span>{tab.label}</span>
+        </a>
+      ))}
+    </nav>
+
+    <!-- Right Actions -->
+    <div class="studio-actions-right">
+      <slot name="actions" />
+      <a href="/cheatsheet" class="studio-action-link" title="Class Cheatsheet">⚡ Cheatsheet</a>
+      <a href="/docs" class="studio-action-link" title="Documentation Reference">Docs ↗</a>
+      <a href="/" class="studio-action-link" title="Homepage">Home</a>
+    </div>
+  </header>
+
+  <!-- Main Studio Work Surface -->
+  <main class="studio-app-viewport">
+    <slot />
+  </main>
+
+  <!-- Notification Toast -->
+  <div id="toast"></div>
+
+  <script is:inline>
+    // Global Toast Handler for Studios
+    window.ubToast = function(msg) {
+      const toast = document.getElementById('toast');
+      if (!toast) return;
+      toast.textContent = msg;
+      toast.style.display = 'block';
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => {
+        toast.style.display = 'none';
+      }, 2500);
+    };
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,72 @@
+/**
+ * UNBOILERPLATE - Core Framework Entry
+ * Style without thinking. Think without boilerplate.
+ * The Pure CSS Creative Universe for Humans Who Make Beautiful Things.
+ */
+
+/* Core Foundation & Tokens */
+@import './core/tokens.css';
+@import './core/reset.css';
+@import './core/base.css';
+@import './core/utilities.css';
+@import './core/modifiers.css';
+@import './core/magic.css';
+@import './core/fluid.css';
+@import './core/docs-layout.css';
+
+/* Dimension Systems (2D & 3D) */
+@import './core/dimensions-3d.css';
+@import './core/dimensions-2d.css';
+
+/* Creative Effects, Texts, Backgrounds & Hovers */
+@import './presets/effects/complex-effects.css';
+@import './presets/effects/text-fx.css';
+@import './presets/effects/backgrounds.css';
+@import './presets/effects/hovers.css';
+
+/* UI Components & 3D Elements */
+@import './presets/components/cards.css';
+@import './presets/components/buttons.css';
+@import './presets/components/forms.css';
+@import './presets/components/layouts.css';
+@import './presets/components/components-3d.css';
+@import './presets/components/components-3d-extended.css';
+
+/* Creative Photo Galleries */
+@import './presets/gallery/masonry.css';
+@import './presets/gallery/film-strip.css';
+@import './presets/gallery/carousel.css';
+@import './presets/gallery/lightbox.css';
+
+/* The Artist's Canvas, Retro Era & Portfolio Builder */
+@import './presets/art/movements.css';
+@import './presets/art/brushes-textures.css';
+@import './presets/art/canvas.css';
+@import './presets/art/emotions.css';
+@import './presets/art/vector-canvas.css';
+@import './presets/art/time-machine.css';
+@import './presets/retro/retro-site.css';
+@import './presets/portfolio/artist-portfolio.css';
+
+/* Pure CSS Animation Engines & 3D Particles */
+@import './presets/animations/control.css';
+@import './presets/animations/text-animate.css';
+@import './presets/animations/micro.css';
+@import './presets/animations/transitions.css';
+@import './presets/animations/ambient.css';
+@import './presets/animations/animations-3d.css';
+@import './presets/animations/particles-3d.css';
+@import './presets/animations/natural-motion.css';
+
+/* The Learning Bridge: Educational Visualizers */
+@import './presets/edu/learning-bridge.css';
+
+/* Mood & Vibe Wrappers and Override Engine */
+@import './presets/vibes/vibes.css';
+@import './presets/vibes/overrides.css';
+
+/* Theme Modes */
+@import './themes/dark.css';
+@import './themes/light.css';
+@import './themes/neon.css';
+@import './themes/pastel.css';

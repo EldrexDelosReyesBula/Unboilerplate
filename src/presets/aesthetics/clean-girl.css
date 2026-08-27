@@ -1,0 +1,54 @@
+/**
+ * UNBOILERPLATE - Aesthetic: Clean Girl / Minimalist Luxe
+ * Crisp neutral glass, ultra-soft shadows, subtle gradients, serene glow.
+ */
+
+.aesthetic-clean-girl,
+.theme-clean-girl,
+[data-aesthetic="clean-girl"],
+[data-theme="clean-girl"],
+[data-theme="theme-clean-girl"] {
+  --ub-bg: #faf9f6;
+  --ub-bg-subtle: #f2efe9;
+  --ub-bg-surface: #ffffff;
+  --ub-text: #1a1a1a;
+  --ub-text-muted: #666666;
+  --ub-border: rgba(0, 0, 0, 0.06);
+  --ub-accent: #222222;
+  --ub-primary: linear-gradient(135deg, #2b2b2b 0%, #0f0f0f 100%);
+  --ub-radius-lg: 20px;
+  --ub-radius-md: 12px;
+  --ub-font-family-display: 'Inter', system-ui, sans-serif;
+}
+
+.aesthetic-clean-girl .vibe-card,
+.theme-clean-girl .vibe-card,
+[data-aesthetic="clean-girl"] .vibe-card,
+[data-theme="clean-girl"] .vibe-card,
+[data-theme="theme-clean-girl"] .vibe-card {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.04);
+}
+
+.aesthetic-clean-girl .vibe-btn,
+.theme-clean-girl .vibe-btn,
+[data-aesthetic="clean-girl"] .vibe-btn,
+[data-theme="clean-girl"] .vibe-btn,
+[data-theme="theme-clean-girl"] .vibe-btn {
+  background: #111111;
+  color: #ffffff;
+  border-radius: var(--ub-radius-pill);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  font-weight: 500;
+}
+
+.aesthetic-clean-girl .vibe-btn:hover,
+.theme-clean-girl .vibe-btn:hover,
+[data-aesthetic="clean-girl"] .vibe-btn:hover,
+[data-theme="clean-girl"] .vibe-btn:hover,
+[data-theme="theme-clean-girl"] .vibe-btn:hover {
+  background: #2a2a2a;
+  transform: translateY(-1px);
+}
