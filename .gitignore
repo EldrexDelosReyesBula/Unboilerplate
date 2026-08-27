@@ -12,6 +12,7 @@ package-lock.json.bak
 # ── Build & Documentation Artifacts ─────────────────────────────────────
 # Note: Keep root `dist/` tracked for CDN releases and direct npm distribution.
 # Ignore generated documentation static builds and dev caches.
+docs/dist/
 docs/dist-docs/
 docs/.astro/
 .astro/
